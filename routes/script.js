@@ -15,7 +15,7 @@ router.get('/', (req,res) => {
 });
 
 router.get('/dev', (req,res) => {
-    res.send('<script src="//localhost:3999/script" async></script>');
+    res.send('<script src="//localhost:3999/script" type="module" async></script>');
 });
 
 module.exports = router;

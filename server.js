@@ -7,6 +7,7 @@ const script = require('./routes/script');
 
 // setup the routes
 app.use('/script', script);
+app.use(express.static('public'))
 
 // fire up the server
 app.listen(3999, () => { 

@@ -25,7 +25,7 @@ const obj = {
 
 // window.__cmp('ping', null, function(result){console.log(result);});
 
-class Cmp {
+/* class Cmp {
     constructor () {
         this.isLoaded = false;
     }
@@ -38,5 +38,52 @@ class Cmp {
             callback(result, true);
         }
     }
+} */
+
+class Cmp {
+    constructor (store) {
+        this.isLoaded = false;
+        this.store = store;
+    }
+    ping (empty = null, callback = () => {}) {
+        const result = {
+            gdprAppliesGlobally: false, // config.storeConsentGlobally - get this from the config file
+            cmpLoaded: true
+        };
+        callback(result, true);
+    }
 }
-const cmp = new Cmp();
+
+
+class Store {
+    constructor () {
+		this.cmpId = 1,
+		this.cmpVersion = 1,
+		this.cookieVersion = 1,
+		this.vendorConsentData,
+		this.publisherConsentData,
+		this.vendorList,
+		this.customPurposeList
+    }
+}
+
+const store = new Store();
+const cmp = new Cmp(store);
+
+const defaultConfig = {
+	customPurposeListLocation: './purposes.json',
+	globalVendorListLocation: 'https://vendorlist.consensu.org/vendorlist.json',
+	globalConsentLocation: './portal.html',
+	storeConsentGlobally: false,
+	storePublisherData: false,
+	logging: false,
+	localization: {},
+	forceLocale: null,
+	gdprApplies: true
+};
+
+class Config {
+	constructor(defaultConfig) {
+		this.globalVendorListLocation = defaultConfig.globalVendorListLocation;
+    }
+}
