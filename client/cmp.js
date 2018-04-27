@@ -1,6 +1,6 @@
 class Cmp {
 
-    constructor (config) {
+    constructor (config, store = {}) {
 
         this.isLoaded = false;
         this.cmpId = config.cmpId;
@@ -8,6 +8,7 @@ class Cmp {
         this.cookieVersion = config.cookieVersion;
         this.gdprApplies = config.gdprApplies;
         this.storeConsentGlobally = config.storeConsentGlobally;
+        this.store = store;
         // this.store = store;
         // function decraled and fired to log the creation of the CMP
         this.log = function () { console.log('Cmp -> class created'); };

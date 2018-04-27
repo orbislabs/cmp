@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-const rootPath = path.join(__dirname, '../public' );
+const rootPath = path.join(__dirname, '../dist' );
 
 // middleware logging a request to this route
 router.use(function timeLog (req, res, next) {
@@ -11,7 +11,7 @@ router.use(function timeLog (req, res, next) {
 });
 
 router.get('/', (req,res) => {
-    res.sendFile('main.js', { root : rootPath });
+    res.sendFile('cmp.bundle.js', { root : rootPath });
 });
 
 router.get('/dev', (req,res) => {
