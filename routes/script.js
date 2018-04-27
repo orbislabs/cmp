@@ -11,7 +11,7 @@ router.use(function timeLog (req, res, next) {
 });
 
 router.get('/', (req,res) => {
-    res.sendFile('cmp.js', { root : rootPath });
+    res.sendFile('main.js', { root : rootPath });
 });
 
 router.get('/dev', (req,res) => {

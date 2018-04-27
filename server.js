@@ -1,3 +1,6 @@
+// check node v9.8.0
+console.log(`Node:  ${process.version}`);
+
 // setup express
 const express = require('express');
 const app = express();
