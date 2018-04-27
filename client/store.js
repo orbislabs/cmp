@@ -2,35 +2,30 @@ import vendorList from './vendorList.js';
 import { ConsentString } from 'consent-string';
 import { 	checkCookiesEnabled,
             writeCookie,
-            readCookie 
+            readCookie,
+            readCookieSync 
         } from './cookies.js';
 
-const consentData = new ConsentString();
-
-// Modify the consent data
-consentData.setCmpId(1);
-consentData.setConsentScreen(1);
-consentData.setGlobalVendorList(vendorList);
-//consentData.setPurposeAllowed(12, true);
-
-// Update the cookie value
-//writeCookie(consentData.getConsentString());
 
 function checkCmpCookie () {
-    const cookie = readCookie('euconsent');
-    console.log(cookie)
-}
-
-checkCmpCookie();
-
-class Store {
-    constructor ({
-        vendorConsentData,
-        vendorList,
-        customPurposeList
-    } = {} ) {
-		this.vendorConsentData,
-		this.vendorList,
-		this.customPurposeList
+    const cookie = readCookieSync('euconsent');
+    if (cookie) {
+        const consentData = new ConsentString();
+        consentData.setVendorsAllowed([1,2,4,6,9,12,33,44])
+        window.consentData = consentData;
+        return cookie;
+    } else {
+        // do we fire the modal here???
+        return false; 
     }
 }
+
+class Store {
+    constructor (vendorList) {
+        this.vendorList = vendorList;
+        this.vendorConsentCookieData = checkCmpCookie();
+        this.allowedVendorsArray = consentData.allowedVendorIds;
+    }
+}
+
+export default Store;

@@ -15,17 +15,31 @@ export function checkCookiesEnabled () {
     return cookieEnabled;
 }
 
-export function readCookie(name) {
+export function writeCookieSync (value) {
+    document.cookie = `${COOKIE_NAME}=${value}${COOKIE_DOMAIN};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
+	return;
+}
+
+export function readCookieSync (name) {
+	const value = '; ' + document.cookie;
+	const parts = value.split('; ' + name + '=');
+	if (parts.length === 2) {
+		return parts.pop().split(';').shift();
+	}
+	return;
+}
+
+// below functions use Promises - not sure why.
+export function writeCookie (value) {
+    document.cookie = `${COOKIE_NAME}=${value}${COOKIE_DOMAIN};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
+	return Promise.resolve();
+}
+
+export function readCookie (name) {
 	const value = '; ' + document.cookie;
 	const parts = value.split('; ' + name + '=');
 	if (parts.length === 2) {
 		return Promise.resolve(parts.pop().split(';').shift());
 	}
-	return Promise.resolve();
-}
-
-export function writeCookie (value) {
-    //document.cookie = 'euconsent=cookieforyoubitch!;path=/'
-    document.cookie = `${COOKIE_NAME}=${value}${COOKIE_DOMAIN};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
 	return Promise.resolve();
 }

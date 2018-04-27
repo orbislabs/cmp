@@ -22,15 +22,27 @@ class Cmp {
         };
         callback(result, true);
     }
+
     /**
      * Get all vendor consent data from the data store.
      * @param {Array} vendorIds Array of vendor IDs to retrieve.  If empty return all vendors.
      */
     getVendorConsents (vendorIds, callback = () => {}) {
-        if (vendorIds === undefined || vendorIds != typeof Array) {
+/*         if (vendorIds === undefined || vendorIds != typeof Array) {
             console.error(`${arguments[0]} is not of type Array`);
+        } */
+        callback(result, true);
+    }
+
+    /**
+     * Get the encoded vendor consent data value.
+     */
+    getConsentData (empty = null, callback = () => {}) {
+        const result = {
+            gdprApplies : this.gdprApplies,
+            hasGlobalScope : this.storeConsentGlobally,
+            consentData : this.store.vendorConsentCookieData
         }
-        const consent = {};
         callback(result, true);
     }
 
