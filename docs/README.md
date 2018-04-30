@@ -40,25 +40,15 @@ Create a new instance of the main class
 new ConsentString(baseString) // take input as base64 encoded cookie value, defaults to null
 ```
 The class instance offers up the following properties:
-```javascript
-allowedPurposeIds
-allowedVendorIds
-cmpId
-cmpVersion
-consentLanguage
-consentScreen
-vendorList
-vendorListVersion
-version
-```
+
 | Name | Type | Argument | Output Type | Output Example |
 | ---- | ---- | ------- | ------------ | -------------- |
-|`allowedPurposeIds` | type | arg | out | out_ex |
-|`allowedVendorIds` | type | arg | out | out_ex |
-|`cmpId` | type | arg | out | out_ex |
-|`cmpVersion` | type | arg | out | out_ex |
-|`consentLanguage` | type | arg | out | out_ex |
-|`consentScreen` | type | arg | out | out_ex |
-|`vendorList` | type | arg | out | out_ex |
-|`vendorListVersion` | type | arg | out | out_ex |
-|`version` | type | arg | out | out_ex |
+|`allowedPurposeIds` | property | `null` | `Array.<integer>` | out_ex |
+|`allowedVendorIds` | property | `null` | `Array.<integer>` | out_ex |
+|`cmpId` | property | `null` | `interger` | out_ex |
+|`cmpVersion` | property | `null` | `interger` | out_ex |
+|`consentLanguage` | property | `null` | `string` | out_ex |
+|`consentScreen` | property | `null` | `interger` | out_ex |
+|`vendorList` | property | `null` | `object` | out_ex |
+|`vendorListVersion` | property | `null` | `interger` | out_ex |
+|`version` | property | `null` | `interger` | out_ex |
