@@ -32,3 +32,10 @@ ping(null, callback) // is cmp loaded? is gdpr global?
 
 ### App Architecture
 ![app-architecture](../docs/images/cmp-comps.svg)
+
+## ConsentString SDK
+
+Create a new instance of the main class
+```javascript
+new ConsentString(baseString) // take input as base64 encoded cookie value, defaults to null
+```
