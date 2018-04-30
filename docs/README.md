@@ -74,14 +74,20 @@ The class instance offers up the following properties:
 |`setVendorsAllowed(vendorIds)` | method | vendorIds `Array.<integer>`| `null` |  |
 
 ### Internal APIs
-```javascript
-//code
-```
+
 The following are functions, to be made available internally
 ```javascript
 readCookie(cookieName = 'euconsent')
 writeCookie(cookieName = 'euconsent', value)
 queryAllowedVendors([vendorArray])
-updateCmpSettings()
+updateCmpSettings(configObject, userChoices)
 ```
 
+### Config
+- **cmpId** = 99 (note: random for now)
+- **cmpVersion** = 1
+- **consentLanguage** = 'en'
+- **consentScreen** = 1 (note: need to figure out what the purpose of this field is)
+- **vendorListLocation** = set to a path on the server for now
+- **vendorListVersion** = 7 (can be fetched from vendor list itself)
+- **iabVersion** = 1.1 (the IAB spec version)
