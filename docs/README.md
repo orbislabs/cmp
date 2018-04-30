@@ -43,12 +43,32 @@ The class instance offers up the following properties:
 
 | Name | Type | Argument | Output Type | Output Example |
 | ---- | ---- | ------- | ------------ | -------------- |
-|`allowedPurposeIds` | property | `null` | `Array.<integer>` | out_ex |
-|`allowedVendorIds` | property | `null` | `Array.<integer>` | out_ex |
-|`cmpId` | property | `null` | `interger` | out_ex |
-|`cmpVersion` | property | `null` | `interger` | out_ex |
-|`consentLanguage` | property | `null` | `string` | out_ex |
-|`consentScreen` | property | `null` | `interger` | out_ex |
-|`vendorList` | property | `null` | `object` | out_ex |
-|`vendorListVersion` | property | `null` | `interger` | out_ex |
-|`version` | property | `null` | `interger` | out_ex |
+|`allowedPurposeIds` | property | `null` | `Array.<integer>` | [1,2,3,4] |
+|`allowedVendorIds` | property | `null` | `Array.<integer>` | [1,2,3,4] |
+|`cmpId` | property | `null` | `integer` | 7 |
+|`cmpVersion` | property | `null` | `integer` | 1 |
+|`consentLanguage` | property | `null` | `string` | en |
+|`consentScreen` | property | `null` | `integer` | 1 |
+|`vendorList` | property | `null` | `object` | {} |
+|`vendorListVersion` | property | `null` | `integer` | 7 |
+|`version` | property | `null` | `integer` | 1 |
+|`getCmpId()` | method | `null` | `integer` | 4 |
+|`getCmpVersion()` | method | `null` | `integer` | 1 |
+|`getConsentLanguage()` | method | `null` | `string` | en |
+|`getConsentScreen()` | method | `null` | `integer` | 5 |
+|`getConsentString()` | method | `null` | `string` | BOGHWRWN62525HSGGS |
+|`getPurposesAllowed()` | method | `null` | `Array.<integer>` | [1,2,3,4] |
+|`getVendorListVersion()` | method | `null` | `integer` | 5 |
+|`getVendorsAllowed()` | method | `null` |`Array.<integer>` | [1,2,3,4] |
+|`getVersion()` | method | `null` | `integer` | 5 |
+|`isPurposeAllowed(purposeId)` | method | purposeId `integer` | `boolean` | true |
+|`isVendorAllowed(vendorId)` | method | vendorId `integer` | `boolean` | true |
+|`setCmpId(id)` | method | id `integer` | `null` |  |
+|`setCmpVersion(version)` | method | version `integer` | `null` |  |
+|`setConsentLanguage(language)` | method | language `string` | `null` |  |
+|`setConsentScreen(screenId)` | method | screenId `*` | `null` |  |
+|`setGlobalVendorList(vendorList)` | method | vendorList `object` | `null` |  |
+|`setPurposeAllowed(purposeId, value)` | method | purposeId `integer`, value `boolean`| `null` |  |
+|`setPurposesAllowed(purposeIds)` | method | purposeIds `Array.<integer>`| `null` |  |
+|`setVendorAllowed(vendorId, value)` | method | vendorId `integer`, value `boolean`| `null` |  |
+|`setVendorsAllowed(vendorIds)` | method | vendorIds `Array.<integer>`| `null` |  |
