@@ -72,3 +72,16 @@ The class instance offers up the following properties:
 |`setPurposesAllowed(purposeIds)` | method | purposeIds `Array.<integer>`| `null` |  |
 |`setVendorAllowed(vendorId, value)` | method | vendorId `integer`, value `boolean`| `null` |  |
 |`setVendorsAllowed(vendorIds)` | method | vendorIds `Array.<integer>`| `null` |  |
+
+### Internal APIs
+```javascript
+//code
+```
+The following are functions, to be made available internally
+```javascript
+readCookie(cookieName = 'euconsent')
+writeCookie(cookieName = 'euconsent', value)
+queryAllowedVendors([vendorArray])
+updateCmpSettings()
+```
+
