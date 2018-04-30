@@ -19,7 +19,7 @@ nodemon server.js # terminal tab 2
 
 ### The Flow Logic
 
-![cmp-flow-logic](../images/control-flow.svg)
+![cmp-flow-logic](../docs/images/control-flow.svg)
 
 ### Minimal Required API
 
@@ -31,4 +31,4 @@ ping(null, callback) // is cmp loaded? is gdpr global?
 ```
 
 ### App Architecture
-![app-architecture](../images/cmp-comps.svg)
+![app-architecture](../docs/images/cmp-comps.svg)
