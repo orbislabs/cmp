@@ -19,8 +19,7 @@ nodemon server.js # terminal tab 2
 
 ### The Flow Logic
 
-- check if cookies are blocked
-- check if IAB cookie is present
+![cmp-flow-logic](../images/control-flow.svg)
 
 ### Minimal Required API
 
@@ -30,3 +29,6 @@ getVendorConsents([vendor_array], callback) // returns permissions for vendor li
 getConsentData(null, callback) // returns a base64 encoded cookie value
 ping(null, callback) // is cmp loaded? is gdpr global?
 ```
+
+### App Architecture
+![app-architecture](../images/cmp-comps.svg)
