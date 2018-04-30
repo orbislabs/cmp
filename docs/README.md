@@ -5,8 +5,8 @@ An IAB compliant CMP, with user privacy preserving features.
 
 You can install simply by running the following commands:
 ```bash
-git clone
-cd
+git clone https://github.com/orbislabs/cmp.git
+cd cmp
 npm install
 ```
 
