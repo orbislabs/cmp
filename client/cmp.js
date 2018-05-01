@@ -1,59 +1,44 @@
-class Cmp {
+import { ConsentString } from 'consent-string';
+import { fetchAllVendorsArray,
+        fetchAllPurposeArray } from './utils';
+import vendorList from './vendorList.js';
 
-    constructor (config, store = {}) {
-
-        this.isLoaded = false;
-        this.cmpId = config.cmpId;
-        this.cmpVersion = config.cmpVersion;
-        this.cookieVersion = config.cookieVersion;
-        this.gdprApplies = config.gdprApplies;
-        this.storeConsentGlobally = config.storeConsentGlobally;
-        this.store = store;
-        // this.store = store;
-        // function decraled and fired to log the creation of the CMP
-        this.log = function () { console.log('Cmp -> class created'); };
-        this.log();
+export class Cmp extends ConsentString {
+    constructor (result = null, vendorList) {
+        super (result);
+        this.setCmpId(199)
+        this.setCmpVersion(1);
+        this.setConsentLanguage('en');
+        this.setConsentScreen(1);
+        this.setGlobalVendorList(vendorList);
+        this.fullVendorList = fetchAllVendorsArray(vendorList);
+        this.fullPurposeList = fetchAllPurposeArray(vendorList);
+        this.on('fullConsent', this.onFullConsent);
     }
 
     ping (empty = null, callback = () => {}) {
         const result = {
-            gdprAppliesGlobally: this.storeConsentGlobally, // config.storeConsentGlobally - get this from the config file
+            gdprAppliesGlobally: true,
             cmpLoaded: true
         };
         callback(result, true);
     }
 
-    /**
-     * Get all vendor consent data from the data store.
-     * @param {Array} vendorIds Array of vendor IDs to retrieve.  If empty return all vendors.
-     */
-    getVendorConsents (vendorIds, callback = () => {}) {
-/*         if (vendorIds === undefined || vendorIds != typeof Array) {
-            console.error(`${arguments[0]} is not of type Array`);
-        } */
+    queryAllowedVendors (vendors = allVendors, callback = () => {}) {
+        let result = {};
+        vendors.forEach((element) => {
+            result[element] = this.isVendorAllowed(element);
+        });
         callback(result, true);
     }
 
-    /**
-     * Get the encoded vendor consent data value.
-     */
     getConsentData (empty = null, callback = () => {}) {
-        const result = {
-            gdprApplies : this.gdprApplies,
-            hasGlobalScope : this.storeConsentGlobally,
-            consentData : this.store.vendorConsentCookieData
-        }
+        const result = this.getConsentString();
         callback(result, true);
     }
 
+    onFullConsent () {
+        this.setVendorsAllowed(this.fullVendorList);
+        this.setPurposesAllowed(this.fullPurposeList);
+    }
 }
-
-/* const consent = {
-    metadata: this.generateConsentString(),
-    gdprApplies: config.gdprApplies,
-    hasGlobalScope: config.storeConsentGlobally,
-    ...this.store.getVendorConsentsObject(vendorIds)
-}; 
- */
-
-export default Cmp;

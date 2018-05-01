@@ -11,6 +11,7 @@ const script = require('./routes/script');
 // setup the routes
 app.use('/script', script);
 app.use(express.static('dist'))
+app.use(express.static('/node_modules/uikit/dist/css/'))
 
 // fire up the server
 app.listen(3999, () => { 

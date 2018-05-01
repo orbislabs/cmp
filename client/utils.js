@@ -1,11 +1,18 @@
-const a = new Set([1,2,3,4,5]);
-const b = new Set([4,5,6,7,8]);
+function fetchAllVendorsArray (vendorList) {
+    let result = vendorList.vendors.map(item => {
+        return item.id;
+    });
+    return result;
+};
 
-function createVendorQueryOutput (query, allowed) {
-    const result = new Set(
-        [...query].filter(x => allowed.has(x))
-    );
-    console.log(result);
+function fetchAllPurposeArray (vendorList) {
+    let result = vendorList.purposes.map(item => {
+        return item.id
+    });
+    return result;
+};
+
+export {
+    fetchAllVendorsArray,
+    fetchAllPurposeArray
 }
-
-createVendorQueryOutput(a,b);

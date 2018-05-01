@@ -6,7 +6,7 @@ const COOKIE_MAX_AGE = 33696000;
 const COOKIE_NAME = 'euconsent';
 const PATH = '/'
 
-export function checkCookiesEnabled () {
+function checkCookiesEnabled () {
     var cookieEnabled = (navigator.cookieEnabled) ? true : false;
     if (typeof navigator.cookieEnabled == "undefined" && !cookieEnabled){ 
         document.cookie="testcookie";
@@ -15,12 +15,12 @@ export function checkCookiesEnabled () {
     return cookieEnabled;
 }
 
-export function writeCookieSync (value) {
+function writeCookieSync (value) {
     document.cookie = `${COOKIE_NAME}=${value}${COOKIE_DOMAIN};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
 	return;
 }
 
-export function readCookieSync (name) {
+function readCookieSync (name = 'euconsent') {
 	const value = '; ' + document.cookie;
 	const parts = value.split('; ' + name + '=');
 	if (parts.length === 2) {
@@ -29,13 +29,13 @@ export function readCookieSync (name) {
 	return;
 }
 
-// below functions use Promises - not sure why.
-export function writeCookie (value) {
+// below functions use Promises
+function writeCookie (value) {
     document.cookie = `${COOKIE_NAME}=${value}${COOKIE_DOMAIN};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
 	return Promise.resolve();
 }
 
-export function readCookie (name) {
+function readCookie (name = 'euconsent') {
 	const value = '; ' + document.cookie;
 	const parts = value.split('; ' + name + '=');
 	if (parts.length === 2) {
@@ -43,3 +43,11 @@ export function readCookie (name) {
 	}
 	return Promise.resolve();
 }
+
+export {
+	readCookie,
+	writeCookie,
+	readCookieSync,
+	writeCookieSync,
+	checkCookiesEnabled
+};
