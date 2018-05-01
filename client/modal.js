@@ -18,11 +18,11 @@ const html = `
 
 function showConsentModal () {
     UIkit.modal.dialog(html, { 'bg-close'  : false });
-    document.getElementById('agree-button').addEventListener('click', function () {
+/*     document.getElementById('agree-button').addEventListener('click', function () {
         console.log('CMP => User consent given')
         let fullConsentEvent = new Event('fullConsent');
-        dispatchEvent(fullConsentEvent);
-    });
+        console.log(fullConsentEvent);
+    }); */
     document.getElementById('information-button').addEventListener('click', function () {
         console.log('CMP => User requested further information')
     });
