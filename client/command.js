@@ -1,9 +1,9 @@
-class Command {
+class Events {
     constructor () {
         this.queue = [];
     }
 
-    execute (input) {
+    execute (fn) {
         const command = arguments[0]
         console.log(command);
     }
@@ -14,6 +14,9 @@ class Command {
     }
 }
 
+// observables (read)
+// create a single Events class - singleton pattern
+
 let cmd = new Command();
 
 cmd.addToQueue('event1');
@@ -23,11 +26,7 @@ cmd.addToQueue('event4');
 
 cmd.execute('event1','arg-a','arg-b');
 
-function countArguments(a,b) {  
-    console.log(arguments.length);
- }
- // get the number of arguments
- countArguments('welcome', 'to', 'Earth');
+
 
 
 

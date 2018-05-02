@@ -53,4 +53,17 @@ function init () {
         });
 }
 
+const a = (result) => {
+	if (!result) {
+		console.log('CMP => no IAB cookie set - showing modal')
+		showConsentModal();
+		let consentString = new Cmp(null, vendorList);
+		window.cmp = consentString;
+	} else {
+		console.log('CMP => loading cookie data')
+		let consentString = new Cmp(result, vendorList);
+		window.cmp = consentString;
+	}
+}
+
 init();

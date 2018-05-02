@@ -16,13 +16,16 @@ const html = `
         </div>
         `
 
+// this should return the user selection as a resolved promise
 function showConsentModal () {
+    
     UIkit.modal.dialog(html, { 'bg-close'  : false });
-/*     document.getElementById('agree-button').addEventListener('click', function () {
-        console.log('CMP => User consent given')
-        let fullConsentEvent = new Event('fullConsent');
-        console.log(fullConsentEvent);
-    }); */
+    
+    document.getElementById('agree-button').addEventListener('click', function () {
+        //console.log('CMP => User consent given')
+        //let fullConsentEvent = new Event('fullConsent');
+        cmp.onFullConsent();
+    });
     document.getElementById('information-button').addEventListener('click', function () {
         console.log('CMP => User requested further information')
     });
