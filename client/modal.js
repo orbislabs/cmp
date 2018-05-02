@@ -28,5 +28,4 @@ function showConsentModal () {
     });
 }
 
-
 export default showConsentModal;

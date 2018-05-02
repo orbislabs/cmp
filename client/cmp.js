@@ -14,7 +14,6 @@ export class Cmp extends ConsentString {
         this.fullVendorList = fetchAllVendorsArray(vendorList);
         this.fullPurposeList = fetchAllPurposeArray(vendorList);
         //this.on('fullConsent', this.onFullConsent);
-        this.listen()
     }
 
     ping (empty = null, callback = () => {}) {
@@ -42,9 +41,5 @@ export class Cmp extends ConsentString {
         console.log('CMP => setting full consent')
         this.setVendorsAllowed(this.fullVendorList);
         this.setPurposesAllowed(this.fullPurposeList);
-    }
-
-    listen () {
-        document.getElementById('agree-button').addEventListener('click', this.onFullConsent);
     }
 }
