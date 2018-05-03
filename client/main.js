@@ -4,34 +4,32 @@ import vendorList from './vendorList.js';
 import showConsentModalPromise from './modal.js';
 
 function init () {
-	console.log('CMP => startup');
-    if (!cookies.checkCookiesEnabled()) {
-        console.error('CMP => cookies are blocked');
-        return;
-    }
-    cookies.readCookie()
-        .then((result) => {
-            if (!result) {
-				console.log('CMP => no IAB cookie set - showing modal')
-				//showConsentModal();
-				let consentString = new Cmp(null, vendorList);
-                window.cmp = consentString;
-            } else {
-                console.log('CMP => loading cookie data')
-                let consentString = new Cmp(result, vendorList);
-                window.cmp = consentString;
-            }
-        })
-        .catch((err) => {
-            console.error(err);
-        });
+	return new Promise ((resolve, reject) => {
+		console.log('CMP => Initialising...');
+		resolve(true);
+	});
+};
+
+function loadCmp (result, vendorList) {
+	return new Promise ((resolve, reject) => {
+		if (result == false ) {
+			let consentString = new Cmp(null, vendorList);
+			window.cmp = consentString;
+			resolve(false);
+		} else {
+			let consentString = new Cmp(result, vendorList);
+			window.cmp = consentString;
+			if (!cmp) reject('Error loading CMP')
+			resolve(window.cmp);
+		}
+	});
 }
 
-init();
-
-loadCmp()
+// Main CMP flow logic is here.
+init()
 	.then(result => cookies.checkCookiesEnabledPromise(result)) // true OR false
 	.then(result => cookies.checkIabCookie(result)) // base64 OR false
+	.then(result => loadCmp(result, vendorList))
 	.then((result) => {
 		if (result == false) { 
 			showConsentModalPromise()
@@ -50,9 +48,4 @@ loadCmp()
 	.catch(err => console.log(err))
 
 
-function loadCmp () {
-	return new Promise ((resolve, reject) => {
-		console.log('CMP => TESTING loadedcmp!');
-		resolve(true);
-	});
-};
+
