@@ -2,6 +2,7 @@ import { ConsentString } from 'consent-string';
 import { fetchAllVendorsArray,
         fetchAllPurposeArray } from './utils';
 import vendorList from './vendorList.js';
+import * as cookies from './cookies.js';
 
 export class Cmp extends ConsentString {
     constructor (result = null, vendorList) {
@@ -11,15 +12,20 @@ export class Cmp extends ConsentString {
         this.setConsentLanguage('en');
         this.setConsentScreen(1);
         this.setGlobalVendorList(vendorList);
+        this.cmpLoaded = false;
         this.fullVendorList = fetchAllVendorsArray(vendorList);
         this.fullPurposeList = fetchAllPurposeArray(vendorList);
-        //this.on('fullConsent', this.onFullConsent);
+    }
+
+    readyCmpAPI () {
+        this.cmpLoaded = true;
+        console.log(`CMP => The CMP is loaded: ${this.cmpLoaded}`);
     }
 
     ping (empty = null, callback = () => {}) {
         const result = {
             gdprAppliesGlobally: true,
-            cmpLoaded: true
+            cmpLoaded: this.cmpLoaded
         };
         callback(result, true);
     }
@@ -38,8 +44,26 @@ export class Cmp extends ConsentString {
     }
 
     onFullConsent () {
-        console.log('CMP => setting full consent')
-        this.setVendorsAllowed(this.fullVendorList);
-        this.setPurposesAllowed(this.fullPurposeList);
+        return new Promise ((resolve, reject) => {
+            console.log('CMP => setting full consent')
+            this.setVendorsAllowed(this.fullVendorList);
+            this.setPurposesAllowed(this.fullPurposeList);
+            cookies.writeCookie(this.getConsentString())
+                .then((result) => {
+                    if(result) resolve(true)
+                })
+        });
     }
+
+    updatePurposesAndCookie (purposeArray) {
+        return new Promise ((resolve, reject) => {
+            this.setPurposesAllowed(purposeArray);
+            console.log(`CMP => Set purposes: ${this.getPurposesAllowed()}`);
+            cookies.writeCookie(this.getConsentString())
+            .then((result) => {
+                if(result) resolve(true)
+            });
+        });
+    }
+
 }

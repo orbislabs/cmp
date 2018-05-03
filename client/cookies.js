@@ -7,13 +7,56 @@ const COOKIE_NAME = 'euconsent';
 const PATH = '/'
 
 function checkCookiesEnabled () {
-    var cookieEnabled = (navigator.cookieEnabled) ? true : false;
+    let cookieEnabled = (navigator.cookieEnabled) ? true : false;
     if (typeof navigator.cookieEnabled == "undefined" && !cookieEnabled){ 
         document.cookie="testcookie";
         cookieEnabled = (document.cookie.indexOf("testcookie") != -1) ? true : false;
     }
     return cookieEnabled;
 }
+
+function checkCookiesEnabledPromise () {
+    return new Promise ((resolve, reject) => {
+		let cookieEnabled = (navigator.cookieEnabled) ? true : false;
+		if (typeof navigator.cookieEnabled == "undefined" && !cookieEnabled){ 
+			document.cookie = "testcookie";
+			cookieEnabled = (document.cookie.indexOf("testcookie") != -1) ? true : false;
+		}
+		if (cookieEnabled == true || false ) {
+			console.log(`CMP => set cookie status : ${cookieEnabled}`)
+			resolve(cookieEnabled);
+		} else {
+			reject('Error checking if CMP can set cookies')
+		}
+	})
+}
+
+function checkIabCookie (result) {
+	if (result == false) console.error('CMP => Cookies are blocked!')
+	return new Promise ((resolve, reject) => {
+		readCookie('euconsent')
+			.then((result) => {
+				if (result) {
+					console.log(`CMP => IAB cookie loaded: ${result}`);
+					resolve(result);
+				} else {
+					console.log(`CMP => No IAB cookie present`);
+					resolve(false);
+				}
+			});
+	});
+};
+
+function setIabCookie (result) {
+	if (result = 'fullConsent') {}
+	return new Promise ((resolve, reject) => {
+		if (result == 'fullConsent') {
+			onFullConsent()
+			writeCookie()
+		}
+	})
+}
+
 
 function writeCookieSync (value) {
     document.cookie = `${COOKIE_NAME}=${value}${COOKIE_DOMAIN};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
@@ -32,7 +75,7 @@ function readCookieSync (name = 'euconsent') {
 // below functions use Promises
 function writeCookie (value) {
     document.cookie = `${COOKIE_NAME}=${value}${COOKIE_DOMAIN};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
-	return Promise.resolve();
+	return Promise.resolve(true);
 }
 
 function readCookie (name = 'euconsent') {
@@ -49,5 +92,8 @@ export {
 	writeCookie,
 	readCookieSync,
 	writeCookieSync,
-	checkCookiesEnabled
+	checkCookiesEnabled,
+	checkCookiesEnabledPromise,
+	checkIabCookie,
+	setIabCookie
 };

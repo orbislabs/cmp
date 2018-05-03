@@ -1,33 +1,7 @@
-/* // Pluto CMP++ v1
-import Cmp from './cmp.js';
-import Store from './store.js';
-import defaultConfig from './config.js';
-import vendorList from './vendorList.js';
-import * as a from './utils.js'; // this can be removed - testing
-import { ConsentString } from 'consent-string';
-import { 	checkCookiesEnabled,
-            writeCookie,
-            readCookie 
-        } from './cookies.js';
-
-function start () {
-	if(!checkCookiesEnabled()) {
-		console.log(`CMP is unable to set cookies.`);
-		return;
-	}
-	let store = new Store(vendorList);
-	let cmp = new Cmp(defaultConfig, store);
-	cmp.isLoaded = true;
-	window.__cmp = cmp;
-}
-
-// this creates a globally available CMP instance
-start(); */
-
 import * as cookies from './cookies.js';
 import { Cmp } from './cmp.js';
 import vendorList from './vendorList.js';
-import showConsentModal from './modal.js';
+import showConsentModalPromise from './modal.js';
 
 function init () {
 	console.log('CMP => startup');
@@ -39,7 +13,7 @@ function init () {
         .then((result) => {
             if (!result) {
 				console.log('CMP => no IAB cookie set - showing modal')
-				showConsentModal();
+				//showConsentModal();
 				let consentString = new Cmp(null, vendorList);
                 window.cmp = consentString;
             } else {
@@ -53,17 +27,32 @@ function init () {
         });
 }
 
-const a = (result) => {
-	if (!result) {
-		console.log('CMP => no IAB cookie set - showing modal')
-		showConsentModal();
-		let consentString = new Cmp(null, vendorList);
-		window.cmp = consentString;
-	} else {
-		console.log('CMP => loading cookie data')
-		let consentString = new Cmp(result, vendorList);
-		window.cmp = consentString;
-	}
-}
-
 init();
+
+loadCmp()
+	.then(result => cookies.checkCookiesEnabledPromise(result)) // true OR false
+	.then(result => cookies.checkIabCookie(result)) // base64 OR false
+	.then((result) => {
+		if (result == false) { 
+			showConsentModalPromise()
+				.then((result) => {
+					if (result == 'fullConsent') {
+						cmp.onFullConsent();
+					} else {
+						cmp.updatePurposesAndCookie(result);
+					}
+				})
+				.then(result => cmp.readyCmpAPI(result))
+		} else {
+			cmp.readyCmpAPI(result)
+		}
+	})
+	.catch(err => console.log(err))
+
+
+function loadCmp () {
+	return new Promise ((resolve, reject) => {
+		console.log('CMP => TESTING loadedcmp!');
+		resolve(true);
+	});
+};

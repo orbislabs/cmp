@@ -12,6 +12,8 @@ function fetchAllPurposeArray (vendorList) {
     return result;
 };
 
+
+
 export {
     fetchAllVendorsArray,
     fetchAllPurposeArray
