@@ -1,10 +1,11 @@
 import { ConsentString } from 'consent-string';
 import { fetchAllVendorsArray,
-        fetchAllPurposeArray } from './utils';
+        fetchAllPurposeArray,
+        buildVendorTable } from './utils';
 import vendorList from './vendorList.js';
 import * as cookies from './cookies.js';
 
-export class Cmp extends ConsentString {
+export default class Cmp extends ConsentString {
     constructor (result = null, vendorList) {
         super (result);
         this.setCmpId(199)
@@ -67,3 +68,5 @@ export class Cmp extends ConsentString {
     }
 
 }
+
+buildVendorTable(vendorList);

@@ -1,6 +1,8 @@
-function __cmp (command, parameter = null, callback = null) {
+export default function api (command, parameter = null, callback = null) {
     switch (command) {
-        case 'ping' : ping(parameter, callback); break;
+        case 'ping'                 : cmp.ping(parameter, callback); break;
+        case 'getVendorConsents'    : cmp.getVendorConsents(parameter, callback); break;
+        case 'getConsentData'       : cmp.getConsentData(parameter, callback); break;
         default : console.error('Error: unknown command');
     }
 }

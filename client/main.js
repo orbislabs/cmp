@@ -1,11 +1,13 @@
 import * as cookies from './cookies.js';
-import { Cmp } from './cmp.js';
+import Cmp from './cmp.js';
 import vendorList from './vendorList.js';
 import showConsentModalPromise from './modal.js';
+import api from './api.js';
 
 function init () {
 	return new Promise ((resolve, reject) => {
-		console.log('CMP => Initialising...');
+		window.__cmp = api;
+		console.log('CMP => API Initialising...');
 		resolve(true);
 	});
 };
@@ -23,7 +25,7 @@ function loadCmp (result, vendorList) {
 			resolve(window.cmp);
 		}
 	});
-}
+};
 
 // Main CMP flow logic is here.
 init()
@@ -45,7 +47,4 @@ init()
 			cmp.readyCmpAPI(result)
 		}
 	})
-	.catch(err => console.log(err))
-
-
-
+	.catch(err => console.log(err));
