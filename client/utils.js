@@ -1,8 +1,4 @@
 import json2html from './json2html.js';
-//import vendorList from './vendorList.js';
-//vendorList.vendors  
-
-console.log(json2html)
 
 function fetchAllVendorsArray (vendorList) {
     let result = vendorList.vendors.map(item => {
@@ -19,6 +15,7 @@ function fetchAllPurposeArray (vendorList) {
 };
 
 function buildVendorTable (vendorList) {
+    console.log('here')
     const vendors = vendorList.vendors;
     const table = {'<>' : 'div', 'html' : '${name} ${policyUrl}'}
     const html = json2html.transform(vendors,table);

@@ -1,7 +1,6 @@
 import { ConsentString } from 'consent-string';
 import { fetchAllVendorsArray,
-        fetchAllPurposeArray,
-        buildVendorTable } from './utils';
+        fetchAllPurposeArray } from './utils';
 import vendorList from './vendorList.js';
 import * as cookies from './cookies.js';
 
@@ -68,5 +67,3 @@ export default class Cmp extends ConsentString {
     }
 
 }
-
-buildVendorTable(vendorList);

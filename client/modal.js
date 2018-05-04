@@ -1,10 +1,18 @@
+//import buildVendorTable from './utils.js';
+import vendorList from './vendorList.js';
+import json2html from './json2html.js';
+
+//console.log(buildVendorTable)
+console.log(json2html)
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
 import '../node_modules/uikit/dist/css/uikit.min.css';
 import Popup from './templates/popup.html';
 import Details from './templates/details.html';
+import Vendors from './templates/vendors.html';
 // loads the Icon plugin
 UIkit.use(Icons);
+//const vendorTable = buildVendorTable(vendorList);
 
 function showConsentModalPromise () {
     return new Promise ((resolve, reject) => {
@@ -29,6 +37,34 @@ function showConsentModalPromise () {
                 }
                 resolve(createPurposeArrayFromObject(checkboxData));
             });
+            document.getElementById('vendor-list-link').addEventListener('click', function (e) {
+                function buildVendorTable (vendorList) {
+                    console.log('here')
+                    const vendors = vendorList.vendors;
+                    const table = 
+                    {"<>":"table","id":"purposes-table","class":"uk-table uk-table-hover uk-table-divider","html":[
+                        {"<>":"thead","html":[
+                            {"<>":"tr","html":[
+                                {"<>":"th","html":"Name"},
+                                {"<>":"th","html":"Policy"}
+                              ]}
+                          ]},
+                        {"<>":"tbody","html":[
+                            {"<>":"tr","html":[
+                                {"<>":"td","html":"${name}"},
+                                {"<>":"td","html":"<a href='${policyUrl}'>LINK</a>"}
+                              ]}
+                          ]}
+                      ]}
+                    const html = json2html.transform(vendors,table);
+                    console.log(html);
+                    return html;
+                }
+
+                //const final = tbody.innerHTML(buildVendorTable(vendorList))
+                UIkit.modal.dialog(buildVendorTable(vendorList))
+                
+            });
         });
     });
 };
@@ -44,3 +80,8 @@ function createPurposeArrayFromObject (obj) {
     });
     return result;
 };
+
+/* {'<>' : 'tr', 'html' : [
+    {'<>' : 'td', 'html' : '${name}'},
+    {'<>' : 'td', 'html' : '${policyUrl}'}
+]} */
