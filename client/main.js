@@ -4,6 +4,8 @@ import vendorList from './vendorList.js';
 import showConsentModalPromise from './modal.js';
 import api from './api.js';
 
+import * as t from './testing';
+
 function init () {
 	return new Promise ((resolve, reject) => {
 		window.__cmp = api;

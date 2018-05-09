@@ -7,9 +7,12 @@ const app = express();
 
 // self rolled modules imported here
 const script = require('./routes/script');
+const modal = require('./routes/modal');
 
 // setup the routes
 app.use('/script', script);
+app.use('/modal', modal);
+
 app.use(express.static('dist'))
 app.use(express.static('/node_modules/uikit/dist/css/'))
 

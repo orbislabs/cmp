@@ -40,25 +40,32 @@ function showConsentModalPromise () {
             document.getElementById('vendor-list-link').addEventListener('click', function (e) {
                 function buildVendorTable (vendorList) {
                     console.log('here')
+                    const stringStart = 
+`
+<table id="purposes-table" class="uk-table uk-table-hover uk-table-divider">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Policy</td>
+        </tr>
+    </thead>
+`
+
+const stringEnd = 
+`
+</table>
+`
                     const vendors = vendorList.vendors;
                     const table = 
-                    {"<>":"table","id":"purposes-table","class":"uk-table uk-table-hover uk-table-divider","html":[
-                        {"<>":"thead","html":[
-                            {"<>":"tr","html":[
-                                {"<>":"th","html":"Name"},
-                                {"<>":"th","html":"Policy"}
-                              ]}
-                          ]},
-                        {"<>":"tbody","html":[
-                            {"<>":"tr","html":[
-                                {"<>":"td","html":"${name}"},
-                                {"<>":"td","html":"<a href='${policyUrl}'>LINK</a>"}
-                              ]}
-                          ]}
-                      ]}
+                    {"<>":"tbody","html":[
+                        {"<>":"tr","html":[
+                            {"<>":"td","html":"${name}"},
+                            {"<>":"td","html":"<a href='${policyUrl}'>LINK</a>"}]}
+                    
+                    ]}
                     const html = json2html.transform(vendors,table);
                     console.log(html);
-                    return html;
+                    return stringStart + html + stringEnd;
                 }
 
                 //const final = tbody.innerHTML(buildVendorTable(vendorList))
