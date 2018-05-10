@@ -7,16 +7,16 @@ console.log(json2html)
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
 import '../node_modules/uikit/dist/css/uikit.min.css';
-import Popup from './templates/popup.html';
-import Details from './templates/details.html';
-import Vendors from './templates/vendors.html';
+import Modal from './ui/templates/index.html';
+import Details from './ui/templates/purposes.html';
+import Vendors from './ui/templates/vendors.html';
 // loads the Icon plugin
 UIkit.use(Icons);
 //const vendorTable = buildVendorTable(vendorList);
 
 function showConsentModalPromise () {
     return new Promise ((resolve, reject) => {
-        UIkit.modal.dialog(Popup, { 'bg-close' : false });
+        UIkit.modal.dialog(Modal, { 'bg-close' : false });
         document.getElementById('agree-button').addEventListener('click', function (e) {
             resolve('fullConsent')
             console.log('CMP => User consent given');
@@ -41,36 +41,28 @@ function showConsentModalPromise () {
                 function buildVendorTable (vendorList) {
                     console.log('here')
                     const stringStart = 
-`
-<table id="purposes-table" class="uk-table uk-table-hover uk-table-divider">
-    <thead>
-        <tr>
-            <td>Name</td>
-            <td>Policy</td>
-        </tr>
-    </thead>
-`
-
-const stringEnd = 
-`
-</table>
-`
+                        `
+                        <table id="purposes-table" class="uk-table uk-table-hover uk-table-divider">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Policy</td>
+                                </tr>
+                            </thead>
+                        `;
+                    const stringEnd = `</table>`;
                     const vendors = vendorList.vendors;
-                    const table = 
-                    {"<>":"tbody","html":[
-                        {"<>":"tr","html":[
-                            {"<>":"td","html":"${name}"},
-                            {"<>":"td","html":"<a href='${policyUrl}'>LINK</a>"}]}
+                    const table = {"<>":"tbody","html":[
+                                    {"<>":"tr","html":[
+                                        {"<>":"td","html":"${name}"},
+                                        {"<>":"td","html":"<a href='${policyUrl}'>LINK</a>"}]}
                     
-                    ]}
+                                    ]}
                     const html = json2html.transform(vendors,table);
                     console.log(html);
                     return stringStart + html + stringEnd;
                 }
-
-                //const final = tbody.innerHTML(buildVendorTable(vendorList))
                 UIkit.modal.dialog(buildVendorTable(vendorList))
-                
             });
         });
     });
@@ -87,8 +79,3 @@ function createPurposeArrayFromObject (obj) {
     });
     return result;
 };
-
-/* {'<>' : 'tr', 'html' : [
-    {'<>' : 'td', 'html' : '${name}'},
-    {'<>' : 'td', 'html' : '${policyUrl}'}
-]} */

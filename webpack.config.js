@@ -1,10 +1,15 @@
 const path = require('path');
+//const HtmlWebpackPlugin = require('html-webpack-plugin');// remove from package
 
-module.exports = {
-    entry : './client/main.js',
+
+const config = {
+    entry : {
+        cmp : './client/main.js',
+        ui : './client/ui/ui.js'
+    },
     output : {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'cmp.bundle.js'
+        filename: '[name].bundle.js'
     },
     module: {
         rules: [{
@@ -30,3 +35,5 @@ module.exports = {
         }]
     }
 };
+
+module.exports = config;
