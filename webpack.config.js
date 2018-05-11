@@ -1,39 +1,44 @@
 const path = require('path');
-//const HtmlWebpackPlugin = require('html-webpack-plugin');// remove from package
-
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 const config = {
     entry : {
         cmp : './client/main.js',
-        ui : './client/ui/ui.js'
+        ui : './client/ui/main.js'
     },
     output : {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].bundle.js'
     },
     module: {
-        rules: [{
-            test: /\.js$/,
-            exclude: /(node_modules|bower_components)/,
-            use: {
-                loader: 'babel-loader',
-            }
-        },
-        {
-            test: /\.css$/,
-            use: [{
-                loader: 'style-loader'
-                }, {
-                loader: 'css-loader'
-                }]
-        },
-        {
-            test: /\.(html)$/,
-            use: {
-                loader: 'html-loader'
-            }
-        }]
-    }
+        rules: [
+            {   test: /\.vue$/,
+                loader: 'vue-loader'
+            },
+            {   test: /\.js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                }
+            },
+            {
+                test: /\.css$/,
+                    use: [{
+                        loader: 'style-loader'
+                        }, {
+                        loader: 'css-loader'
+                        }]
+            },
+            {
+                test: /\.(html)$/,
+                use: {
+                    loader: 'html-loader'
+                }
+            }]
+    },
+    plugins : [
+        new VueLoaderPlugin()
+    ]
 };
 
 module.exports = config;
