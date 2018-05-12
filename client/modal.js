@@ -68,6 +68,7 @@ function showConsentModalPromise () {
     });
 };
 
+
 export default showConsentModalPromise;
 
 function createPurposeArrayFromObject (obj) {

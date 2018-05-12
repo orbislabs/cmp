@@ -1,11 +1,11 @@
 <template>
     <div> 
-            <h1>{{ title }}</h1>
-            <p>{{ body }}</p>
-            <p class="uk-text-right">
-                <vk-button v-on:click="$emit('change-view', 'Purposes')">More Information</vk-button>
-                <vk-button v-on:click="fullConsent" type="primary">I Agree</vk-button>
-            </p>
+        <h1>{{ title }}</h1>
+        <p>{{ body }}</p>
+        <p class="uk-text-right">
+            <vk-button v-on:click="$emit('change-view', 'Purposes')">More Information</vk-button>
+            <vk-button v-on:click="fullConsent" type="primary">I Agree</vk-button>
+        </p>
     </div>
 </template>
 <script>
@@ -23,9 +23,11 @@ export default {
         fullConsent () {
             console.log('CMP :: Full Consent Given');
             this.show = false;
+            this.$bus.$emit('full-consent', {});
         },
         moreInformation () {
             console.log('CMP :: More Information Requested');
+    
         }
   }
 }

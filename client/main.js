@@ -4,7 +4,7 @@ import vendorList from './vendorList.js';
 import showConsentModalPromise from './modal.js';
 import api from './api.js';
 
-import * as t from './testing';
+import renderVueApp from './ui/main.js';
 
 function init () {
 	return new Promise ((resolve, reject) => {
@@ -47,6 +47,7 @@ init()
 				.then(result => cmp.readyCmpAPI(result))
 		} else {
 			cmp.readyCmpAPI(result)
+			renderVueApp().then(result => console.log(result))
 		}
 	})
 	.catch(err => console.log(err));
