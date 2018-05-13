@@ -3,7 +3,6 @@ import vendorList from './vendorList.js';
 import json2html from './json2html.js';
 
 //console.log(buildVendorTable)
-console.log(json2html)
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
 import '../node_modules/uikit/dist/css/uikit.min.css';

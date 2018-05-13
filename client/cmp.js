@@ -61,7 +61,7 @@ export default class Cmp extends ConsentString {
             console.log(`CMP => Set purposes: ${this.getPurposesAllowed()}`);
             cookies.writeCookie(this.getConsentString())
             .then((result) => {
-                if(result) resolve(true)
+                if(result) resolve(true);
             });
         });
     }

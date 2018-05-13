@@ -47,7 +47,7 @@ init()
 				.then(result => cmp.readyCmpAPI(result))
 		} else {
 			cmp.readyCmpAPI(result)
-			renderVueApp().then(result => console.log(result))
+			renderVueApp().then(result => cmp.updatePurposesAndCookie(result));
 		}
 	})
 	.catch(err => console.log(err));
