@@ -5,8 +5,8 @@
             <vk-table-column-select headless></vk-table-column-select>
             <vk-table-column title="Vendor Name" cell="name"></vk-table-column>
 
-              <vk-table-column title="Name" cell="policyUrl" expanded>
-                    <a v-bind:href=cell>{{cell}}</a>
+              <vk-table-column title="Name">
+                    <a v-bind:href="paginatedData.policyUrl">Link</a>
             </vk-table-column>
 
         </vk-table>

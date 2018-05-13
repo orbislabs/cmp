@@ -10,10 +10,10 @@
 </template>
 <script>
 export default {
+    show: true,
   name : 'modal',
   data () {
       return {
-          show : true,
           title : 'We use cookies!',
           body : `There is new regulation in the EU which requires you to consent to our use of your personal data. 
           We and our partners collect and use cookies for ad personalisation and measurement.`
@@ -25,10 +25,6 @@ export default {
             this.show = false;
             this.$bus.$emit('full-consent', {});
         },
-        moreInformation () {
-            console.log('CMP :: More Information Requested');
-    
-        }
   }
 }
 </script>

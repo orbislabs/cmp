@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name : 'purposes',
+  name : 'Purposes',
   data () {
       return {
             title : 'Purposes',
@@ -33,9 +33,6 @@ export default {
             multipleSelection : [1,2,3,4,5]
       }
   },
-  methods : {
-      // none yet!
-  }
 }
 </script>
 
