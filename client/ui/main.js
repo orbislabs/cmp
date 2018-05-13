@@ -14,31 +14,31 @@ Vue.component('Purposes', Purposes);
 Vue.component('Vendors', Vendors);
 
 
-function renderVueApp () {
-  return new Promise ((resolve, reject) => {
+function renderVueApp() {
+  return new Promise((resolve, reject) => {
 
     let div = document.createElement("div");
     div.setAttribute('id', 'app');
     document.body.appendChild(div);
 
-    const vm = new Vue({
-      el : '#app',
-      render : h => h(App),
-      created () {
-        this.$bus.$on('full-consent', function () {
-          console.log(`CMP-UI :: Promise Resolved: Full Consent`);
-          resolve('fullConsent');
-          this.$bus.$emit('ui-close', 'fullConsent');
-        });
-        this.$bus.$on('partial-consent', function (selection) {
-          console.log(`CMP-UI :: Promise Resolved: ${selection}`);
-          resolve(selection);
-          this.$bus.$emit('ui-close', selection);
-        });
-      }
+      const vm = new Vue({
+        el: '#app',
+        render: h => h(App),
+        created() {
+            this.$bus.$on('full-consent', function() {
+              console.log(`CMP-UI :: Promise Resolved: Full Consent`);
+              resolve('fullConsent');
+              this.$bus.$emit('ui-close', 'fullConsent');
+            });
+            this.$bus.$on('partial-consent', function(selection) {
+              console.log(`CMP-UI :: Promise Resolved: ${selection}`);
+              resolve(selection);
+              this.$bus.$emit('ui-close', selection);
+            });
+          }
+      });
+
     });
-    
-  });
 };
 
 
