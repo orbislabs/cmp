@@ -19,25 +19,34 @@
   Object.defineProperties(Vue.prototype, {
     $bus: {
       get: function () {
-        return EventBus
+        return EventBus;
       }
     }
   });
   
   const EventBus = new Vue({
     created () {
-      this.$on('my-event', this.handleMyEvent)
+      console.log('CMP-UI :: EventBus Created');
+      this.$on('purpose-consent-selection', this.updateAllowedPurposes);
+      this.$on('vendor-consent-selection', this.updateAllowedVendors);
     },
     data : {
-      allowedVendors : 0
+      allowedPurposes : [1,2,3,4,5],
+      allowedVendors : [1,2,3,4,5,6,7,8]
     },
     methods: {
       handleMyEvent ($event) {
         this.allowedVendors = $event;
-        console.log('My event caught in global event bus', $event)
-        console.log('allowedvendors: ', this.allowedVendors)
-      }
+        console.log('My event caught in global event bus', $event);
+        console.log('allowedvendors: ', this.allowedVendors);
+      },
+      updateAllowedVendors ($event) {
+        // TODO: this
+      },
+      updateAllowedPurposes ($event) {
+        // TODO: this
+      },
     }
-  })
+  });
 
   export default EventBus;
