@@ -6,13 +6,15 @@ const express = require('express');
 const app = express();
 
 // self rolled modules imported here
-const script = require('./routes/script');
+const cmp = require('./routes/cmp');
+const demo = require('./routes/demo');
 
 // setup the routes
-app.use('/script', script);
+app.use('/cmp', cmp);
+app.use('/demo', demo);
 
-app.use(express.static('dist'))
-app.use(express.static('/node_modules/uikit/dist/css/'))
+app.use(express.static('dist'));
+app.use(express.static('/node_modules/uikit/dist/css/')); // TODO: try to remove
 
 // fire up the server
 app.listen(3999, () => { 

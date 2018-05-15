@@ -6,7 +6,7 @@ const rootPath = path.join(__dirname, '../dist' );
 
 // middleware logging a request to this route
 router.use(function timeLog (req, res, next) {
-    console.log('GET /script @ Time : ', Date.now());
+    console.log('GET /cmp @ Time : ', Date.now());
     next();
 });
 
@@ -15,7 +15,7 @@ router.get('/', (req,res) => {
 });
 
 router.get('/dev', (req,res) => {
-    res.send('<script src="//localhost:3999/script" type="module" async></script>');
+    res.send('<script src="//localhost:3999/cmp" type="module" async></script>');
 });
 
 module.exports = router;

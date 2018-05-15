@@ -5,7 +5,6 @@
             <!-- render the currently active component/page here -->
             <component v-bind:is="currentView" v-on:change-view="updateView" v-bind:consent-object.sync="consentObject"></component>
         </vk-modal>
-        <vk-button type="primary">Show Privacy Manager</vk-button>
     </div>
 </template>
 <script>

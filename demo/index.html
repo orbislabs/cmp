@@ -1,0 +1,45 @@
+<head>
+  <!-- UIkit CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.42/css/uikit.min.css" />
+  <style>
+    #buttons-grid {
+      margin-top: 120px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="uk-section uk-section-primary uk-height-viewport">
+    <div class="uk-container uk-container-small">
+      
+        <h1>Welcome to the Pluto CMP Demo</h1>
+      
+      <p>
+        Orbis is excited to bring the IAB Europe’s industry framework to our publishers, brands and website owners with our Consent Management Platform (CMP++), Pluto.
+      </p>
+      
+      
+      <div id="buttons-grid" uk-grid>
+        <div class="uk-width-expand@m">
+          <button class="uk-button uk-button-default uk-button-large uk-width-1-1" href="#" onclick="swal('Ooops...','Option not yet implemented.','warning')">Clear IAB Cookie</button>
+        </div>
+        <div class="uk-width-expand@m">
+          <button class="uk-button uk-button-default uk-button-large uk-width-1-1" href="#" onclick="window.__cmp('showConsentTool')">Show CMP UI</button>
+        </div>
+
+      </div>
+
+  </div>
+  </div>
+
+  <!-- UIkit JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.42/js/uikit.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.42/js/uikit-icons.min.js"></script>
+    <!-- Sweet Alert JS -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <!-- PLUTO CMP JS -->
+  <script src="//localhost:3999/cmp" type="module" async></script>
+  <script>
+      
+  </script>
+</body>
