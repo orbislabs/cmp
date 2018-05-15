@@ -20,15 +20,19 @@ const div = document.createElement('div');
 div.setAttribute('id', 'cmp-app');
 document.body.appendChild(div);
 
-function renderVueApp() {
+const vm = new Vue(App).$mount('#cmp-app');
+
+function renderVueApp () {
   return new Promise((resolve, reject) => {
-
-    const vm = new Vue(App).$mount('#cmp-app');
-
-    vm.$bus.$on('save-selection', value => {
-      console.log(`CMP-UI :: Resolving Promise (save-selection): ${JSON.stringify(value)}`);
-      resolve(vm.consentObject);
-    });
+    if (vm) {
+      vm.show = true;
+      vm.$bus.$on('save-selection', value => {
+        console.log(`CMP-UI :: Resolving Promise (save-selection): ${JSON.stringify(value)}`);
+        resolve(vm.consentObject);
+      });
+    } else {
+      console.error(`CMP-UI :: No App Present`);
+    }
   });
 }
 

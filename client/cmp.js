@@ -7,6 +7,7 @@ import {
 } from './utils';
 import vendorList from './vendorList.js';
 import * as cookies from './cookies.js';
+import renderVueApp from './ui/main.js';
 
 export default class Cmp extends ConsentString {
   constructor(result = null, vendorList) {
@@ -45,6 +46,14 @@ export default class Cmp extends ConsentString {
   getConsentData(empty = null, callback = () => {}) {
     const result = this.getConsentString();
     callback(result, true);
+  }
+
+  showConsentTool (parameter = null, callback = null) {
+    // TODO : refactor for a single entry to showing the consent modal
+    renderVueApp()
+      .then(result => this.updateCmpAndWriteCookie(result))
+      .then(result => this.readyCmpAPI(result))
+      .catch(err => console.log(err));
   }
 
   onFullConsent() {

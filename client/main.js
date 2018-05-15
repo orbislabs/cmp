@@ -37,8 +37,8 @@ init()
     if (result == false) {
       renderVueApp()
         .then(result => cmp.updateCmpAndWriteCookie(result))
-		.then(result => cmp.readyCmpAPI(result))
-		.catch(err => console.log(err));
+		    .then(result => cmp.readyCmpAPI(result))
+		    .catch(err => console.log(err));
     } else {
       cmp.readyCmpAPI(result);
     }

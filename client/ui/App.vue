@@ -12,7 +12,7 @@ export default {
   name: 'app',
   data() {
     return {
-      show: true,
+      show: false,
       currentView: 'Modal',
       consentObject: {
         purposes: [1, 2, 3, 4, 5],

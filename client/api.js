@@ -3,6 +3,7 @@ export default function api (command, parameter = null, callback = null) {
         case 'ping'                 : cmp.ping(parameter, callback); break;
         case 'getVendorConsents'    : cmp.getVendorConsents(parameter, callback); break;
         case 'getConsentData'       : cmp.getConsentData(parameter, callback); break;
-        default : console.error('Error: unknown command');
+        case 'showConsentTool'      : cmp.showConsentTool(parameter, callback); break;
+        default : console.error('CMP => Error: unknown command');
     }
 }
