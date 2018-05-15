@@ -30,16 +30,19 @@ export default {
     this.$bus.$on('full-consent', ($event) => {
       console.log(`CMP-UI :: full-consent Event: ${$event}`);
       this.$bus.$emit('save-selection', this.consentObject);
+      this.currentView = 'Modal';
       this.show = false;
     });
     this.$bus.$on('partial-consent', ($event) => {
       // when this fires, we fire another event... save-event & close the app, not sure if this is a good idea..
       console.log(`CMP-UI :: partial-consent Event: ${$event}`);
       this.$bus.$emit('save-selection', this.consentObject);
+      this.currentView = 'Modal';
       this.show = false;
     });
     this.$bus.$on('ui-close', ($event) => {
       console.log(`CMP-UI :: ui-close Event: ${$event}`);
+      this.currentView = 'Modal';
       this.show = false;
     });
   }

@@ -7,6 +7,7 @@ import Purposes from './components/Purposes.vue';
 import Vendors from './components/Vendors.vue';
 import Breadcrumb from './components/Breadcrumb.vue';
 import '@vuikit/theme';
+import '../../cookie/cookieutils.js';
 
 Vue.use(Vuikit);
 

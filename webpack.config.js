@@ -3,7 +3,8 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 const config = {
     entry : {
-        cmp : './client/main.js'
+        cmp : './client/main.js',
+        demo : './demo/demo.js'
     },
     output : {
         path: path.resolve(__dirname, 'dist'),
