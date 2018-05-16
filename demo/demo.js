@@ -3,6 +3,7 @@ import { decodeVendorCookieValue } from '../cookie/cookieutils.js';
 
 const code = document.getElementById('code');
 
+//TODO: an error is being thrown
 function getDemoCookie () {
     checkIabCookie()
     .then(result => decodeVendorCookieValue(result))
