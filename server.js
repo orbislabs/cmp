@@ -23,7 +23,7 @@ let PORT;
 if (profile == 'dev') {
     PORT = 3999;
 } else {
-    PORT = process.env.PORT || 80;
+    PORT = process.env.PORT || 8080;
 }
 
 // self rolled modules imported here
