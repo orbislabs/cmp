@@ -33,7 +33,7 @@ app.use(express.static('/node_modules/uikit/dist/css/')); // TODO: try to remove
 
 // fire up the server
 app.listen(PORT, () => { 
-    console.log(`CMP++ :: ExpressServer --> Running on ${HOST} : ${PORT}`);
+    console.log(`CMP++ :: ExpressServer --> Running on: ${PORT}`);
 });
 // check node v9.8.0
 console.log(`Node:  ${process.version}`);
