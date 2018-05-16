@@ -56,6 +56,7 @@ export default class Cmp extends ConsentString {
       .catch(err => console.log(err));
   }
 
+  // TODO : this function is not being used, this may not be needed
   onFullConsent() {
     return new Promise((resolve, reject) => {
       console.log('CMP => setting full consent');

@@ -27,8 +27,10 @@ export default {
     }
   },
   created() {
+    // TODO : this needs to pick the full consent object - setup from config!
     this.$bus.$on('full-consent', ($event) => {
       console.log(`CMP-UI :: full-consent Event: ${$event}`);
+      this.consentObject.purposes = [1, 2, 3, 4, 5];
       this.$bus.$emit('save-selection', this.consentObject);
       this.currentView = 'Modal';
       this.show = false;

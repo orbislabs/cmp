@@ -47,15 +47,6 @@ function checkIabCookie(result) {
   });
 }
 
-function setIabCookie(result) {
-  return new Promise((resolve, reject) => {
-    if (result == 'fullConsent') {
-      onFullConsent();
-      writeCookie();
-    }
-  });
-}
-
 function writeCookieSync(value) {
   document.cookie = `${COOKIE_NAME}=${value}${COOKIE_DOMAIN};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
   return;
@@ -92,6 +83,5 @@ export {
   writeCookieSync,
   checkCookiesEnabled,
   checkCookiesEnabledPromise,
-  checkIabCookie,
-  setIabCookie
+  checkIabCookie
 };
