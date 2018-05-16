@@ -18,7 +18,13 @@ if (host == '127.0.0.1') {
     process.env.NODE_ENV = 'production';
 } */
 
-const PORT = 3999;
+const profile = process.argv[2];
+let PORT;
+if (profile == 'dev') {
+    PORT = 3999;
+} else {
+    PORT = 80;
+}
 
 // self rolled modules imported here
 const cmp = require('./routes/cmp');
@@ -36,6 +42,7 @@ app.listen(PORT, () => {
     console.log(`CMP++ :: ExpressServer --> Running on: ${PORT}`);
 });
 // check node v9.8.0
-console.log(`Node:  ${process.version}`);
+console.log(`CMP++ :: ExpressServer --> NodeV:  ${process.version}`);
+console.log(`CMP++ :: ExpressServer --> Arguments: ${process.argv[2]}`);
 //console.log(`Server IP:  ${host}`);
 //console.log(`Env:  ${JSON.stringify(process.env.NODE_ENV)}`);

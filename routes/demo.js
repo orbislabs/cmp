@@ -11,14 +11,10 @@ router.use(function timeLog (req, res, next) {
     next();
 });
 
-// TODO: this needs improving, this file has ip of server
 router.get('/', (req,res) => {
     res.sendFile('index.html', { root : rootPath });
 });
-// TODO: this needs improving, this file has localhost address
-router.get('/dev', (req,res) => {
-    res.sendFile('index.dev.html', { root : rootPath });
-});
+
 router.get('/logic', (req,res) => {
     res.sendFile('demo.bundle.js', { root : distPath });
 });
