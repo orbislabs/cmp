@@ -261,7 +261,7 @@ function encodePublisherCookieValue(publisherData) {
  * Decode the (URL safe Base64) value of a cookie into an object.
  */
 function decodeCookieValue(cookieValue, definitionMap) {
-
+	if (!cookieValue) return;
 	// Replace safe characters
 	const unsafe = cookieValue
 		.replace(/-/g, '+')

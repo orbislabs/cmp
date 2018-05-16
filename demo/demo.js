@@ -8,12 +8,18 @@ function getDemoCookie () {
     checkIabCookie()
     .then(result => decodeVendorCookieValue(result))
     .then((result) => {
-        const cookieString = JSON.stringify(result);
-        const formattedString = js_beautify(cookieString);
-        code.innerHTML = formattedString;
+        if(!result) {
+            code.innerHTML = 'No IAB cookie present, please load the CMP';
+        } else {
+            const cookieString = JSON.stringify(result);
+            const formattedString = js_beautify(cookieString);
+            code.innerHTML = formattedString;
+        }
     })
     .catch(err => console.error(err));  
 }
 
+// TODO: this needs to be listened and not polled
 getDemoCookie();
+setInterval(getDemoCookie, 1000);
 
