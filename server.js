@@ -5,8 +5,7 @@ const express = require('express');
 const app = express();
 
 // config based on DEV or PROD profiles
-const host = os.networkInterfaces().lo0[0].address;
-let PORT;
+/* const host = os.networkInterfaces().lo0[0].address;
 let HOST;
 
 if (host == '127.0.0.1') {
@@ -17,7 +16,9 @@ if (host == '127.0.0.1') {
     PORT = 3999;
     HOST = host;
     process.env.NODE_ENV = 'production';
-}
+} */
+
+const PORT = 3999;
 
 // self rolled modules imported here
 const cmp = require('./routes/cmp');
@@ -36,5 +37,5 @@ app.listen(PORT, () => {
 });
 // check node v9.8.0
 console.log(`Node:  ${process.version}`);
-console.log(`Server IP:  ${host}`);
-console.log(`Env:  ${JSON.stringify(process.env.NODE_ENV)}`);
+//console.log(`Server IP:  ${host}`);
+//console.log(`Env:  ${JSON.stringify(process.env.NODE_ENV)}`);

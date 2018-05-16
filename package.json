@@ -5,9 +5,10 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "preinstall" : "npm install pm2 -g",
     "develop": "webpack --mode development --watch",
     "build": "webpack --mode production",
-    "deploy": "nohup node server.js"
+    "deploy": "pm2 node server.js"
   },
   "repository": {
     "type": "git",
