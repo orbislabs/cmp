@@ -1,6 +1,27 @@
 import { checkIabCookie } from '../client/cookies.js';
 import { decodeVendorCookieValue } from '../cookie/cookieutils.js';
 
+var urlString = window.location.href;
+var url = new URL(urlString);
+var clientId = url.searchParams.get('c');
+
+var script = document.createElement('script');
+script.setAttribute('id', 'pluto-cmp-js-src');
+script.setAttribute('src', '/cmp');
+
+script.setAttribute('client-id', clientId);
+
+
+if (!clientId) {
+  script.setAttribute('client-id', 0);
+  document.body.appendChild(script);
+  console.log(script);
+} else {
+  script.setAttribute('client-id', clientId);
+  document.body.appendChild(script);
+  console.log(script);
+}
+
 const code = document.getElementById('code');
 
 //TODO: an error is being thrown

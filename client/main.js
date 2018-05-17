@@ -37,7 +37,7 @@ function loadCmp(clientId, vendorList, result) {
 init()
   .then(result => cookies.checkCookiesEnabledPromise(result)) // true OR false
   .then(result => cookies.checkIabCookie(result)) // base64 OR false
-  .then(result => loadCmp(result, vendorList))
+  .then(result => loadCmp(clientId, vendorList, result))
   .then((result) => {
     if (result == false) {
       renderVueApp(clientId)
