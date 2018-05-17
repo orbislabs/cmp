@@ -8,7 +8,11 @@
     </div>
 </template>
 <script>
+
+import { store } from './store.js';
+
 export default {
+  store : store,
   name: 'app',
   data() {
     return {

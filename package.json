@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "preinstall" : "npm install pm2 -g",
+    "preinstall": "npm install pm2 -g",
     "develop": "webpack --mode development --watch",
     "build": "webpack --mode production",
     "deploy": "pm2 start server.js"
@@ -31,6 +31,7 @@
     "express": "^4.16.3",
     "uikit": "^3.0.0-beta.42",
     "vue": "^2.5.16",
+    "vuex": "^3.0.1",
     "vuikit": "^0.8.4"
   },
   "devDependencies": {
