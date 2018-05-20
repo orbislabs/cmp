@@ -1,7 +1,7 @@
 <template>
-    <div> 
-        <h1>{{ currentClientConfig.views.homeView.title }}</h1>
-        <p>{{ currentClientConfig.views.homeView.body }}</p>
+    <div>
+        <h1>{{ getCurrentClientConfig.views.homeView.title }}</h1>
+        <p>{{ getCurrentClientConfig.views.homeView.body }}</p>
         <p class="uk-text-right">
             <vk-button v-on:click="$emit('change-view', 'Purposes')">More Information</vk-button>
             <vk-button v-on:click="fullConsent" type="secondary">I Agree</vk-button>
@@ -19,7 +19,7 @@ export default {
   },
   computed : {
     ...mapGetters([
-      'currentClientConfig'
+      'getCurrentClientConfig'
     ])
   },
   methods: {

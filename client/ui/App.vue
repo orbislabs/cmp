@@ -3,7 +3,7 @@
         <vk-modal v-bind:show="show">
             <app-breadcrumb v-bind:current-view="currentView" v-on:change-view="updateView"></app-breadcrumb>
             <!-- render the currently active component/page here -->
-            <component v-bind:is="currentView" v-on:change-view="updateView" v-bind:consent-object.sync="consentObject"></component>
+            <component v-bind:is="currentView" v-on:change-view="updateView"></component>
         </vk-modal>
     </div>
 </template>
@@ -18,10 +18,6 @@ export default {
     return {
       show: false,
       currentView: 'Modal',
-      consentObject: {
-        purposes: [1, 2, 3, 4, 5],
-        vendors: [1, 2, 3, 4]
-      },
     }
   },
   methods: {
@@ -34,15 +30,14 @@ export default {
     // TODO : this needs to pick the full consent object - setup from config!
     this.$bus.$on('full-consent', ($event) => {
       console.log(`CMP-UI :: full-consent Event: ${$event}`);
-      this.consentObject.purposes = [1, 2, 3, 4, 5];
-      this.$bus.$emit('save-selection', this.consentObject);
+      this.$bus.$emit('save-selection', this.$store.getters.getCurrentClientConfig.defaults);
       this.currentView = 'Modal';
       this.show = false;
     });
     this.$bus.$on('partial-consent', ($event) => {
       // when this fires, we fire another event... save-event & close the app, not sure if this is a good idea..
       console.log(`CMP-UI :: partial-consent Event: ${$event}`);
-      this.$bus.$emit('save-selection', this.consentObject);
+      this.$bus.$emit('save-selection', this.$store.getters.getUserConsentObject);
       this.currentView = 'Modal';
       this.show = false;
     });

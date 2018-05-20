@@ -38,10 +38,6 @@ export default {
     }
   },
   props: {
-    consentObject : {
-        required : true,
-        type : Object
-    },
     size: {
       type: Number,
       required: false,

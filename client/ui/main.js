@@ -7,6 +7,8 @@ import Modal from './components/Modal.vue';
 import Purposes from './components/Purposes.vue';
 import Vendors from './components/Vendors.vue';
 import Breadcrumb from './components/Breadcrumb.vue';
+import Toggle from './components/Toggle.vue';
+
 
 import './eventBus';
 import '@vuikit/theme';
@@ -20,6 +22,7 @@ Vue.component('Purposes', Purposes);
 Vue.component('Vendors', Vendors);
 Vue.component('app-breadcrumb', Breadcrumb);
 Vue.component('app-init', App);
+Vue.component('cmp-toggle', Toggle);
 
 // creating a root in the DOM for the app to attach to, when called
 const div = document.createElement('div');
@@ -33,11 +36,12 @@ const vm = new Vue(App).$mount('#cmp-app');
 function renderVueApp (clientId) {
   return new Promise((resolve, reject) => {
     if (vm) {
-      vm.$store.commit('setClientId', clientId);
+      vm.$store.commit('setClientId', parseInt(clientId));
+      vm.$store.commit('syncClientDefaultsToUserObject', vm.$store.getters.getCurrentClientConfig.defaults);      
       vm.show = true;
       vm.$bus.$on('save-selection', value => {
         console.log(`CMP-UI :: Resolving Promise (save-selection): ${JSON.stringify(value)}`);
-        resolve(vm.consentObject);
+        resolve(value);
       });
     } else {
       console.error(`CMP-UI :: No App Present`);
