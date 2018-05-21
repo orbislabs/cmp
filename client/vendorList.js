@@ -607,5 +607,5 @@ const vendorList =
               ]
            }
         ]
-     }
+     };
 export default vendorList;

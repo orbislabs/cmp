@@ -34,7 +34,11 @@ const clientConfig = {
                 }
             ],
         },
-        vendorView: {},
+        vendorView: {
+          title: 'Our Partners',
+          body: `Below are a list of our partners, please explore each vendors policy and remove any
+                    which do not conform to your privacy standards.`,
+        },
     }
 };
 

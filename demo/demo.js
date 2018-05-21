@@ -15,11 +15,11 @@ script.setAttribute('client-id', clientId);
 if (!clientId) {
   script.setAttribute('client-id', 0);
   document.body.appendChild(script);
-  console.log(script);
+  //console.log(script);
 } else {
   script.setAttribute('client-id', clientId);
   document.body.appendChild(script);
-  console.log(script);
+  //console.log(script);
 }
 
 const code = document.getElementById('code');

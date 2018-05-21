@@ -1,5 +1,6 @@
 <template>
     <div>
+
         <h1>{{ getCurrentClientConfig.views.homeView.title }}</h1>
         <p>{{ getCurrentClientConfig.views.homeView.body }}</p>
         <p class="uk-text-right">
@@ -19,7 +20,7 @@ export default {
   },
   computed : {
     ...mapGetters([
-      'getCurrentClientConfig'
+      'getCurrentClientConfig',
     ])
   },
   methods: {

@@ -1,6 +1,6 @@
 <template>
     <div>
-      {{ getCurrentClientConfig.defaults.purposes }}
+
         <h1>{{ getCurrentClientConfig.views.purposeView.title }}</h1>
 
         <p>{{ getCurrentClientConfig.views.purposeView.body }}</p>
@@ -8,7 +8,7 @@
         <vk-table :data="getCurrentClientConfig.views.purposeView.purposeText" narrowed>
             <vk-table-column title="Purpose" cell="purpose"></vk-table-column>
             <vk-table-column title="Allow">
-              <cmp-toggle :purposeId="row.id" slot-scope="{ row }" :value="true" :labels="{checked: 'on', unchecked: 'off'}"></cmp-toggle>
+              <cmp-toggle toggleType="purposes" :purposeId="row.id" slot-scope="{ row }" :value="true" :labels="{checked: 'on', unchecked: 'off'}"></cmp-toggle>
             </vk-table-column>
         </vk-table>
 
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+
 import { mapGetters } from 'vuex';
 
 export default {
@@ -36,6 +37,7 @@ export default {
     ])
   },
 }
+
 </script>
 
 <style scoped>

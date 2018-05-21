@@ -46,9 +46,13 @@ export default {
         type : Number, 
         required : true
     },
+    toggleType : {
+      type : String,
+      required : true
+    },
     value: {
       type: Boolean,
-      default: false
+      default: true
     },
     disabled: {
       type: Boolean,
@@ -210,9 +214,10 @@ export default {
         value: this.toggled,
         srcEvent: event
       })
-      this.$store.commit('updatePurposes', {
-          value: this.toggled,
-          purposeId : this.purposeId
+      this.$store.commit('updateUserConsentObject', {
+          toggleType : this.toggleType,
+          toggleValue : this.toggleId,
+          toggleId : this.purposeId
       })
     }
   }
