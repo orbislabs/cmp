@@ -2,6 +2,7 @@
     <div>
 
     <h1>{{ getCurrentClientConfig.views.vendorView.title }}</h1>
+    
     <p>{{ getCurrentClientConfig.views.vendorView.body }}</p>
 
     <vk-table v-bind:data="paginatedData" narrowed>
@@ -12,7 +13,6 @@
         <vk-table-column title="Allow">
           <cmp-toggle toggleType="vendors" :purposeId="row.id" :key="row.id" slot-scope="{ row }" :value="true" :labels="{checked: 'on', unchecked: 'off'}"></cmp-toggle>            
         </vk-table-column>
-
     </vk-table>
 
     <vk-pagination :page.sync="pageNumber" :perPage="size" :total="totalVendors" align="center">
@@ -36,8 +36,18 @@ import { mapGetters } from 'vuex';
 export default {
   data() {
     return {
-      pageNumber: 1
+      pageNumber : 1,
+      unToggled : [],
+      defaultCheck : false
     }
+  },
+  created () {
+    this.$bus.$on('toggled', payload => {
+      console.log(payload)
+      if(payload.toggleType == 'vendors' && !payload.toggleValue) {
+        this.unToggled.push(payload.toggleId);
+      }
+    });
   },
   props: {
     size: {
