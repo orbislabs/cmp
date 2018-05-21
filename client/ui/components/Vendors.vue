@@ -9,16 +9,9 @@
         <vk-table-column title="Policy Link">
           <a slot-scope="{ row }" :href="row.policyUrl" target="_blank">Link</a>            
         </vk-table-column>
-        
-        <!--ORIGINAL -->
         <vk-table-column title="Allow">
-          <cmp-toggle toggleType="vendors" :purposeId="row.id" :key="row.id" slot-scope="{ row }" :sync="true" :value="true" :labels="{checked: 'on', unchecked: 'off'}"></cmp-toggle>            
+          <cmp-toggle toggleType="vendors" :purposeId="row.id" :key="row.id" slot-scope="{ row }" :value="true" :labels="{checked: 'on', unchecked: 'off'}"></cmp-toggle>            
         </vk-table-column>
-
-        <!--DEBUG -->
-        <vk-table-column title="Debug">
-            <cmp-toggle toggleType="vendors" slot-scope="{ row }" :key="row.id" :purposeId="row.id" @change="toggleMe" :value="false"></cmp-toggle>   
-        </vk-table-column>  
 
     </vk-table>
 
@@ -50,7 +43,7 @@ export default {
     size: {
       type: Number,
       required: false,
-      default: 3
+      default: 5
     }
   },
   methods: {
@@ -60,8 +53,10 @@ export default {
     prevPage() {
       this.pageNumber--
     },
-    toggleMe () {
-      console.log(this)
+    isButtonToggled () {
+      this.$on('change', value => {
+        console.log(value)
+      })
     }
   },
   computed: {
