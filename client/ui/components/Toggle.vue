@@ -220,6 +220,11 @@ export default {
         value: this.toggled,
         srcEvent: event
       })
+      this.$emit('toggled', {
+          toggleType : this.toggleType,
+          toggleValue : this.toggled,
+          toggleId : this.purposeId
+      })
       this.$store.commit('updateUserConsentObject', {
           toggleType : this.toggleType,
           toggleValue : this.toggled,
