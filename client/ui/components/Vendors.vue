@@ -11,7 +11,7 @@
           <a slot-scope="{ row }" :href="row.policyUrl" target="_blank">Link</a>            
         </vk-table-column>
         <vk-table-column title="Allow">
-          <cmp-toggle toggleType="vendors" :purposeId="row.id" :key="row.id" slot-scope="{ row }" :value="true" :labels="{checked: 'on', unchecked: 'off'}"></cmp-toggle>            
+          <cmp-toggle toggleType="vendors" :purposeId="row.id" :key="row.id" slot-scope="{ row }" :value="toggleValue(row.id)" :labels="{checked: 'on', unchecked: 'off'}"></cmp-toggle>            
         </vk-table-column>
     </vk-table>
 
@@ -37,17 +37,7 @@ export default {
   data() {
     return {
       pageNumber : 1,
-      unToggled : [],
-      defaultCheck : false
     }
-  },
-  created () {
-    this.$bus.$on('toggled', payload => {
-      console.log(payload)
-      if(payload.toggleType == 'vendors' && !payload.toggleValue) {
-        this.unToggled.push(payload.toggleId);
-      }
-    });
   },
   props: {
     size: {
@@ -63,16 +53,19 @@ export default {
     prevPage() {
       this.pageNumber--
     },
-    isButtonToggled () {
-      this.$on('change', value => {
-        console.log(value)
-      })
+    toggleValue (id) {
+      if(this.getUserConsentObject.vendors.indexOf(id) > -1) {
+        return true;
+      } else {
+        return false;
+      }
     }
   },
   computed: {
     ...mapGetters([
       'getCurrentClientConfig',
-      'getCurrentClientVendorList'
+      'getCurrentClientVendorList',
+      'getUserConsentObject'
     ]),
     totalVendors() {
       return this.getCurrentClientVendorList.length;

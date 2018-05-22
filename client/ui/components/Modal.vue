@@ -1,8 +1,8 @@
 <template>
     <div>
-
+        <img :src="getCurrentClientConfig.clientLogo">
         <h1>{{ getCurrentClientConfig.views.homeView.title }}</h1>
-        <p>{{ getCurrentClientConfig.views.homeView.body }}</p>
+        <p v-html="getCurrentClientConfig.views.homeView.body"></p>
         <p class="uk-text-right">
             <vk-button v-on:click="$emit('change-view', 'Purposes')">More Information</vk-button>
             <vk-button v-on:click="fullConsent" type="secondary">I Agree</vk-button>

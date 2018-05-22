@@ -41,12 +41,6 @@ const contains = (object, title) => {
 const px = v => v + 'px'
 export default {
   name: 'ToggleButton',
-  created() {
-    console.log('created')
-  },
-  destroyed() {
-    console.log('destroyed')
-  },
   props: {
     purposeId : { 
         type : Number, 
@@ -219,11 +213,6 @@ export default {
       this.$emit('change', {
         value: this.toggled,
         srcEvent: event
-      })
-      this.$bus.$emit('toggled', {
-          toggleType : this.toggleType,
-          toggleValue : this.toggled,
-          toggleId : this.purposeId
       })
       this.$store.commit('updateUserConsentObject', {
           toggleType : this.toggleType,

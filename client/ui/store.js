@@ -42,7 +42,16 @@ export const store = new Vuex.Store({
         if(clientDefaultVendorIds.indexOf(vendor.id) > -1) return vendor;
       });
       return clientVendorsList;
-    }
+    },
+
+/*     getCurrentUserSelection : (state, getters) => {
+      const clientPurposes = getters.getCurrentClientConfig.defaults.purposes;
+      const userPurposes = getters.getUserConsentObject.purposes;
+      const arr = clientPurposes.filter( function(purpose) {
+        if( userPurposes.indexOf(purpose.id) > -1 ) return purpose;
+      });
+      return arr;
+    } */
 
   },
   mutations : {
@@ -55,7 +64,7 @@ export const store = new Vuex.Store({
     updateUserConsentObject (state, payload) {
       console.log(`CMP-UI :: userConsentObject update: ${JSON.stringify(payload)}`);
       // { toggleType : 'purpose' , toggleValue : true , toggleId : 2 }
-      //console.warn('CMP-UI :: ', state);
+      console.warn('CMP-UI :: ', state);
       
       let purposeArray = state.userConsentObject.purposes;
       let vendorArray = state.userConsentObject.vendors;
@@ -68,13 +77,13 @@ export const store = new Vuex.Store({
         //--------------//
         if (toggleValue) {
           // user is allowing the selection - true
-          if(purposeArray.indexOf(payload.purposeId) == -1) {
-            purposeArray.push(payload.purposeId);
+          if(purposeArray.indexOf(toggleId) == -1) {
+            purposeArray.push(toggleId);
           }
         } else {
           // user is rejecting the selection - false 
-          if( purposeArray.indexOf(payload.purposeId) !== -1 ) {
-            purposeArray.splice(purposeArray.indexOf(payload.purposeId), 1);
+          if( purposeArray.indexOf(toggleId) !== -1 ) {
+            purposeArray.splice(purposeArray.indexOf(toggleId), 1);
           }  
         }
         //--------------//
@@ -95,7 +104,7 @@ export const store = new Vuex.Store({
       } else {
         console.error('CMP-UI :: Unknown Toggle Type', toggleType);
       }
-      //console.warn('state after updating purposes', state);
+      console.warn('state after updating purposes', state);
     },
     // this mutation is called right after setting the clientId, so we can use the getter
     // to fetch the correct client config object

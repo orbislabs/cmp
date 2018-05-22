@@ -31,6 +31,7 @@ export default {
     this.$bus.$on('full-consent', ($event) => {
       console.log(`CMP-UI :: full-consent Event: ${$event}`);
       this.$bus.$emit('save-selection', this.$store.getters.getCurrentClientConfig.defaults);
+      this.$store.commit('syncClientDefaultsToUserObject', this.$store.getters.getCurrentClientConfig.defaults);
       this.currentView = 'Modal';
       this.show = false;
     });

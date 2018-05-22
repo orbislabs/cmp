@@ -8,7 +8,7 @@
         <vk-table :data="getCurrentClientConfig.views.purposeView.purposeText" narrowed>
             <vk-table-column title="Purpose" cell="purpose"></vk-table-column>
             <vk-table-column title="Allow">
-              <cmp-toggle toggleType="purposes" :purposeId="row.id" slot-scope="{ row }" :value="true" :labels="{checked: 'on', unchecked: 'off'}"></cmp-toggle>
+              <cmp-toggle toggleType="purposes" :purposeId="row.id" slot-scope="{ row }" :value="toggleValue(row.id)" :labels="{checked: 'on', unchecked: 'off'}"></cmp-toggle>
             </vk-table-column>
         </vk-table>
 
@@ -33,9 +33,22 @@ export default {
   },
   computed : {
     ...mapGetters([
-      'getCurrentClientConfig'
-    ])
+      'getCurrentClientConfig',
+      'getUserConsentObject'
+    ]),
+    myComputed () {
+      return value;
+    }
   },
+  methods : {
+    toggleValue (id) {
+      if(this.getUserConsentObject.purposes.indexOf(id) > -1) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
 }
 
 </script>
