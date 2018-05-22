@@ -212,7 +212,7 @@ export default {
       toggled: !!this.value
     }
   },
-  methods: {
+  methods: { 
     toggle (event) {
       this.toggled = !this.toggled
       this.$emit('input', this.toggled)
@@ -220,7 +220,7 @@ export default {
         value: this.toggled,
         srcEvent: event
       })
-      this.$emit('toggled', {
+      this.$bus.$emit('toggled', {
           toggleType : this.toggleType,
           toggleValue : this.toggled,
           toggleId : this.purposeId
