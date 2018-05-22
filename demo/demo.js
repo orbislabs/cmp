@@ -1,30 +1,27 @@
 import { checkIabCookie } from '../client/cookies.js';
 import { decodeVendorCookieValue } from '../cookie/cookieutils.js';
 
-var urlString = window.location.href;
-var url = new URL(urlString);
-var clientId = url.searchParams.get('c');
-
-var script = document.createElement('script');
+// LOGIC - Client Selection
+// grab the querystring from the URL, get c=
+// build a script element and attach to page
+const urlString = window.location.href;
+const url = new URL(urlString);
+const clientId = url.searchParams.get('c');
+const script = document.createElement('script');
 script.setAttribute('id', 'pluto-cmp-js-src');
 script.setAttribute('src', '/cmp');
-
 script.setAttribute('client-id', clientId);
-
-
 if (!clientId) {
   script.setAttribute('client-id', 0);
   document.body.appendChild(script);
-  //console.log(script);
 } else {
   script.setAttribute('client-id', clientId);
   document.body.appendChild(script);
-  //console.log(script);
 }
 
-const code = document.getElementById('code');
 
-//TODO: an error is being thrown
+const code = document.getElementById('code');
+// fetch cookie, decode, prettify and inject into DOM.
 function getDemoCookie () {
     checkIabCookie()
     .then(result => decodeVendorCookieValue(result))
@@ -44,3 +41,10 @@ function getDemoCookie () {
 getDemoCookie();
 setInterval(getDemoCookie, 1000);
 
+// below is a function for deleting euconsent IAB cookie
+// adding to global scope to use in onclick
+function deleteIabCookie () {
+  document.cookie = 'euconsent' + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  swal('Cookie Deleted!','Refreshing the page will automatically load the CMP','success');
+}
+window.deleteIabCookie = deleteIabCookie;
