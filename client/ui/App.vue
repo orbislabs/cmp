@@ -52,4 +52,7 @@ export default {
 </script>
 
 <style scoped>
+#cmp-app {
+   all : unset!important;
+}
 </style>
