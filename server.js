@@ -21,9 +21,9 @@ if (host == '127.0.0.1') {
 const profile = process.argv[2];
 let PORT;
 if (profile == 'dev') {
-    PORT = 3999;
+    PORT = 5000;
 } else {
-    PORT = process.env.PORT || 80;
+    PORT = process.env.PORT || 5000;
 }
 
 // self rolled modules imported here

@@ -9,7 +9,6 @@ import Vendors from './components/Vendors.vue';
 import Breadcrumb from './components/Breadcrumb.vue';
 import Toggle from './components/Toggle.vue';
 
-
 import './eventBus';
 import '@vuikit/theme';
 import '../../cookie/cookieutils.js';
@@ -31,14 +30,13 @@ document.body.appendChild(div);
 
 // create the app instance and attach it to the DOM in a hidden state
 const vm = new Vue(App).$mount('#cmp-app');
-vm.$store.commit('syncClientDefaultsToUserObject', vm.$store.getters.getCurrentClientConfig.defaults);
 
 // this function is called to load the UI, it accepts the clientId
 function renderVueApp (clientId) {
   return new Promise((resolve, reject) => {
     if (vm) {
       vm.$store.commit('setClientId', parseInt(clientId));
-      //vm.$store.commit('syncClientDefaultsToUserObject', vm.$store.getters.getCurrentClientConfig.defaults);      
+      vm.$store.commit('syncClientDefaultsToUserObject', vm.$store.getters.getCurrentClientConfig.defaults);
       vm.show = true;
       vm.$bus.$on('save-selection', value => {
         console.log(`CMP-UI :: Resolving Promise (save-selection): ${JSON.stringify(value)}`);
