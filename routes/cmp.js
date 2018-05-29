@@ -17,7 +17,8 @@ router.get('/', (req, res) => {
 });
 
 router.get('/dev', (req, res) => {
-  res.send('<script src="//localhost:5000/cmp" async></script>');
+  console.log('called');
+  res.send('<body><script src="http://pluto-cmp.com/cmp"></script></body>');
 });
 
 module.exports = router;

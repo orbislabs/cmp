@@ -17,7 +17,7 @@ router.get('/', (req,res) => {
 
 // TODO: remove
 router.get('/frame', (req,res) => {
-    res.sendFile('source.html', { root : rootPath });
+    res.sendFile('frame.html', { root : rootPath });
 });
 
 router.get('/logic', (req,res) => {

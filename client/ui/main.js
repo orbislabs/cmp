@@ -23,13 +23,27 @@ Vue.component('app-breadcrumb', Breadcrumb);
 Vue.component('app-init', App);
 Vue.component('cmp-toggle', Toggle);
 
-// creating a root in the DOM for the app to attach to, when called
-//const iframe = document.createElement('iframe');
-const div = document.createElement('div');
-div.setAttribute('id', 'cmp-app');
-document.body.appendChild(div);
-//console.log(iframe);
 
+// CODE TO CREATE IFRAME
+/* const frame = document.createElement('iframe');
+frame.setAttribute('id', 'myFrame');
+frame.setAttribute('style', 'width:50%;height:50%;overflow:auto;background-color:azure');
+document.body.appendChild(frame);
+console.log(window.frames.myFrame.contentWindow.document.getElementsByTagName('body')[0]);
+const iFrameBody = window.frames.myFrame.contentWindow.document.getElementsByTagName('body')[0];        
+const div2 = document.createElement('div');
+div2.setAttribute('id', 'cmp-app');
+iFrameBody.appendChild(div2);
+const vm = new Vue(App).$mount();
+iFrameBody.appendChild(vm.$el); */
+
+
+
+// creating a root in the DOM for the app to attach to, when called
+const divToAttachApp = document.createElement('div');
+divToAttachApp.setAttribute('id', 'cmp-app');
+document.body.appendChild(divToAttachApp);
+  
 // create the app instance and attach it to the DOM in a hidden state
 const vm = new Vue(App).$mount('#cmp-app');
 
@@ -51,3 +65,4 @@ function renderVueApp (clientId) {
 }
 
 export default renderVueApp;
+

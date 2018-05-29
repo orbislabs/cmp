@@ -7,6 +7,7 @@
         </vk-modal>
     </div>
 </template>
+
 <script>
 
 import { store } from './store.js';
@@ -52,7 +53,6 @@ export default {
 </script>
 
 <style scoped>
-#cmp-app {
-   all : unset !important;
-}
+
 </style>
+

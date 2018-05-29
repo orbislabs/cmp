@@ -1,5 +1,8 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackExcludeAssetsPlugin = require('html-webpack-exclude-assets-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 //var MiniCssExtractPlugin = require('mini-css-extract-plugin'); // TODO: remove this dep - not being used..
 
 const config = {
@@ -43,6 +46,11 @@ const config = {
   },
   plugins: [
     new VueLoaderPlugin(),
+    new CleanWebpackPlugin('dist', {} ),
+    new HtmlWebpackPlugin({
+      excludeAssets: [/demo.bundle.js/]
+    }),
+    new HtmlWebpackExcludeAssetsPlugin()
   ]
 };
 

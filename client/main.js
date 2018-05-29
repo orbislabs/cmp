@@ -5,7 +5,14 @@ import api from './api.js';
 import renderVueApp from './ui/main.js';
 
 // here we grab the client id from a data att in the script tag
-const clientId = document.getElementById('pluto-cmp-js-src').getAttribute('client-id');
+let clientId;
+if(document.getElementById('pluto-cmp-js-src')) {
+  clientId = document.getElementById('pluto-cmp-js-src').getAttribute('client-id');
+} else {
+  clientId = 0;
+}
+
+//const clientId = document.getElementById('pluto-cmp-js-src').getAttribute('client-id');
 console.log(`CMP => Detected clientID: ${clientId}`);
 
 // this function adds the api to the global window object

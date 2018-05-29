@@ -6,6 +6,7 @@ import { decodeVendorCookieValue } from '../cookie/cookieutils.js';
 // LOGIC - Client Selection
 // grab the querystring from the URL, get c=
 // build a script element and attach to page
+
 const urlString = window.location.href;
 const url = new URL(urlString);
 const clientId = url.searchParams.get('c');
@@ -59,8 +60,8 @@ function injectJS() {
     myscript.setAttribute('client-id','1');
 
     myscript.type = 'text/javascript';
-    myscript.src = '/cmp'; // replace this with your SCRIPT
+    myscript.src = '/cmp'; 
     iFrameHead.appendChild(myscript);
-    console.log(iFrameHead)
+    console.log(iFrameHead);
 }
 window.injectJS = injectJS;
