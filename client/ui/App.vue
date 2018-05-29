@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="uk-scope">
         <vk-modal v-bind:show="show">
             <app-breadcrumb v-bind:current-view="currentView" v-on:change-view="updateView"></app-breadcrumb>
             <!-- render the currently active component/page here -->

@@ -11,18 +11,19 @@ router.use(function timeLog (req, res, next) {
     next();
 });
 
+// The below route serves the static html for the demo page.
 router.get('/', (req,res) => {
     res.sendFile('index.html', { root : rootPath });
 });
-
-// TODO: remove
-router.get('/frame', (req,res) => {
-    res.sendFile('frame.html', { root : rootPath });
-});
-
+// This sends the JS for the functionality of the page
 router.get('/logic', (req,res) => {
     res.sendFile('demo.bundle.js', { root : distPath });
 });
 
+// This is sending a page which has only an iframe pointing to
+// dist/index.html -> serving app inside iFrame
+router.get('/frame', (req,res) => {
+    res.sendFile('frame.html', { root : rootPath });
+});
 
 module.exports = router;

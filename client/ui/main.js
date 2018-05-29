@@ -10,7 +10,8 @@ import Breadcrumb from './components/Breadcrumb.vue';
 import Toggle from './components/Toggle.vue';
 
 import './eventBus';
-import '@vuikit/theme';
+import './uikit.css';
+//import '@vuikit/theme';
 import '../../cookie/cookieutils.js';
 
 Vue.use(Vuikit);
