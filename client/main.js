@@ -18,7 +18,7 @@ function init() {
 }
 
 // logic is stored for starting with a loaded CMP or empty
-function loadCmp(clientId, vendorList, result) {
+function loadCmp(clientId = 1, vendorList, result) {
   return new Promise((resolve, reject) => {
     if (result == false) {
       let consentString = new Cmp(clientId, vendorList, null);

@@ -24,9 +24,11 @@ Vue.component('app-init', App);
 Vue.component('cmp-toggle', Toggle);
 
 // creating a root in the DOM for the app to attach to, when called
+//const iframe = document.createElement('iframe');
 const div = document.createElement('div');
 div.setAttribute('id', 'cmp-app');
 document.body.appendChild(div);
+//console.log(iframe);
 
 // create the app instance and attach it to the DOM in a hidden state
 const vm = new Vue(App).$mount('#cmp-app');

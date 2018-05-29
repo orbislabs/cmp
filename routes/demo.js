@@ -15,8 +15,14 @@ router.get('/', (req,res) => {
     res.sendFile('index.html', { root : rootPath });
 });
 
+// TODO: remove
+router.get('/frame', (req,res) => {
+    res.sendFile('source.html', { root : rootPath });
+});
+
 router.get('/logic', (req,res) => {
     res.sendFile('demo.bundle.js', { root : distPath });
 });
+
 
 module.exports = router;

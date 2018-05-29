@@ -1,6 +1,8 @@
 import { checkIabCookie } from '../client/cookies.js';
 import { decodeVendorCookieValue } from '../cookie/cookieutils.js';
 
+
+
 // LOGIC - Client Selection
 // grab the querystring from the URL, get c=
 // build a script element and attach to page
@@ -48,3 +50,17 @@ function deleteIabCookie () {
   swal('Cookie Deleted!','Refreshing the page will automatically load the CMP','success');
 }
 window.deleteIabCookie = deleteIabCookie;
+
+
+function injectJS() {
+    var iFrameHead = window.frames["myFrame"].document.getElementsByTagName("head")[0];
+    var myscript = document.createElement('script');
+    myscript.setAttribute('id','pluto-cmp-js-src');
+    myscript.setAttribute('client-id','1');
+
+    myscript.type = 'text/javascript';
+    myscript.src = '/cmp'; // replace this with your SCRIPT
+    iFrameHead.appendChild(myscript);
+    console.log(iFrameHead)
+}
+window.injectJS = injectJS;

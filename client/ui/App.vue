@@ -53,6 +53,6 @@ export default {
 
 <style scoped>
 #cmp-app {
-   all : unset!important;
+   all : unset !important;
 }
 </style>

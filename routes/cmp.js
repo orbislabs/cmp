@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/dev', (req, res) => {
-  res.send('<script src="//localhost:3999/cmp" type="module" async></script>');
+  res.send('<script src="//localhost:5000/cmp" async></script>');
 });
 
 module.exports = router;

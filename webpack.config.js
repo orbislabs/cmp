@@ -1,6 +1,6 @@
 const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-var MiniCssExtractPlugin = require('mini-css-extract-plugin'); // TODO: remove this dep - not being used..
+//var MiniCssExtractPlugin = require('mini-css-extract-plugin'); // TODO: remove this dep - not being used..
 
 const config = {
   entry: {
@@ -31,11 +31,6 @@ const config = {
           },
           {
             loader: 'css-loader',
-            options: {
-              modules: true,
-              importLoaders: 1,
-              localIdentName: '[local]_[hash:base64:8]'
-            }
           }]
       },
       {
