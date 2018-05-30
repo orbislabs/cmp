@@ -47,7 +47,7 @@ setInterval(getDemoCookie, 1000);
 // below is a function for deleting euconsent IAB cookie
 // adding to global scope to use in onclick
 function deleteIabCookie () {
-  document.cookie = 'euconsent' + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  document.cookie = 'euconsent' + '=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT; domain=.pluto-cmp.com';
   swal('Cookie Deleted!','Refreshing the page will automatically load the CMP','success');
 }
 window.deleteIabCookie = deleteIabCookie;
