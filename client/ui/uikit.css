@@ -2530,6 +2530,41 @@
    Component: Print
  ========================================================================== */
 
+
+   /* ========================================================================
+   Dennis: CSS
+ ========================================================================== */
+.uk-scope li {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #666;
+}
+.uk-scope a {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+.uk-scope td {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #666;
+}
+.uk-scope th {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+.uk-scope p {
+/* 1 */
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+font-size: 16px;
+font-weight: normal;
+line-height: 1.5;
+/* 2 */
+-webkit-text-size-adjust: 100%;
+/* 3 */
+background: #fff;
+color: #666;
+}
+
+   /* ========================================================================
+   Below is the CSS from the original file.
+ ========================================================================== */
+
 .uk-scope html {
   /* 1 */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;

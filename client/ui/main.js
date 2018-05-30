@@ -11,7 +11,7 @@ import Toggle from './components/Toggle.vue';
 
 import './eventBus';
 import './uikit.css';
-//import '@vuikit/theme';
+//import '@vuikit/theme'; TODO: this can be removed, right now we are using scoped CSS file from uikit
 import '../../cookie/cookieutils.js';
 
 Vue.use(Vuikit);
@@ -23,22 +23,6 @@ Vue.component('Vendors', Vendors);
 Vue.component('app-breadcrumb', Breadcrumb);
 Vue.component('app-init', App);
 Vue.component('cmp-toggle', Toggle);
-
-
-// CODE TO CREATE IFRAME
-/* const frame = document.createElement('iframe');
-frame.setAttribute('id', 'myFrame');
-frame.setAttribute('style', 'width:50%;height:50%;overflow:auto;background-color:azure');
-document.body.appendChild(frame);
-console.log(window.frames.myFrame.contentWindow.document.getElementsByTagName('body')[0]);
-const iFrameBody = window.frames.myFrame.contentWindow.document.getElementsByTagName('body')[0];        
-const div2 = document.createElement('div');
-div2.setAttribute('id', 'cmp-app');
-iFrameBody.appendChild(div2);
-const vm = new Vue(App).$mount();
-iFrameBody.appendChild(vm.$el); */
-
-
 
 // creating a root in the DOM for the app to attach to, when called
 const divToAttachApp = document.createElement('div');
@@ -66,4 +50,3 @@ function renderVueApp (clientId) {
 }
 
 export default renderVueApp;
-

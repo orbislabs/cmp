@@ -1,35 +1,33 @@
 <head>
-  <style>
-    p {
-      color: blueviolet;
-    }  
-  </style>
+  <title>Pluto || CMP</title>
+  <script>
+    window.addEventListener('message', receiveMessage, false);
+    function receiveMessage(event) {
+      //if (event.origin !== 'http://pluto-cmp.com') return;
+      console.log(event);
+    }
+  </script>
 </head>
+
 <body>
-  <p>pink</p>
-  <iframe style="width:100%;height:100%;overflow:auto;background-color:azure" 
-    name="myFrame2" 
-    id="myFrame2"
-    src="/index.html">
+  <h3>iFrame Demo, code below</h3>
+  <hr>
+  <xmp>
+  <iframe 
+    style="width:100%;height:100%;overflow:auto;background:transparent;"
+    frameBorder="0"
+    name="myFrame" 
+    id="myFrame" 
+    src="http://pluto-cmp.com/index.html">
+  </iframe>
+  </xmp>
+
+  <iframe 
+    style="width:100%;height:100%;overflow:auto;background:transparent;"
+    frameBorder="0" 
+    name="myFrame" 
+    id="myFrame" 
+    src="/index.html"
+    onload="window.postMessage('message from pluto','*')">
   </iframe>
 </body>
-  <!--<iframe style="width:100%;height:100%;overflow:auto;background-color:azure" 
-    name="myFrame" 
-    id="myFrame">
-  </iframe>
-  <script>
-    function injectJS() {
-      var iFrameHead = window.frames["myFrame"].document.getElementsByTagName("body")[0];        
-      var myscript = document.createElement('script');
-      myscript.setAttribute('id', 'pluto-cmp-js-src');
-      myscript.setAttribute('client-id', 1);
-      myscript.src = 'http://pluto-cmp.com/cmp.bundle.js';
-      iFrameHead.appendChild(myscript);
-    }
-    injectJS();
-  </script> 
-</body>-->
-
-<!--<body>
-  <script id="pluto-cmp-js-src" src="/cmp.bundle.js" client-id="1"></script>
-</body>-->
