@@ -48,8 +48,8 @@ export default {
     console.log('destroyed')
   },
   props: {
-    purposeId : { 
-        type : Number, 
+    purposeId : {
+        type : Number,
         required : true
     },
     toggleType : {
@@ -212,7 +212,7 @@ export default {
       toggled: !!this.value
     }
   },
-  methods: { 
+  methods: {
     toggle (event) {
       this.toggled = !this.toggled
       this.$emit('input', this.toggled)
@@ -220,11 +220,11 @@ export default {
         value: this.toggled,
         srcEvent: event
       })
-      this.$bus.$emit('toggled', {
-          toggleType : this.toggleType,
-          toggleValue : this.toggled,
-          toggleId : this.purposeId
-      })
+      // this.$bus.$emit('toggled', {
+      //     toggleType : this.toggleType,
+      //     toggleValue : this.toggled,
+      //     toggleId : this.purposeId
+      // })
       this.$store.commit('updateUserConsentObject', {
           toggleType : this.toggleType,
           toggleValue : this.toggled,

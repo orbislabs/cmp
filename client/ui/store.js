@@ -11,9 +11,12 @@ import clientConfig1 from '../configs/client.1.js';
 import clientConfig2 from '../configs/client.2.js';
 
 Vue.use(Vuex);
+const debug = process.env.NODE_ENV !== 'production'
+import createLogger from 'vuex/dist/logger'
 
 export const store = new Vuex.Store({
   strict : true, // TODO: this should bet set in dev ONLY!
+  plugins: debug ? [createLogger()] : [],
   state : {
     isShow: false,
     currentView: 'Modal',
