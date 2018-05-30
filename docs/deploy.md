@@ -6,7 +6,7 @@ OS : Ubuntu 16.04
 ## Install Nginx
 
 Update the package manager:
-`sudo apt-get update`
+`$ sudo apt-get update`
 
 Check ports are clean:
 ```
@@ -16,13 +16,13 @@ lsof -i :80
 ```
 
 Install Nginx:
-`sudo apt-get install nginx`
+`$ sudo apt-get install nginx`
 
 Check Nginx profiles:
-`sudo ufw app list`
+`$ sudo ufw app list`
 
 Set profile to accept HTTP & HTTPS traffic:
-`sudo ufw allow "Nginx Full"`
+`$ sudo ufw allow "Nginx Full"`
 
 Check if settings are active:
 `$ sudo ufw status`
