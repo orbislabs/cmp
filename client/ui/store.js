@@ -132,6 +132,13 @@ export const store = new Vuex.Store({
       commit('syncClientDefaultsToUserObject', defaultConfig);
       commit('changeShowState', false);
       commit('changeCurrentView', 'Modal');
+    },
+    setPartialConsent({commit, getters}, payload) {
+      console.log(`CMP-UI :: partial-consent Event: ${payload}`);
+      const config = getters.getUserConsentObject
+      EventBus.$emit('save-selection', config);
+      commit('changeShowState', false);
+      commit('changeCurrentView', 'Modal');
     }
   }
 });

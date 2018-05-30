@@ -22,7 +22,7 @@
     </vk-pagination>
 
     <p class="uk-text-right">
-        <vk-button v-on:click="$bus.$emit('partial-consent')">Accept Selected</vk-button>
+        <vk-button v-on:click="setPartialConsent">Accept Selected</vk-button>
         <vk-button v-on:click="setFullConsent" type="secondary">Accept All</vk-button>
     </p>
 
@@ -48,7 +48,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      'setFullConsent'
+      'setFullConsent',
+      'setPartialConsent'
     ]),
     nextPage() {
       this.pageNumber++

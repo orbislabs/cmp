@@ -9,7 +9,7 @@ import Vendors from './components/Vendors.vue';
 import Breadcrumb from './components/Breadcrumb.vue';
 import Toggle from './components/Toggle.vue';
 
-import './eventBus';
+import EventBus from './eventBus';
 import './uikit.css';
 //import '@vuikit/theme'; TODO: this can be removed, right now we are using scoped CSS file from uikit
 import '../../cookie/cookieutils.js';
@@ -39,7 +39,7 @@ function renderVueApp (clientId) {
       vm.$store.commit('setClientId', parseInt(clientId));
       vm.$store.commit('syncClientDefaultsToUserObject', vm.$store.getters.getCurrentClientConfig.defaults);
       vm.$store.commit('changeShowState', true)
-      vm.$bus.$on('save-selection', value => {
+      EventBus.$on('save-selection', value => {
         console.log(`CMP-UI :: Resolving Promise (save-selection): ${JSON.stringify(value)}`);
         resolve(value);
       });
