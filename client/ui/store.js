@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import EventBus from './eventBus';
 
 import vendorList from '../vendorList.js';
 
@@ -10,10 +11,15 @@ import clientConfig1 from '../configs/client.1.js';
 import clientConfig2 from '../configs/client.2.js';
 
 Vue.use(Vuex);
+const debug = process.env.NODE_ENV !== 'production'
+import createLogger from 'vuex/dist/logger'
 
 export const store = new Vuex.Store({
   strict : true, // TODO: this should bet set in dev ONLY!
+  plugins: debug ? [createLogger()] : [],
   state : {
+    isShow: false,
+    currentView: 'Modal',
     clientId : 0,
     clientConfigs : {
       0 : clientConfig,
@@ -56,7 +62,7 @@ export const store = new Vuex.Store({
   },
   mutations : {
     // TODO : right now we are setting the config in main.js using Vue.set()
-    setClientId (state, clientId) { 
+    setClientId (state, clientId) {
       state.clientId = clientId;
     },
     // TODO: this function is mega shitty updateUserConsentObject it needs refactor
@@ -65,7 +71,7 @@ export const store = new Vuex.Store({
       console.log(`CMP-UI :: userConsentObject update: ${JSON.stringify(payload)}`);
       // { toggleType : 'purpose' , toggleValue : true , toggleId : 2 }
       console.warn('CMP-UI :: ', state);
-      
+
       let purposeArray = state.userConsentObject.purposes;
       let vendorArray = state.userConsentObject.vendors;
 
@@ -81,10 +87,10 @@ export const store = new Vuex.Store({
             purposeArray.push(toggleId);
           }
         } else {
-          // user is rejecting the selection - false 
+          // user is rejecting the selection - false
           if( purposeArray.indexOf(toggleId) !== -1 ) {
             purposeArray.splice(purposeArray.indexOf(toggleId), 1);
-          }  
+          }
         }
         //--------------//
       } else if (toggleType == 'vendors') {
@@ -95,10 +101,10 @@ export const store = new Vuex.Store({
             vendorArray.push(toggleId);
           }
         } else {
-          // user is rejecting the selection - false 
+          // user is rejecting the selection - false
           if( vendorArray.indexOf(toggleId) !== -1 ) {
             vendorArray.splice(vendorArray.indexOf(toggleId), 1);
-          }  
+          }
         }
         //--------------//
       } else {
@@ -113,6 +119,29 @@ export const store = new Vuex.Store({
       // make sure to copy the array, to avoid changing the original clientConfig
       state.userConsentObject.purposes = [...payload.purposes];
       state.userConsentObject.vendors = [...payload.vendors];
+    },
+    changeShowState (state, payload) {
+      state.isShow = payload
+    },
+    changeCurrentView (state, payload) {
+      state.currentView = payload
+    }
+  },
+  actions: {
+    setFullConsent({commit, getters}, payload) {
+      console.log(`CMP-UI :: full-consent Event: ${payload}`);
+      const defaultConfig = getters.getCurrentClientConfig.defaults
+      EventBus.$emit('save-selection', defaultConfig);
+      commit('syncClientDefaultsToUserObject', defaultConfig);
+      commit('changeShowState', false);
+      commit('changeCurrentView', 'Modal');
+    },
+    setPartialConsent({commit, getters}, payload) {
+      console.log(`CMP-UI :: partial-consent Event: ${payload}`);
+      const config = getters.getUserConsentObject
+      EventBus.$emit('save-selection', config);
+      commit('changeShowState', false);
+      commit('changeCurrentView', 'Modal');
     }
   }
 });

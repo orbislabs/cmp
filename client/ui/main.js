@@ -9,7 +9,7 @@ import Vendors from './components/Vendors.vue';
 import Breadcrumb from './components/Breadcrumb.vue';
 import Toggle from './components/Toggle.vue';
 
-import './eventBus';
+import EventBus from './eventBus';
 import './uikit.css';
 //import '@vuikit/theme'; TODO: this can be removed, right now we are using scoped CSS file from uikit
 import '../../cookie/cookieutils.js';
@@ -28,7 +28,7 @@ Vue.component('cmp-toggle', Toggle);
 const divToAttachApp = document.createElement('div');
 divToAttachApp.setAttribute('id', 'cmp-app');
 document.body.appendChild(divToAttachApp);
-  
+
 // create the app instance and attach it to the DOM in a hidden state
 const vm = new Vue(App).$mount('#cmp-app');
 
@@ -38,8 +38,8 @@ function renderVueApp (clientId) {
     if (vm) {
       vm.$store.commit('setClientId', parseInt(clientId));
       vm.$store.commit('syncClientDefaultsToUserObject', vm.$store.getters.getCurrentClientConfig.defaults);
-      vm.show = true;
-      vm.$bus.$on('save-selection', value => {
+      vm.$store.commit('changeShowState', true)
+      EventBus.$on('save-selection', value => {
         console.log(`CMP-UI :: Resolving Promise (save-selection): ${JSON.stringify(value)}`);
         resolve(value);
       });
