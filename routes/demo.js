@@ -25,5 +25,9 @@ router.get('/logic', (req,res) => {
 router.get('/frame', (req,res) => {
     res.sendFile('frame.html', { root : rootPath });
 });
+// This is sending a page which has a GTM tag
+router.get('/gtm', (req,res) => {
+  res.sendFile('gtm.html', { root : rootPath });
+});
 
 module.exports = router;
