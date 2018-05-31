@@ -41,12 +41,6 @@ const contains = (object, title) => {
 const px = v => v + 'px'
 export default {
   name: 'ToggleButton',
-  created() {
-    console.log('created')
-  },
-  destroyed() {
-    console.log('destroyed')
-  },
   props: {
     purposeId : {
         type : Number,

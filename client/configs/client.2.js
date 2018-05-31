@@ -4,7 +4,8 @@ const clientConfig = {
   clientLogo : 'https://upload.wikimedia.org/wikipedia/fi/a/ab/The_Independent_logo.svg',
   defaults : {
     purposes : [1,2,3,4,5],
-    vendors : [1,2,3,4,5,6,7,8,9,10]
+    vendors : [1,2,3,4,5,6,7,8,9,10],
+    customVendors : []
   },
   views : {
     homeView : {
