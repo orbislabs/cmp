@@ -5,12 +5,6 @@ import EventBus from './eventBus';
 import iabVendorList from '../configs/iabVendorList.js';
 import customVendorList from '../configs/customVendorList.js';
 
-// below we load all the possible configs into objects and then into the store
-// TODO : optimisation, load only the config needed
-// import clientConfig from '../configs/client.0.js';
-// import clientConfig1 from '../configs/client.1.js';
-// import clientConfig2 from '../configs/client.2.js';
-
 Vue.use(Vuex);
 const debug = process.env.NODE_ENV !== 'production'
 import createLogger from 'vuex/dist/logger'
@@ -22,20 +16,15 @@ export const store = new Vuex.Store({
   state : {
     isShow: false,
     currentView: 'Modal',
-    clientId : 0,
+    clientId : null,
     iabVendorList : iabVendorList,
     customVendorList : customVendorList,
     userConsentObject : {
       purposes : [],
       vendors : [],
       customVendors : []
-    }
-    vendorList : vendorList,
-    userConsentObject : {
-      purposes : [],
-      vendors : [],
     },
-    currentClientConfig: null
+    clientConfig: null
   },
 
   getters : {
@@ -43,7 +32,7 @@ export const store = new Vuex.Store({
     getUserConsentObject : state => state.userConsentObject,
 
     getCurrentClientConfig : state => {
-      return state.currentClientConfig
+      return state.clientConfig
     },
 
     getFullVendorList : state => state.iabVendorList.vendors,
@@ -71,6 +60,9 @@ export const store = new Vuex.Store({
     // TODO : right now we are setting the config in main.js using Vue.set()
     setClientId (state, clientId) {
       state.clientId = clientId;
+    },
+    setClientConfig (state, clientConfig) {
+      state.clientConfig = clientConfig
     },
     // TODO: this function is mega shitty updateUserConsentObject it needs refactor
     // here we mutate the userConsentObject to add/remove allowed purposes
@@ -152,8 +144,11 @@ export const store = new Vuex.Store({
   },
   actions: {
     setClientId({commit}, clientId) {
-      import(`../configs/client.${clientId}.js`).then((config) => {
-        console.log(config.default)
+      return import(`../configs/client.${clientId}.js`).then((configImport) => {
+        const config = configImport.default
+        commit('setClientId', clientId)
+        commit('setClientConfig', config)
+        commit('syncClientDefaultsToUserObject', config.defaults)
       })
     }
   }
