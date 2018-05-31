@@ -2,7 +2,8 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import EventBus from './eventBus';
 
-import vendorList from '../vendorList.js';
+import iabVendorList from '../configs/iabVendorList.js';
+import customVendorList from '../configs/customVendorList.js';
 
 // below we load all the possible configs into objects and then into the store
 // TODO : optimisation, load only the config needed
@@ -17,6 +18,7 @@ import createLogger from 'vuex/dist/logger'
 export const store = new Vuex.Store({
   strict : true, // TODO: this should bet set in dev ONLY!
   plugins: debug ? [createLogger()] : [],
+  
   state : {
     isShow: false,
     currentView: 'Modal',
@@ -26,12 +28,15 @@ export const store = new Vuex.Store({
       1 : clientConfig1,
       2 : clientConfig2,
     },
-    vendorList : vendorList,
+    iabVendorList : iabVendorList,
+    customVendorList : customVendorList,
     userConsentObject : {
       purposes : [],
       vendors : [],
+      customVendors : []
     }
   },
+
   getters : {
 
     getUserConsentObject : state => state.userConsentObject,
@@ -40,24 +45,25 @@ export const store = new Vuex.Store({
       return state.clientConfigs[state.clientId];
     },
 
-    getFullVendorList : state => state.vendorList.vendors,
+    getFullVendorList : state => state.iabVendorList.vendors,
+
+    getFullCustomVendorList : state => state.customVendorList.vendors,
 
     getCurrentClientVendorList : (state, getters) => {
+      // first we fetch the IAB, and filter the IAB vendors 
       const clientDefaultVendorIds = getters.getCurrentClientConfig.defaults.vendors;
-      const clientVendorsList = getters.getFullVendorList.filter( function(vendor) {
+      let clientIabVendorsList = getters.getFullVendorList.filter( function(vendor) {
         if(clientDefaultVendorIds.indexOf(vendor.id) > -1) return vendor;
       });
-      return clientVendorsList;
+      // now we get the customVendors and combine the objects
+      const clientCustomVendorIds = getters.getCurrentClientConfig.defaults.customVendors;
+      let clientCustomVendorsList = getters.getFullCustomVendorList.filter( function(vendor) {
+        if(clientCustomVendorIds.indexOf(vendor.id) > -1) return vendor;
+      });
+      let merged = clientCustomVendorsList.concat(clientIabVendorsList);
+      return merged;
     },
 
-/*     getCurrentUserSelection : (state, getters) => {
-      const clientPurposes = getters.getCurrentClientConfig.defaults.purposes;
-      const userPurposes = getters.getUserConsentObject.purposes;
-      const arr = clientPurposes.filter( function(purpose) {
-        if( userPurposes.indexOf(purpose.id) > -1 ) return purpose;
-      });
-      return arr;
-    } */
 
   },
   mutations : {
@@ -68,9 +74,6 @@ export const store = new Vuex.Store({
     // TODO: this function is mega shitty updateUserConsentObject it needs refactor
     // here we mutate the userConsentObject to add/remove allowed purposes
     updateUserConsentObject (state, payload) {
-      console.log(`CMP-UI :: userConsentObject update: ${JSON.stringify(payload)}`);
-      // { toggleType : 'purpose' , toggleValue : true , toggleId : 2 }
-      console.warn('CMP-UI :: ', state);
 
       let purposeArray = state.userConsentObject.purposes;
       let vendorArray = state.userConsentObject.vendors;
@@ -110,15 +113,17 @@ export const store = new Vuex.Store({
       } else {
         console.error('CMP-UI :: Unknown Toggle Type', toggleType);
       }
-      console.warn('state after updating purposes', state);
     },
     // this mutation is called right after setting the clientId, so we can use the getter
     // to fetch the correct client config object
     syncClientDefaultsToUserObject (state, payload) {
-      console.log(`CMP-UI :: Syncing Default To User Consent Object: ${JSON.stringify(payload)}`);
       // make sure to copy the array, to avoid changing the original clientConfig
       state.userConsentObject.purposes = [...payload.purposes];
       state.userConsentObject.vendors = [...payload.vendors];
+      if(payload.customVendors){
+        state.userConsentObject.vendors.push(...payload.customVendors);
+      }
+      //state.userConsentObject.vendors.push(...payload.customVendors);
     },
     changeShowState (state, payload) {
       state.isShow = payload

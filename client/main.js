@@ -1,6 +1,6 @@
 import * as cookies from './cookies.js';
 import Cmp from './cmp.js';
-import vendorList from './vendorList.js';
+import iabVendorList from './configs/iabVendorList.js';
 import api from './api.js';
 import renderVueApp from './ui/main.js';
 
@@ -25,14 +25,14 @@ function init() {
 }
 
 // logic is stored for starting with a loaded CMP or empty
-function loadCmp(clientId = 1, vendorList, result) {
+function loadCmp(clientId = 1, iabVendorList, result) {
   return new Promise((resolve, reject) => {
     if (result == false) {
-      let consentString = new Cmp(clientId, vendorList, null);
+      let consentString = new Cmp(clientId, iabVendorList, null);
       window.cmp = consentString;
       resolve(false);
     } else {
-      let consentString = new Cmp(clientId, vendorList, result);
+      let consentString = new Cmp(clientId, iabVendorList, result);
       window.cmp = consentString;
       if (!cmp) reject('Error loading CMP');
       resolve(window.cmp);
@@ -44,7 +44,7 @@ function loadCmp(clientId = 1, vendorList, result) {
 init()
   .then(result => cookies.checkCookiesEnabledPromise(result)) // true OR false
   .then(result => cookies.checkIabCookie(result)) // base64 OR false
-  .then(result => loadCmp(clientId, vendorList, result))
+  .then(result => loadCmp(clientId, iabVendorList, result))
   .then((result) => {
     if (result == false) {
       renderVueApp(clientId)

@@ -4,7 +4,8 @@ const clientConfig = {
     clientLogo : '',
     defaults: {
         purposes: [1, 2, 3, 4, 5],
-        vendors: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        vendors: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        customVendors : []
     },
     views: {
         homeView: {

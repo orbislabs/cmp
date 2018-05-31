@@ -5,22 +5,22 @@ import {
   fetchAllVendorsArray,
   fetchAllPurposeArray
 } from './utils';
-import vendorList from './vendorList.js';
+import iabVendorList from './configs/iabVendorList.js';
 import * as cookies from './cookies.js';
 import renderVueApp from './ui/main.js';
 
 export default class Cmp extends ConsentString {
-  constructor(clientId, vendorList, result = null) {
+  constructor(clientId, iabVendorList, result = null) {
     super(result);
     this.setCmpId(199);
     this.setCmpVersion(1);
     this.setConsentLanguage('en');
     this.setConsentScreen(1);
-    this.setGlobalVendorList(vendorList);
+    this.setGlobalVendorList(iabVendorList);
     this.clientId = clientId;
     this.cmpLoaded = false;
-    this.fullVendorList = fetchAllVendorsArray(vendorList);
-    this.fullPurposeList = fetchAllPurposeArray(vendorList);
+    this.fullVendorList = fetchAllVendorsArray(iabVendorList);
+    this.fullPurposeList = fetchAllPurposeArray(iabVendorList);
   }
 
   readyCmpAPI() {

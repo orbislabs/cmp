@@ -4,7 +4,8 @@ const clientConfig = {
   clientLogo : 'http://wearemiq.com/wp-content/themes/miq/img/branding/miq-think-beyond.png',
   defaults : {
     purposes : [1,2,3,4,5],
-    vendors : [32,101]
+    vendors : [32,101],
+    customVendors : [1001,1002,1003,1004]
   },
   views : {
     homeView : {
