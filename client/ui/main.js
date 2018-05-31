@@ -36,7 +36,8 @@ const vm = new Vue(App).$mount('#cmp-app');
 function renderVueApp (clientId) {
   return new Promise((resolve, reject) => {
     if (vm) {
-      vm.$store.commit('setClientId', parseInt(clientId));
+      // vm.$store.commit('setClientId', parseInt(clientId));
+      vm.$store.dispatch('setClientId', parseInt(clientId));
       vm.$store.commit('syncClientDefaultsToUserObject', vm.$store.getters.getCurrentClientConfig.defaults);
       vm.$store.commit('changeShowState', true)
       EventBus.$on('save-selection', value => {
