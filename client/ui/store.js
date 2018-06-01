@@ -70,6 +70,7 @@ export const store = new Vuex.Store({
 
       let purposeArray = state.userConsentObject.purposes;
       let vendorArray = state.userConsentObject.vendors;
+      let customVendorArray = state.userConsentObject.customVendors;
 
       const toggleType = payload.toggleType;
       const toggleValue = payload.toggleValue;
@@ -90,6 +91,20 @@ export const store = new Vuex.Store({
         }
         //--------------//
       } else if (toggleType == 'vendors') {
+        if (toggleId > 1000) {
+          // if this is true it means it is a customVendor
+          if (toggleValue) {
+            // user is allowing the selection - true
+            if(customVendorArray.indexOf(toggleId) == -1) {
+              customVendorArray.push(toggleId);
+            }
+          } else {
+            // user is rejecting the selection - false
+            if( customVendorArray.indexOf(toggleId) !== -1 ) {
+              customVendorArray.splice(customVendorArray.indexOf(toggleId), 1);
+            }
+          }
+        }
         //--------------//
         if (toggleValue) {
           // user is allowing the selection - true
@@ -113,9 +128,10 @@ export const store = new Vuex.Store({
       // make sure to copy the array, to avoid changing the original clientConfig
       state.userConsentObject.purposes = [...payload.purposes];
       state.userConsentObject.vendors = [...payload.vendors];
-      if(payload.customVendors){
+      state.userConsentObject.customVendors = [...payload.customVendors];
+/*       if(payload.customVendors){
         state.userConsentObject.vendors.push(...payload.customVendors);
-      }
+      } */
       //state.userConsentObject.vendors.push(...payload.customVendors);
     },
     changeShowState (state, payload) {
@@ -140,16 +156,14 @@ export const store = new Vuex.Store({
       EventBus.$emit('save-selection', config);
       commit('changeShowState', false);
       commit('changeCurrentView', 'Modal');
-    }
-  },
-  actions: {
+    },
     setClientId({commit}, clientId) {
-      return import(`../configs/client.${clientId}.js`).then((configImport) => {
+      return import(`@/configs/client.${clientId}.js`).then((configImport) => {
         const config = configImport.default
         commit('setClientId', clientId)
         commit('setClientConfig', config)
         commit('syncClientDefaultsToUserObject', config.defaults)
       })
     }
-  }
+  },
 });

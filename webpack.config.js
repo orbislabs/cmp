@@ -12,7 +12,11 @@ const config = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
+    publicPath : '/',
     filename: '[name].bundle.js'
+  },
+  resolve : {
+    alias : { '@': path.resolve('client')}
   },
   module: {
     rules: [{

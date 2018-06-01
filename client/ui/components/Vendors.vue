@@ -58,6 +58,13 @@ export default {
       this.pageNumber--
     },
     toggleValue (id) {
+      if(id > 1000) {
+        if(this.getUserConsentObject.customVendors.indexOf(id) > -1) {
+        return true;
+        } else {
+          return false;
+        }
+      }
       if(this.getUserConsentObject.vendors.indexOf(id) > -1) {
         return true;
       } else {

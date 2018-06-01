@@ -8,11 +8,12 @@ import {
 import iabVendorList from './configs/iabVendorList.js';
 import * as cookies from './cookies.js';
 import renderVueApp from './ui/main.js';
+import { fireGtmPixels } from './main.js';
 
 export default class Cmp extends ConsentString {
   constructor(clientId, iabVendorList, result = null) {
     super(result);
-    this.setCmpId(199);
+    this.setCmpId(52);
     this.setCmpVersion(1);
     this.setConsentLanguage('en');
     this.setConsentScreen(1);
@@ -21,6 +22,7 @@ export default class Cmp extends ConsentString {
     this.cmpLoaded = false;
     this.fullVendorList = fetchAllVendorsArray(iabVendorList);
     this.fullPurposeList = fetchAllPurposeArray(iabVendorList);
+    this.customVendorsAllowed = [];
   }
 
   readyCmpAPI() {
@@ -36,7 +38,7 @@ export default class Cmp extends ConsentString {
     callback(result, true);
   }
 
-  queryAllowedVendors(vendors = allVendors, callback = () => {}) {
+  getVendorConsents(vendors = allVendors, callback = () => {}) {
     let result = {};
     vendors.forEach((element) => {
       result[element] = this.isVendorAllowed(element);
@@ -54,6 +56,7 @@ export default class Cmp extends ConsentString {
     renderVueApp(this.clientId)
       .then(result => this.updateCmpAndWriteCookie(result))
       .then(result => this.readyCmpAPI(result))
+      .then(result => fireGtmPixels(this.clientId))
       .catch(err => console.log(err));
   }
 
@@ -70,10 +73,17 @@ export default class Cmp extends ConsentString {
     });
   }
 
+  setCustomVendorsAllowed(customVendorArray) {
+    this.customVendorsAllowed = customVendorArray;
+  }
+
   updateCmpAndWriteCookie(consentObject) {
+
     return new Promise((resolve, reject) => {
       this.setPurposesAllowed(consentObject.purposes);
       this.setVendorsAllowed(consentObject.vendors);
+      this.setCustomVendorsAllowed(consentObject.customVendors);
+      console.log(`CMP => Set CustomVendors:${JSON.stringify(this.customVendorsAllowed)}`);
       console.log(`CMP => Set Purposes: ${JSON.stringify(this.getPurposesAllowed())}`);
       console.log(`CMP => Set Vendors: ${JSON.stringify(this.getVendorsAllowed())}`);
       cookies.writeCookie(this.getConsentString())
