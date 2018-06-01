@@ -144,7 +144,7 @@ export const store = new Vuex.Store({
   },
   actions: {
     setClientId({commit}, clientId) {
-      return import(`../configs/client.${clientId}.js`).then((configImport) => {
+      return import(`@/configs/client.${clientId}.js`).then((configImport) => {
         const config = configImport.default
         commit('setClientId', clientId)
         commit('setClientConfig', config)
