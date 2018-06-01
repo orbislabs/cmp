@@ -5,12 +5,6 @@ import EventBus from './eventBus';
 import iabVendorList from '../configs/iabVendorList.js';
 import customVendorList from '../configs/customVendorList.js';
 
-// below we load all the possible configs into objects and then into the store
-// TODO : optimisation, load only the config needed
-import clientConfig from '../configs/client.0.js';
-import clientConfig1 from '../configs/client.1.js';
-import clientConfig2 from '../configs/client.2.js';
-
 Vue.use(Vuex);
 const debug = process.env.NODE_ENV !== 'production'
 import createLogger from 'vuex/dist/logger'
@@ -18,23 +12,19 @@ import createLogger from 'vuex/dist/logger'
 export const store = new Vuex.Store({
   strict : true, // TODO: this should bet set in dev ONLY!
   plugins: debug ? [createLogger()] : [],
-  
+
   state : {
     isShow: false,
     currentView: 'Modal',
-    clientId : 0,
-    clientConfigs : {
-      0 : clientConfig,
-      1 : clientConfig1,
-      2 : clientConfig2,
-    },
+    clientId : null,
     iabVendorList : iabVendorList,
     customVendorList : customVendorList,
     userConsentObject : {
       purposes : [],
       vendors : [],
       customVendors : []
-    }
+    },
+    clientConfig: null
   },
 
   getters : {
@@ -42,7 +32,7 @@ export const store = new Vuex.Store({
     getUserConsentObject : state => state.userConsentObject,
 
     getCurrentClientConfig : state => {
-      return state.clientConfigs[state.clientId];
+      return state.clientConfig
     },
 
     getFullVendorList : state => state.iabVendorList.vendors,
@@ -50,7 +40,7 @@ export const store = new Vuex.Store({
     getFullCustomVendorList : state => state.customVendorList.vendors,
 
     getCurrentClientVendorList : (state, getters) => {
-      // first we fetch the IAB, and filter the IAB vendors 
+      // first we fetch the IAB, and filter the IAB vendors
       const clientDefaultVendorIds = getters.getCurrentClientConfig.defaults.vendors;
       let clientIabVendorsList = getters.getFullVendorList.filter( function(vendor) {
         if(clientDefaultVendorIds.indexOf(vendor.id) > -1) return vendor;
@@ -70,6 +60,9 @@ export const store = new Vuex.Store({
     // TODO : right now we are setting the config in main.js using Vue.set()
     setClientId (state, clientId) {
       state.clientId = clientId;
+    },
+    setClientConfig (state, clientConfig) {
+      state.clientConfig = clientConfig
     },
     // TODO: this function is mega shitty updateUserConsentObject it needs refactor
     // here we mutate the userConsentObject to add/remove allowed purposes
@@ -147,6 +140,16 @@ export const store = new Vuex.Store({
       EventBus.$emit('save-selection', config);
       commit('changeShowState', false);
       commit('changeCurrentView', 'Modal');
+    }
+  },
+  actions: {
+    setClientId({commit}, clientId) {
+      return import(`../configs/client.${clientId}.js`).then((configImport) => {
+        const config = configImport.default
+        commit('setClientId', clientId)
+        commit('setClientConfig', config)
+        commit('syncClientDefaultsToUserObject', config.defaults)
+      })
     }
   }
 });
