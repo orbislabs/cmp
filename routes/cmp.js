@@ -13,7 +13,7 @@ router.use(function timeLog(req, res, next) {
   //TODO : remove logging in prod.
   console.log('GET /cmp @ Time : ', Date.now());
   console.log(req.get('X-Request-Country'));
-  if (euCountries.includes(req.get('X-Request-Country'))) {
+  if (euCountries.contains(req.get('X-Request-Country'))) {
     console.log('true');
   }
   next();
