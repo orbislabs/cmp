@@ -13,14 +13,14 @@ router.use(function timeLog(req, res, next) {
   //TODO : remove logging in prod.
   console.log('GET /cmp @ Time : ', Date.now());
   console.log(req.get('X-Request-Country'));
-  if (euCountries.contains(req.get('X-Request-Country'))) {
-    console.log('true');
+  if (euCountries.indexOf(req.get('X-Request-Country')) < 0) {
+    console.log('non-eu');
   }
   next();
 });
 
 router.get('/', (req, res) => {
-  if (euCountries.includes(req.get('X-Request-Country'))) {
+  if (euCountries.indexOf(req.get('X-Request-Country')) >= 0) {
     res.sendFile('cmp.bundle.js', {
       root : rootPath
     });
