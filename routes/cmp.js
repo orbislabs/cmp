@@ -6,7 +6,7 @@ const rootPath = path.join(__dirname, '../dist');
 const public = path.join(__dirname, '../public');
 
 // countries
-import euCountries from './countries.js';
+const euCountries = require('./countries.js');
 
 // middleware logging a request to this route
 router.use(function timeLog(req, res, next) {

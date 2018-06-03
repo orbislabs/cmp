@@ -28,4 +28,3 @@ const euCountries = [
     'ES',
     'SE'
   ];
-  export default euCountries;
