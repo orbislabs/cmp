@@ -7,6 +7,7 @@ const rootPath = path.join(__dirname, '../dist');
 // middleware logging a request to this route
 router.use(function timeLog(req, res, next) {
   console.log('GET /cmp @ Time : ', Date.now());
+  console.log(req.get('X-Request-Country'));
   next();
 });
 
