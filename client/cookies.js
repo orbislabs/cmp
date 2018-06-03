@@ -66,6 +66,11 @@ function writeCookie(value) {
   document.cookie = `${COOKIE_NAME}=${value}${COOKIE_DOMAIN};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
   return Promise.resolve(true);
 }
+//TODO : clean up cookies!!!
+function writeCookieCustom(value) {
+  document.cookie = `custom=${value}${COOKIE_DOMAIN};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
+  return; //Promise.resolve(true);
+}
 
 function readCookie(name = 'euconsent') {
   const value = '; ' + document.cookie;
@@ -79,6 +84,7 @@ function readCookie(name = 'euconsent') {
 export {
   readCookie,
   writeCookie,
+  writeCookieCustom,
   readCookieSync,
   writeCookieSync,
   checkCookiesEnabled,

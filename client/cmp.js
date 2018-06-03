@@ -22,7 +22,7 @@ export default class Cmp extends ConsentString {
     this.cmpLoaded = false;
     this.fullVendorList = fetchAllVendorsArray(iabVendorList);
     this.fullPurposeList = fetchAllPurposeArray(iabVendorList);
-    this.customVendorsAllowed = [];
+    this.customVendorsAllowed = getCustomVendorsAllowed();
   }
 
   readyCmpAPI() {
@@ -72,9 +72,22 @@ export default class Cmp extends ConsentString {
         });
     });
   }
+/* 
+  getCustomVendorsAllowed() {
+    if(typeof cookies.readCookie('custom') == 'string') {
+      console.log('here??',cookies.readCookieSync('custom'))
+      console.log(typeof cookies.readCookieSync('custom'))
+      console.log(JSON.parse(cookies.readCookieSync('custom')))
+      this.customVendorsAllowed = [1,2,4]
+      //this.customVendorsAllowed = JSON.parse(cookies.readCookieSync('custom'));
+    } else {
+      this.customVendorsAllowed = [];
+    }
+  } */
 
   setCustomVendorsAllowed(customVendorArray) {
     this.customVendorsAllowed = customVendorArray;
+    //cookies.writeCookie()
   }
 
   updateCmpAndWriteCookie(consentObject) {
@@ -86,10 +99,19 @@ export default class Cmp extends ConsentString {
       console.log(`CMP => Set CustomVendors:${JSON.stringify(this.customVendorsAllowed)}`);
       console.log(`CMP => Set Purposes: ${JSON.stringify(this.getPurposesAllowed())}`);
       console.log(`CMP => Set Vendors: ${JSON.stringify(this.getVendorsAllowed())}`);
+      cookies.writeCookieCustom(JSON.stringify(consentObject.customVendors));
       cookies.writeCookie(this.getConsentString())
         .then((result) => {
           if (result) resolve(true);
         });
     });
+  }
+}
+
+function getCustomVendorsAllowed() {
+  if(typeof cookies.readCookieSync('custom') == 'string') {
+    return JSON.parse(cookies.readCookieSync('custom'));
+  } else {
+    return [];
   }
 }

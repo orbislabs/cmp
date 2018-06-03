@@ -28,7 +28,6 @@ export default {
       console.log('CMP-UI :: (Entry) Full Consent Given');
       this.setFullConsent({})
     },
-    // TODO : remove events completely???
     ...mapMutations([
       'updatePurposes',
       'updateVendors',

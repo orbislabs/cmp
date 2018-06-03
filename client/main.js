@@ -3,7 +3,7 @@ import Cmp from './cmp.js';
 import iabVendorList from './configs/iabVendorList.js';
 import api from './api.js';
 import renderVueApp from './ui/main.js';
-import { isEqual } from 'underscore';
+//import { isEqual } from 'underscore';
 
 // here we grab the client id from a data att in the script tag
 let clientId;
@@ -38,6 +38,7 @@ function loadCmp(clientId = 1, iabVendorList, result) {
       if (!cmp) reject('Error loading CMP');
       resolve(window.cmp);
     }
+    console.log('CMP loaded...', cmp.customVendorsAllowed)
   });
 }
 
@@ -81,16 +82,21 @@ export function fireGtmPixels (clientId) {
     const a = checkPermissionMismatch( userConfig.iabPurposes , miqConfig.iabPurposes );
     const b = checkPermissionMismatch( userConfig.iabVendors , miqConfig.iabVendors );
     const c = checkPermissionMismatch( userConfig.customVendors , miqConfig.customVendors );
+    console.log(userConfig.customVendors)
 
     if (a && b && c) {
       if(dataLayer) {
         console.log('GTM-Int: Found, GTM dataLayer...');
-        dataLayer.push({'event':'appnexus-consent'});
+        dataLayer.push({'consentStatus': 'true'});
+        dataLayer.push({'event':'consentUpdate'});
       } else {
         reject(console.warn('GTM-Int: No dataLayer available!'));
       }
     } else {
+      console.log(a,b,c)
       resolve(console.log('GTM-Int: No Pixels are being fired...'));
+      dataLayer.push({'consentStatus': 'false'});
+      dataLayer.push({'event':'consentUpdate'});
     }
 
   });

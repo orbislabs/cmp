@@ -11,6 +11,7 @@ import Toggle from './components/Toggle.vue';
 
 import EventBus from './eventBus';
 import './uikit.css';
+
 //import '@vuikit/theme'; TODO: this can be removed, right now we are using scoped CSS file from uikit
 import '../../cookie/cookieutils.js';
 

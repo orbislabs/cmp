@@ -29,5 +29,8 @@ router.get('/frame', (req,res) => {
 router.get('/gtm', (req,res) => {
   res.sendFile('gtm.html', { root : rootPath });
 });
+router.get('/gtm2', (req,res) => {
+  res.sendFile('gtm2.html', { root : rootPath });
+});
 
 module.exports = router;

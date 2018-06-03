@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/orbislabs/cmp#readme",
   "dependencies": {
+    "@vuikit/icons": "^0.8.1",
     "@vuikit/theme": "^0.8.0",
     "consent-string": "^1.2.0",
     "express": "^4.16.3",
