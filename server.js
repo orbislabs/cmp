@@ -44,5 +44,11 @@ app.listen(PORT, () => {
 // check node v9.8.0
 console.log(`CMP++ :: ExpressServer --> NodeV:  ${process.version}`);
 console.log(`CMP++ :: ExpressServer --> Arguments: ${process.argv[2]}`);
+
+// TESTING 
+const path = require('path');
+
+console.log(__dirname, path.resolve('typed'))
+
 //console.log(`Server IP:  ${host}`);
 //console.log(`Env:  ${JSON.stringify(process.env.NODE_ENV)}`);

@@ -29,9 +29,11 @@ export default {
     ]),
   },
   computed: {
-    ...mapState(['isShow', 
-    'currentView', 
-    'clientConfig'])
+    ...mapState([
+      'isShow', 
+      'currentView', 
+      'clientConfig'
+    ])
   },
   beforeMount : function () {
     // TODO: I harded coded a client id here, as this was throwing an error
