@@ -17,8 +17,12 @@ export const store = new Vuex.Store({
     isShow: false,
     currentView: 'Modal',
     clientId : null,
-    iabVendorList : iabVendorList,
-    customVendorList : customVendorList,
+    vendorsList: iabVendorList.vendors.concat((customVendorList.vendors || []).map(vendor => {
+      return {
+        ...vendor,
+        isCustom: true
+      }
+    })),
     userConsentObject : {
       purposes : [],
       vendors : [],
@@ -28,33 +32,16 @@ export const store = new Vuex.Store({
   },
 
   getters : {
-
     getUserConsentObject : state => state.userConsentObject,
-
     getCurrentClientConfig : state => {
       return state.clientConfig
     },
-
-    getFullVendorList : state => state.iabVendorList.vendors,
-
-    getFullCustomVendorList : state => state.customVendorList.vendors,
-
     getCurrentClientVendorList : (state, getters) => {
       // first we fetch the IAB, and filter the IAB vendors
-      const clientDefaultVendorIds = getters.getCurrentClientConfig.defaults.vendors;
-      let clientIabVendorsList = getters.getFullVendorList.filter( function(vendor) {
-        if(clientDefaultVendorIds.indexOf(vendor.id) > -1) return vendor;
-      });
-      // now we get the customVendors and combine the objects
-      const clientCustomVendorIds = getters.getCurrentClientConfig.defaults.customVendors;
-      let clientCustomVendorsList = getters.getFullCustomVendorList.filter( function(vendor) {
-        if(clientCustomVendorIds.indexOf(vendor.id) > -1) return vendor;
-      });
-      let merged = clientCustomVendorsList.concat(clientIabVendorsList);
-      return merged;
-    },
-
-
+      const { vendors, customVendors } = getters.getCurrentClientConfig.defaults
+      const configVendors = [...vendors, ...customVendors]
+      return state.vendorsList.filter(vendor => configVendors.includes(vendor.id))
+    }
   },
   mutations : {
     // TODO : right now we are setting the config in main.js using Vue.set()
@@ -67,68 +54,36 @@ export const store = new Vuex.Store({
     // TODO: this function is mega shitty updateUserConsentObject it needs refactor
     // here we mutate the userConsentObject to add/remove allowed purposes
     updateUserConsentObject (state, payload) {
+      const { toggleType, toggleValue, toggleId } = payload
+      if (!['purposes', 'vendors'].includes(toggleType)) {
+        console.log('CMP-UI :: Unknown Toggle Type', toggleType)
+        return
+      }
 
-      let purposeArray = state.userConsentObject.purposes;
-      let vendorArray = state.userConsentObject.vendors;
-      let customVendorArray = state.userConsentObject.customVendors;
+      const attr = toggleType === 'purposes' ? 'purposes' : toggleId <= 1000 ? 'vendors' : 'customVendors'
+      let arrayValue = state.userConsentObject[attr]
 
-      const toggleType = payload.toggleType;
-      const toggleValue = payload.toggleValue;
-      const toggleId = payload.toggleId;
-
-      if (toggleType == 'purposes') {
-        //--------------//
-        if (toggleValue) {
-          // user is allowing the selection - true
-          if(purposeArray.indexOf(toggleId) == -1) {
-            purposeArray.push(toggleId);
-          }
-        } else {
-          // user is rejecting the selection - false
-          if( purposeArray.indexOf(toggleId) !== -1 ) {
-            purposeArray.splice(purposeArray.indexOf(toggleId), 1);
-          }
+      if (toggleValue) {
+        if (!arrayValue.includes(toggleId)) {
+          arrayValue.push(toggleId)
         }
-        //--------------//
-      } else if (toggleType == 'vendors') {
-        if (toggleId > 1000) {
-          // if this is true it means it is a customVendor
-          if (toggleValue) {
-            // user is allowing the selection - true
-            if(customVendorArray.indexOf(toggleId) == -1) {
-              customVendorArray.push(toggleId);
-            }
-          } else {
-            // user is rejecting the selection - false
-            if( customVendorArray.indexOf(toggleId) !== -1 ) {
-              customVendorArray.splice(customVendorArray.indexOf(toggleId), 1);
-            }
-          }
-        }
-        //--------------//
-        if (toggleValue) {
-          // user is allowing the selection - true
-          if(vendorArray.indexOf(toggleId) == -1) {
-            vendorArray.push(toggleId);
-          }
-        } else {
-          // user is rejecting the selection - false
-          if( vendorArray.indexOf(toggleId) !== -1 ) {
-            vendorArray.splice(vendorArray.indexOf(toggleId), 1);
-          }
-        }
-        //--------------//
       } else {
-        console.error('CMP-UI :: Unknown Toggle Type', toggleType);
+        arrayValue = arrayValue.filter(id => id !== toggleId)
+      }
+      state.userConsentObject = {
+        ...state.userConsentObject,
+        [attr]: arrayValue
       }
     },
     // this mutation is called right after setting the clientId, so we can use the getter
     // to fetch the correct client config object
     syncClientDefaultsToUserObject (state, payload) {
       // make sure to copy the array, to avoid changing the original clientConfig
-      state.userConsentObject.purposes = [...payload.purposes];
-      state.userConsentObject.vendors = [...payload.vendors];
-      state.userConsentObject.customVendors = [...payload.customVendors];
+      state.userConsentObject = {
+        purposes: [...payload.purposes],
+        vendors: [...payload.vendors],
+        customVendors: [...payload.customVendors]
+      }
     },
 
     changeShowState (state, payload) {
