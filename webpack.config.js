@@ -5,6 +5,8 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 //var MiniCssExtractPlugin = require('mini-css-extract-plugin'); // TODO: remove this dep - not being used..
 
+const isProduction = process.env.NODE_ENV === 'production'
+const PRODUCTION_HOST = 'https://pluto.mgr.consensu.org/'
 const config = {
   entry: {
     cmp: './client/main.js',
@@ -12,7 +14,7 @@ const config = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath : '/',
+    publicPath : isProduction ? PRODUCTION_HOST : '/',
     filename: '[name].bundle.js'
   },
   resolve : {
