@@ -64,23 +64,13 @@ function readCookieSync(name = 'euconsent') {
 
 // below functions use Promises
 function writeCookie(value) {
-  if(process.env.NODE_ENV == 'production') {
-    document.cookie = `${COOKIE_NAME}=${value}${COOKIE_DOMAIN_PROD};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
-    return Promise.resolve(true);
-  } else {
     document.cookie = `${COOKIE_NAME}=${value}${COOKIE_DOMAIN};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
     return Promise.resolve(true);
-  }
 }
 //TODO : clean up cookies!!!
 function writeCookieCustom(value) {
-  if(process.env.NODE_ENV == 'production') {
-    document.cookie = `custom=${value}${COOKIE_DOMAIN_PROD};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
-    return; //Promise.resolve(true);
-  } else {
     document.cookie = `custom=${value}${COOKIE_DOMAIN};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
     return; //Promise.resolve(true);
-  }
 }
 
 function readCookie(name = 'euconsent') {
