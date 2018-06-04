@@ -10,8 +10,9 @@ const clientConfig = {
   views : {
     homeView : {
       title : 'We are MiQ!',
-      body : `And believe you should be able to take control over your personal data. Therefore we are providing you with new controls to manage your data, to give you a better internet experience.
-              If you click Accept all below you consent to us and all the third-parties mentioned in our Privacy and Cookie Notice setting cookies and processing your personal data for the purposes of analytics and advertising.`
+      body : `MiQ and our partners use technology such as cookies on our site for analytics and advertising purposes. 
+      By clicking '<b>I Agree</b>' you consent to use of this technology across the web by us and the third-parties mentioned in our <a href="http://wearemiq.com/privacy-policy/">Privacy Policy</a>. 
+      You can change your mind and revisit your consent choices at anytime by returning to this site.`
     },
     purposeView : {
       title: 'Our Purposes',
