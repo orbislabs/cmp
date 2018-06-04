@@ -2,6 +2,7 @@ const host = (window && window.location && window.location.hostname) || '';
 const parts = host.split('.');
 
 const COOKIE_DOMAIN = parts.length > 1 ? `;domain=.${parts.slice(-2).join('.')}` : '';
+const COOKIE_DOMAIN_PROD = ';domain=.consensu.org';
 const COOKIE_MAX_AGE = 33696000;
 const COOKIE_NAME = 'euconsent';
 const PATH = '/';
@@ -63,13 +64,23 @@ function readCookieSync(name = 'euconsent') {
 
 // below functions use Promises
 function writeCookie(value) {
-  document.cookie = `${COOKIE_NAME}=${value}${COOKIE_DOMAIN};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
-  return Promise.resolve(true);
+  if(process.env.NODE_ENV == 'production') {
+    document.cookie = `${COOKIE_NAME}=${value}${COOKIE_DOMAIN_PROD};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
+    return Promise.resolve(true);
+  } else {
+    document.cookie = `${COOKIE_NAME}=${value}${COOKIE_DOMAIN};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
+    return Promise.resolve(true);
+  }
 }
 //TODO : clean up cookies!!!
 function writeCookieCustom(value) {
-  document.cookie = `custom=${value}${COOKIE_DOMAIN};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
-  return; //Promise.resolve(true);
+  if(process.env.NODE_ENV == 'production') {
+    document.cookie = `custom=${value}${COOKIE_DOMAIN_PROD};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
+    return; //Promise.resolve(true);
+  } else {
+    document.cookie = `custom=${value}${COOKIE_DOMAIN};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
+    return; //Promise.resolve(true);
+  }
 }
 
 function readCookie(name = 'euconsent') {
