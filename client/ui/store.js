@@ -41,17 +41,11 @@ export const store = new Vuex.Store({
 
     getCurrentClientVendorList : (state, getters) => {
       // first we fetch the IAB, and filter the IAB vendors
-      const clientDefaultVendorIds = getters.getCurrentClientConfig.defaults.vendors;
-      let clientIabVendorsList = getters.getFullVendorList.filter( function(vendor) {
-        if(clientDefaultVendorIds.indexOf(vendor.id) > -1) return vendor;
-      });
+      const { vendors, customVendors } = getters.getCurrentClientConfig.defaults
+      let clientIabVendorsList = getters.getFullVendorList.filter(vendor => vendors.includes(vendor.id))
       // now we get the customVendors and combine the objects
-      const clientCustomVendorIds = getters.getCurrentClientConfig.defaults.customVendors;
-      let clientCustomVendorsList = getters.getFullCustomVendorList.filter( function(vendor) {
-        if(clientCustomVendorIds.indexOf(vendor.id) > -1) return vendor;
-      });
-      let merged = clientCustomVendorsList.concat(clientIabVendorsList);
-      return merged;
+      let clientCustomVendorsList = getters.getFullCustomVendorList.filter(vendor => customVendors.includes(vendor.id))
+      return clientCustomVendorsList.concat(clientIabVendorsList);
     },
 
 
