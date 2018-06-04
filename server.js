@@ -4,27 +4,7 @@ const os = require('os');
 const express = require('express');
 const app = express();
 
-// config based on DEV or PROD profiles
-/* const host = os.networkInterfaces().lo0[0].address;
-let HOST;
-
-if (host == '127.0.0.1') {
-    PORT = 3999;
-    HOST = 'localhost';
-    process.env.NODE_ENV = 'development';
-} else {
-    PORT = 3999;
-    HOST = host;
-    process.env.NODE_ENV = 'production';
-} */
-
-const profile = process.argv[2];
-let PORT;
-if (profile == 'dev') {
-    PORT = 5000;
-} else {
-    PORT = 5000; // this needs to be changed to proper process.env config
-}
+const PORT = 5000;
 
 // self rolled modules imported here
 const cmp = require('./routes/cmp');
@@ -41,14 +21,7 @@ app.use(express.static('/node_modules/uikit/dist/css/')); // TODO: try to remove
 app.listen(PORT, () => { 
     console.log(`CMP++ :: ExpressServer --> Running on: ${PORT}`);
 });
+
 // check node v9.8.0
 console.log(`CMP++ :: ExpressServer --> NodeV:  ${process.version}`);
 console.log(`CMP++ :: ExpressServer --> Arguments: ${process.argv[2]}`);
-
-// TESTING 
-const path = require('path');
-
-console.log(__dirname, path.resolve('typed'))
-
-//console.log(`Server IP:  ${host}`);
-//console.log(`Env:  ${JSON.stringify(process.env.NODE_ENV)}`);
