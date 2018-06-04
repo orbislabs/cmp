@@ -129,17 +129,16 @@ export const store = new Vuex.Store({
       state.userConsentObject.purposes = [...payload.purposes];
       state.userConsentObject.vendors = [...payload.vendors];
       state.userConsentObject.customVendors = [...payload.customVendors];
-/*       if(payload.customVendors){
-        state.userConsentObject.vendors.push(...payload.customVendors);
-      } */
-      //state.userConsentObject.vendors.push(...payload.customVendors);
     },
+
     changeShowState (state, payload) {
       state.isShow = payload
     },
+
     changeCurrentView (state, payload) {
       state.currentView = payload
     }
+
   },
   actions: {
     setFullConsent({commit, getters}, payload) {

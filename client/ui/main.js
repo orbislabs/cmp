@@ -7,7 +7,8 @@ import Modal from './components/Modal.vue';
 import Purposes from './components/Purposes.vue';
 import Vendors from './components/Vendors.vue';
 import Breadcrumb from './components/Breadcrumb.vue';
-import Toggle from './components/Toggle.vue';
+import Toggle from './components/Toggle.vue'
+import { ElementModalClose } from 'vuikit/lib/modal'
 
 import EventBus from './eventBus';
 import './uikit.css';
@@ -24,6 +25,7 @@ Vue.component('Vendors', Vendors);
 Vue.component('app-breadcrumb', Breadcrumb);
 Vue.component('app-init', App);
 Vue.component('cmp-toggle', Toggle);
+Vue.component('element-modal-close',ElementModalClose)
 
 // creating a root in the DOM for the app to attach to, when called
 const divToAttachApp = document.createElement('div');
