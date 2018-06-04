@@ -5,6 +5,8 @@ const path = require('path');
 const rootPath = path.join(__dirname, '../dist');
 const public = path.join(__dirname, '../public');
 
+const geo = require('./countries');
+
 // countries
 //const euCountries = require('./countries.js');
 const euCountries = [
@@ -35,7 +37,8 @@ const euCountries = [
   'SK',
   'SI',
   'ES',
-  'SE'
+  'SE',
+  'JP' // added for dev
 ];
 // middleware logging a request to this route
 router.use(function timeLog(req, res, next) {
