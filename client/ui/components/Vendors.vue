@@ -59,17 +59,9 @@ export default {
     },
     toggleValue (id) {
       if(id > 1000) {
-        if(this.getUserConsentObject.customVendors.indexOf(id) > -1) {
-        return true;
-        } else {
-          return false;
-        }
+        return this.getUserConsentObject.customVendors.includes(id)
       }
-      if(this.getUserConsentObject.vendors.indexOf(id) > -1) {
-        return true;
-      } else {
-        return false;
-      }
+      return this.getUserConsentObject.vendors.includes(id)
     }
   },
   computed: {
