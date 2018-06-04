@@ -58,10 +58,8 @@ export default {
       this.pageNumber--
     },
     toggleValue (id) {
-      if(id > 1000) {
-        return this.getUserConsentObject.customVendors.includes(id)
-      }
-      return this.getUserConsentObject.vendors.includes(id)
+      const { vendors, customVendors } = this.getUserConsentObject
+      return customVendors.includes(id) || vendors.includes(id)
     }
   },
   computed: {
