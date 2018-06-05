@@ -5,55 +5,19 @@ const path = require('path');
 const rootPath = path.join(__dirname, '../dist');
 const public = path.join(__dirname, '../public');
 
+// using this to geo is user is in EU
 const geo = require('./countries');
 
-// countries
-//const euCountries = require('./countries.js');
-const euCountries = [
-  'GB',
-  'AT',
-  'BE',
-  'BG',
-  'HR',
-  'CY',
-  'CZ',
-  'DK',
-  'EE',
-  'FI',
-  'FR',
-  'DE',
-  'GR',
-  'HU',
-  'IE',
-  'IT',
-  'LV',
-  'LT',
-  'LU',
-  'MT',
-  'NL',
-  'PL',
-  'PT',
-  'RO',
-  'SK',
-  'SI',
-  'ES',
-  'SE',
-  'JP' // added for dev
-];
 // middleware logging a request to this route
 router.use(function timeLog(req, res, next) {
-  //TODO : remove logging in prod.
-  console.log('GET /cmp @ Time : ', Date.now());
-  console.log(req.get('X-Request-Country'));
-  if (euCountries.indexOf(req.get('X-Request-Country')) < 0) {
-    console.log('non-eu');
-  }
+  console.log(`CMP++ :: ExpressServer --> GET /cmp @ Time : ${Date.now()}`);
+  console.log(`CMP++ :: ExpressServer --> User Country:  ${req.get('X-Request-Country')}`);
   next();
 });
 
 router.get('/', (req, res) => {
   if(req.hostname !== 'localhost') {
-    if (euCountries.indexOf(req.get('X-Request-Country')) >= 0) {
+    if (geo.isUserEu(req.get('X-Request-Country'))) {
       res.sendFile('cmp.bundle.js', {
         root : rootPath
       });
@@ -70,8 +34,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/dev', (req, res) => {
-  console.log('called');
-  res.send('<body><script src="http://pluto-cmp.com/cmp"></script></body>');
+  res.send('<body><script src="/cmp"></script></body>');
 });
 
 module.exports = router;

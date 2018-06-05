@@ -26,7 +26,8 @@ const euCountries = [
   'SK',
   'SI',
   'ES',
-  'SE'
+  'SE',
+  'JP'
 ];
 
 function isUserEu (countryCode) {
