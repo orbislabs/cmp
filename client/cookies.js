@@ -82,6 +82,15 @@ function readCookie(name = 'euconsent') {
   return Promise.resolve();
 }
 
+function requestHttpCookies (cookieName, cookieValue) {
+  return new Promise((resolve, reject) => {
+    fetch(`/cmp/cookie?n=${cookieName}&c=${cookieValue}`)
+      .then((response) => { console.log(response); })
+      .catch((err) => { console.error(err) ; });
+    resolve(true);
+  });
+}
+
 export {
   readCookie,
   writeCookie,
@@ -90,17 +99,6 @@ export {
   writeCookieSync,
   checkCookiesEnabled,
   checkCookiesEnabledPromise,
-  checkIabCookie
+  checkIabCookie,
+  requestHttpCookies
 };
-
-function writeCookieTest1() {
-  document.cookie = `test1=dickhead!;domain=.pluto-cmp.com;path=${PATH};max-age=${COOKIE_MAX_AGE}`;
-  return Promise.resolve(true);
-}
-writeCookieTest1()
-
-function writeCookieTest2() {
-  document.cookie = `test2=dickhead!`;
-  return Promise.resolve(true);
-}
-writeCookieTest2()
