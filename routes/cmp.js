@@ -40,7 +40,7 @@ router.get('/dev', (req, res) => {
 });
 
 router.get('/cookie', (req, res) => {
-  res.cookie(req.query.n, req.query.c, { domain: '.pluto-cmp.com' });
+  res.cookie(req.query.n, req.query.c, { domain: '.pluto-cmp.com', expires: new Date(Date.now() + 900000) });
   res.end();
 });
 
