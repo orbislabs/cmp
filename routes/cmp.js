@@ -16,7 +16,7 @@ router.use(function timeLog(req, res, next) {
 });
 
 router.get('/', (req, res) => {
-  if(req.hostname !== 'localhost') {
+  if(req.hostname !== 'localhost' && req.get('X-Request-Country')) {
     if (geo.isUserEu(req.get('X-Request-Country'))) {
       res.sendFile('cmp.bundle.js', {
         root : rootPath
