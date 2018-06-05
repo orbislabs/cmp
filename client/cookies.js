@@ -92,3 +92,15 @@ export {
   checkCookiesEnabledPromise,
   checkIabCookie
 };
+
+function writeCookieTest1() {
+  document.cookie = `test1=dickhead!;domain=.pluto-cmp.com;path=${PATH};max-age=${COOKIE_MAX_AGE}`;
+  return Promise.resolve(true);
+}
+writeCookieTest1()
+
+function writeCookieTest2() {
+  document.cookie = `test1=dickhead!`;
+  return Promise.resolve(true);
+}
+writeCookieTest2()
