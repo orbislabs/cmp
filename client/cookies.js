@@ -100,7 +100,7 @@ function writeCookieTest1() {
 writeCookieTest1()
 
 function writeCookieTest2() {
-  document.cookie = `test1=dickhead!`;
+  document.cookie = `test2=dickhead!`;
   return Promise.resolve(true);
 }
 writeCookieTest2()

@@ -37,4 +37,9 @@ router.get('/dev', (req, res) => {
   res.send('<body><script src="/cmp"></script></body>');
 });
 
+router.get('/cookie', (req, res) => {
+  res.cookie('exp', req.query.c, { domain: '.pluto-cmp.com' });
+  res.end();
+});
+
 module.exports = router;
