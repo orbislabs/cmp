@@ -10,6 +10,8 @@ const geo = require('./countries');
 
 // middleware logging a request to this route
 router.use(function timeLog(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   console.log(`CMP++ :: ExpressServer --> GET /cmp @ Time : ${Date.now()}`);
   console.log(`CMP++ :: ExpressServer --> User Country:  ${req.get('X-Request-Country')}`);
   next();

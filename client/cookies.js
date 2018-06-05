@@ -84,9 +84,7 @@ function readCookie(name = 'euconsent') {
 
 function requestHttpCookies (cookieName, cookieValue) {
   return new Promise((resolve, reject) => {
-    fetch(`http://pluto-cmp.com:5000/cmp/cookie?n=${cookieName}&c=${cookieValue}`, {
-      mode : 'no-cors'
-    })
+    fetch(`http://pluto-cmp.com:5000/cmp/cookie?n=${cookieName}&c=${cookieValue}`)
       .then((response) => { console.log(response); })
       .catch((err) => { console.error(err) ; });
     resolve(true);
