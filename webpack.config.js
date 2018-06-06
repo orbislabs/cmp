@@ -5,7 +5,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production'
-const PRODUCTION_HOST = 'http://pluto-cmp.com:5000/' // TODO: change this back!!!!!
+const PRODUCTION_HOST = 'https://pluto.mgr.consensu.org' // TODO: change this back!!!!!
 const config = {
   entry: {
     cmp: './client/main.js'

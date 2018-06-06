@@ -39,10 +39,12 @@ router.get('/dev', (req, res) => {
 });
 
 router.get('/cookie', (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
-  res.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.set('Access-Control-Allow-Credentials', 'true');
-  res.cookie(req.query.n, req.query.c, { maxAge: 33696000, secure: false });
+  res.set({
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+    'Access-Control-Allow-Credentials': 'true'
+  });
+  res.cookie(req.query.n, req.query.c, { maxAge: 33696000 });
   res.end();
 });
 
