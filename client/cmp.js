@@ -57,6 +57,7 @@ export default class Cmp extends ConsentString {
       .then(result => this.updateCmpAndWriteCookie(result))
       .then(result => this.readyCmpAPI(result))
       .then(result => fireGtmPixels(this.clientId))
+      .then(result => cookies.requestHttpCookies('euconsent', this.getConsentString()))
       .catch(err => console.log(err));
   }
 

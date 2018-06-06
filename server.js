@@ -3,10 +3,12 @@ const os = require('os');
 // setup express 
 const express = require('express');
 const app = express();
+const cookieParser = require('cookie-parser')
 
 const PORT = 5000;
 const cmp = require('./routes/cmp');
 // setup the routes
+app.use(cookieParser())
 app.use('/cmp', cmp);
 app.use(express.static('dist'));
 

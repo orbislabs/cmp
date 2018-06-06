@@ -10,8 +10,7 @@ const geo = require('./countries');
 
 // middleware logging a request to this route
 router.use(function timeLog(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  console.log(req.cookies);
   console.log(`CMP++ :: ExpressServer --> GET /cmp @ Time : ${Date.now()}`);
   console.log(`CMP++ :: ExpressServer --> User Country:  ${req.get('X-Request-Country')}`);
   next();
@@ -40,7 +39,10 @@ router.get('/dev', (req, res) => {
 });
 
 router.get('/cookie', (req, res) => {
-  res.cookie(req.query.n, req.query.c, { domain: '.pluto-cmp.com', expires: new Date(Date.now() + 900000) });
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.set('Access-Control-Allow-Credentials', 'true');
+  res.cookie(req.query.n, req.query.c, { maxAge: 33696000, secure: false });
   res.end();
 });
 

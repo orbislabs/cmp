@@ -82,11 +82,24 @@ function readCookie(name = 'euconsent') {
   return Promise.resolve();
 }
 
-function requestHttpCookies (cookieName, cookieValue) {
+function requestHttpCookies(cookieName, cookieValue) {
+  const url = (process.env.NODE_ENV == 'production') ? 'https://pluto.mgr.consensu.org/cmp/cookie' : '/cmp/cookie';
+  const newCookieName = (process.env.NODE_ENV == 'production') ? cookieName : 'httpeuconsent';
   return new Promise((resolve, reject) => {
-    fetch(`http://pluto-cmp.com:5000/cmp/cookie?n=${cookieName}&c=${cookieValue}`)
-      .then((response) => { console.log(response); })
-      .catch((err) => { console.error(err) ; });
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+    fetch(`${url}?n=${newCookieName}&c=${cookieValue}`, {
+        credentials: 'include',
+        //mode: 'cors', 
+        headers: headers,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
     resolve(true);
   });
 }
