@@ -1,4 +1,8 @@
+# folders
 /node_modules/
 /node_modules
 dist/
+
+# files
 .DS_store
+.env

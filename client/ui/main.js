@@ -13,7 +13,6 @@ import { ElementModalClose } from 'vuikit/lib/modal'
 import EventBus from './eventBus';
 import './uikit.css';
 
-//import '@vuikit/theme'; TODO: this can be removed, right now we are using scoped CSS file from uikit
 import '../../cookie/cookieutils.js';
 
 Vue.use(Vuikit);
