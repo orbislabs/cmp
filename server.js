@@ -1,7 +1,8 @@
 require('dotenv').config()
-//process.env.NODE_ENV = 'production'
-// load node server modules
-const os = require('os');
+process.env.NODE_ENV = 'production'
+
+
+//const morgan = require('morgan');
 // setup express 
 const express = require('express');
 const app = express();
@@ -10,6 +11,7 @@ const cookieParser = require('cookie-parser')
 const PORT = process.env.PORT_PRODUCTION;
 const cmp = require('./routes/cmp');
 // setup the routes
+//app.use(morgan('PLUTO-SERVER --> :referrer :method :url :status :response-time ms RECEIVED :req[Cookie] SENT :res[Set-Cookie]'))
 app.use(cookieParser())
 app.use('/cmp', cmp);
 app.use(express.static('dist'));

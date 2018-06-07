@@ -10,17 +10,13 @@ const geo = require('./countries');
 
 // middleware logging a request to this route
 router.use(function timeLog(req, res, next) {
-  console.log('###########    START OF REQUEST     ##########');
-  console.log('--------------------------------------------------------------------------------------------');
-  console.log(`CMP++ :: ExpressServer --> ${req.method} From ${req.originalUrl} @ Time : ${Date.now()}`);
-  console.log(`CMP++ :: ExpressServer --> Referer : ${req.get('referer')} & Fresh : ${req.fresh}`);
-  console.log(`CMP++ :: ExpressServer --> User Country:  ${req.get('X-Request-Country')}`);
-  console.log('express-cookies: ', req.cookies);
-  console.log('nginx-cookies', req.get('X-Cookie-Euconsent'));
-  console.log('--------------------------------------------------------------------------------------------');
-  console.log('all-headers', req.headers)
-  console.log('--------------------------------------------------------------------------------------------');
-  console.log('######        END OF REQUEST        ############');
+  console.log('######################   START OF REQUEST     ######################');
+  console.log(`#CMP++ :: ExpressServer --> ${req.method} From ${req.originalUrl} @ Time : ${Date.now()}`);
+  console.log(`#CMP++ :: ExpressServer --> Referer : ${req.get('referer')} & Fresh : ${req.fresh}`);
+  console.log(`#CMP++ :: ExpressServer --> User Country:  ${req.get('X-Request-Country')}`);
+  console.log('#CMP++ :: ExpressServer --> Cookies: ', req.cookies);
+  console.log('#CMP++ :: ExpressServer --> X-Cookie-Euconsent: ', req.get('X-Cookie-Euconsent'));
+  console.log('######################     END OF REQUEST     ######################');
   next();
 });
 
