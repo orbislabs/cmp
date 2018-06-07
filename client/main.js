@@ -53,7 +53,7 @@ init()
         .then(result => cmp.updateCmpAndWriteCookie(result))
         .then(result => fireGtmPixels(clientId))
         .then(result => cmp.readyCmpAPI(result))
-        .then(result => cookies.requestHttpCookies( 'httpcookie', cmp.getConsentString() ))
+        .then(result => cookies.requestHttpCookies( 'euconsent', cmp.getConsentString() ))
 		    .catch(err => console.log(err));
     } else {
       fireGtmPixels(clientId)
