@@ -11,6 +11,7 @@ const geo = require('./countries');
 // middleware logging a request to this route
 router.use(function timeLog(req, res, next) {
   console.log(req.cookies);
+  console.log(req.cookies.httpeuconsent);
   console.log(`CMP++ :: ExpressServer --> GET /cmp @ Time : ${Date.now()}`);
   console.log(`CMP++ :: ExpressServer --> User Country:  ${req.get('X-Request-Country')}`);
   next();
@@ -41,7 +42,7 @@ router.get('/dev', (req, res) => {
 router.get('/cookie', (req, res) => {
   res.set({
     'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+    //'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
     'Access-Control-Allow-Credentials': 'true'
   });
   res.cookie(req.query.n, req.query.c, { maxAge: 33696000 });

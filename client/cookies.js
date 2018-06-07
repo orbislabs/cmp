@@ -87,11 +87,11 @@ function requestHttpCookies(cookieName, cookieValue) {
   const newCookieName = (process.env.NODE_ENV == 'production') ? cookieName : 'httpeuconsent';
   return new Promise((resolve, reject) => {
     const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
+    headers.append('Content-Type', 'text/plain');
     headers.append('Accept', 'application/json');
     fetch(`${url}?n=${newCookieName}&c=${cookieValue}`, {
         credentials: 'include',
-        //mode: 'cors', 
+        mode: 'cors', 
         headers: headers,
       })
       .then((response) => {
