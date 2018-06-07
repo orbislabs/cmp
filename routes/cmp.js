@@ -41,7 +41,7 @@ router.get('/dev', (req, res) => {
 
 router.get('/cookie', (req, res) => {
   res.set({
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': req.get('Origin'),
     //'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
     'Access-Control-Allow-Credentials': 'true'
   });
