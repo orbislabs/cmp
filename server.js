@@ -1,5 +1,5 @@
 require('dotenv').config()
-//process.env.PORT_PRODUCTION = 'production'
+//process.env.NODE_ENV = 'production'
 // load node server modules
 const os = require('os');
 // setup express 
