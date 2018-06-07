@@ -10,10 +10,11 @@ const geo = require('./countries');
 
 // middleware logging a request to this route
 router.use(function timeLog(req, res, next) {
-  console.log(`CMP++ :: ExpressServer --> GET /cmp @ Time : ${Date.now()}`);
+  console.log(`CMP++ :: ExpressServer --> ${req.method} @ ${req.path} @ Time : ${Date.now()}`);
+  console.log(`CMP++ :: ExpressServer --> Host : ${req.host} & Fresh : ${req.fresh}`);
   console.log(`CMP++ :: ExpressServer --> User Country:  ${req.get('X-Request-Country')}`);
-  console.log('cookies: ', req.cookies);
-  console.log('nginxcookies', req.get('X-Cookies-Euconsent'));
+  console.log('express-cookies: ', req.cookies);
+  console.log('nginx-cookies', req.get('X-Cookies-Euconsent'));
   next();
 });
 
