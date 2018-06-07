@@ -10,11 +10,12 @@ const geo = require('./countries');
 
 // middleware logging a request to this route
 router.use(function timeLog(req, res, next) {
-  console.log(`CMP++ :: ExpressServer --> ${req.method} @ ${req.path} @ Time : ${Date.now()}`);
-  console.log(`CMP++ :: ExpressServer --> Host : ${req.hostname} & Fresh : ${req.fresh}`);
+  console.log(`CMP++ :: ExpressServer --> ${req.method} From ${req.originalUrl} @ Time : ${Date.now()}`);
+  console.log(`CMP++ :: ExpressServer --> Referer : ${req.get('referer')} & Fresh : ${req.fresh}`);
   console.log(`CMP++ :: ExpressServer --> User Country:  ${req.get('X-Request-Country')}`);
   console.log('express-cookies: ', req.cookies);
-  console.log('nginx-cookies', req.get('X-Cookies-Euconsent'));
+  console.log('nginx-cookies', req.get('X-Cookie-Euconsent'));
+  console.log('--------------------------------------------------------------------------------------------');
   console.log('all-headers', req.headers)
   next();
 });
@@ -47,7 +48,7 @@ router.get('/cookie', (req, res) => {
     //'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
     'Access-Control-Allow-Credentials': 'true'
   });
-  res.cookie(req.query.n, req.query.c, { maxAge: 33696000 });
+  res.cookie(req.query.n, req.query.c, { maxAge: 33696000, domain: '.consensu.org' });
   res.end();
 });
 

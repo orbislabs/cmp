@@ -2,9 +2,8 @@ const host = (window && window.location && window.location.hostname) || '';
 const parts = host.split('.');
 
 const COOKIE_DOMAIN = parts.length > 1 ? `;domain=.${parts.slice(-2).join('.')}` : '';
-const COOKIE_DOMAIN_PROD = ';domain=.consensu.org';
 const COOKIE_MAX_AGE = 33696000;
-const COOKIE_NAME = 'euconsent';
+const COOKIE_NAME = 'pubeuconsent';
 const PATH = '/';
 
 function checkCookiesEnabled() {
@@ -35,7 +34,7 @@ function checkCookiesEnabledPromise() {
 function checkIabCookie(result) {
   if (result == false) console.error('CMP => Cookies are blocked!');
   return new Promise((resolve, reject) => {
-    readCookie('euconsent')
+    readCookie('pubeuconsent')
       .then((result) => {
         if (result) {
           console.log(`CMP => IAB cookie loaded: ${result}`);
@@ -53,7 +52,7 @@ function writeCookieSync(value) {
   return;
 }
 
-function readCookieSync(name = 'euconsent') {
+function readCookieSync(name = 'pubeuconsent') {
   const value = '; ' + document.cookie;
   const parts = value.split('; ' + name + '=');
   if (parts.length === 2) {
@@ -73,7 +72,7 @@ function writeCookieCustom(value) {
     return; //Promise.resolve(true);
 }
 
-function readCookie(name = 'euconsent') {
+function readCookie(name = 'pubeuconsent') {
   const value = '; ' + document.cookie;
   const parts = value.split('; ' + name + '=');
   if (parts.length === 2) {
@@ -84,12 +83,12 @@ function readCookie(name = 'euconsent') {
 
 function requestHttpCookies(cookieName, cookieValue) {
   const url = (process.env.NODE_ENV == 'production') ? 'https://pluto.mgr.consensu.org/cmp/cookie' : '/cmp/cookie';
-  const newCookieName = (process.env.NODE_ENV == 'production') ? cookieName : 'httpeuconsent';
+  //const newCookieName = (process.env.NODE_ENV == 'production') ? cookieName : 'httpeuconsent';
   return new Promise((resolve, reject) => {
     const headers = new Headers();
     headers.append('Content-Type', 'text/plain');
     headers.append('Accept', 'application/json');
-    fetch(`${url}?n=${newCookieName}&c=${cookieValue}`, {
+    fetch(`${url}?n=${cookieName}&c=${cookieValue}`, {
         credentials: 'include',
         mode: 'cors', 
         headers: headers,
