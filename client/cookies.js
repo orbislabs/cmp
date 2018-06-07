@@ -82,6 +82,7 @@ function readCookie(name = 'pubeuconsent') {
 }
 
 function requestHttpCookies(cookieName, cookieValue) {
+  console.log('requesting http coooookies from da server')
   const url = (process.env.NODE_ENV == 'production') ? 'https://pluto.mgr.consensu.org/cmp/cookie' : '/cmp/cookie';
   //const newCookieName = (process.env.NODE_ENV == 'production') ? cookieName : 'httpeuconsent';
   return new Promise((resolve, reject) => {

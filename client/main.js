@@ -83,16 +83,20 @@ export function fireGtmPixels (clientId) {
     const a = checkPermissionMismatch( userConfig.iabPurposes , miqConfig.iabPurposes );
     const b = checkPermissionMismatch( userConfig.iabVendors , miqConfig.iabVendors );
     const c = checkPermissionMismatch( userConfig.customVendors , miqConfig.customVendors );
-    console.log(userConfig.customVendors)
+
     if(typeof dataLayer !== 'undefined') {
+
       if (a && b && c) {
+
         if(dataLayer) {
           console.log('GTM-Int: Found, GTM dataLayer...');
           dataLayer.push({'consentStatus': 'true'});
           dataLayer.push({'event':'consentUpdate'});
+          resolve(true);
         } else {
           reject(console.warn('GTM-Int: No dataLayer available!'));
         }
+
       } else {
         console.log(a,b,c)
         resolve(console.log('GTM-Int: No Pixels are being fired...'));
