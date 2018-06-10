@@ -24,14 +24,16 @@ export default {
   },
   computed: {
     ...mapState([
-      'isShow', 
-      'currentView', 
+      'isShow',
+      'currentView',
       'clientConfig'
     ])
   },
 }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+.uk-scope {
+  @import './styles/style.scss'
+}
 </style>

@@ -43,6 +43,16 @@ const config = {
           }]
       },
       {
+        test: /\.scss$/,
+        use: [
+            'vue-style-loader',
+            'css-loader',
+            {
+              loader: 'sass-loader'
+            }
+          ]
+      },
+      {
         test: /\.(html)$/,
         use: {
           loader: 'html-loader'
