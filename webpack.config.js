@@ -7,7 +7,7 @@ const Dotenv = require('dotenv-webpack');
 
 
 const isProduction = process.env.NODE_ENV === 'production'
-const PRODUCTION_HOST = 'https://pluto.mgr.consensu.org/' 
+const PRODUCTION_HOST = 'https://pluto.mgr.consensu.org/'
 const config = {
   entry: {
     cmp: './client/main.js'
@@ -53,7 +53,9 @@ const config = {
   plugins: [
     new VueLoaderPlugin(),
     new CleanWebpackPlugin('dist', {} ),
-    new HtmlWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: './index.html'
+    }),
     new HtmlWebpackExcludeAssetsPlugin(),
     new Dotenv()
   ]
