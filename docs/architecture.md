@@ -1,15 +1,13 @@
 # !Draft!   Updated Architecture of CMP   !Draft!
 
 ```
-+-----------+         +-----------+
-|           |         |           |
-|  Loader   | ------> |    CMP    |
-|           |         |           |
-+-----------+         +-----------+
++-----------+         +-----------+         +-----------+
+|           |         |           |         |           |
+|  Loader   | ------> |    CMP    | ------> |    UI     |
+|           |         |           |         |           |
++-----------+         +-----------+         +-----------+
 
 ```
-
-
 
 ## Loader Module
 Responsible for the creation of a data object for consumption by other modules. It is client agnostic, it does not need the client id for any logic.
@@ -33,7 +31,6 @@ Responsible for the creation of a data object for consumption by other modules. 
   cookie3pValue : string || null,
 }
 ```
-
 
 ### Application Folder Structure
 ```bash
@@ -60,4 +57,3 @@ Responsible for the creation of a data object for consumption by other modules. 
 
 /docs
 ```
-
