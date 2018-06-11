@@ -11,7 +11,6 @@ import Toggle from './components/Toggle.vue'
 import { ElementModalClose } from 'vuikit/lib/modal'
 
 import EventBus from './eventBus';
-import './uikit.css';
 
 import '../../cookie/cookieutils.js';
 

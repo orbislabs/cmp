@@ -38,6 +38,9 @@ export const store = new Vuex.Store({
     },
     getCurrentClientVendorList : (state, getters) => {
       // first we fetch the IAB, and filter the IAB vendors
+      if (!getters.getCurrentClientConfig) {
+        return []
+      }
       const { vendors, customVendors } = getters.getCurrentClientConfig.defaults
       const configVendors = [...vendors, ...customVendors]
       return state.vendorsList.filter(vendor => configVendors.includes(vendor.id))
