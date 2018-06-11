@@ -1,26 +1,28 @@
+# !Draft! Updated Architecture of CMP
+
 ```
-_____________
-|           |
-|  Loader   | ------> 
-|           |
--------------
++-----------+         +-----------+
+|           |         |           |
+|  Loader   | ------> |    CMP    |
+|           |         |           |
++-----------+         +-----------+
+
 ```
 
 
 
-### Loader Module
-Responsible for the creation of a data object for consumption of other modules
-It is client agnostic, it does not need the client id for any logic
+## Loader Module
+Responsible for the creation of a data object for consumption by other modules. It is client agnostic, it does not need the client id for any logic.
 
 #### Flow:
 - check if cookies are allowed (1st party)
 - check if cookies are allowed (3rd party)
-- check for first party cookie presence & get value
-- check for third party cookie presence & get value
+- check for first party cookie presence & get value if exists
+- check for third party cookie presence & get value if exists
+- send the data to the CMP module for the decision
 - log the results in DB
-- request OR do not request the UI
 
-Data Object:
+#### Data Object Generated:
 ```javascript
 {
   clientId : int,
@@ -33,7 +35,7 @@ Data Object:
 
 
 ### Application Folder Structure
-```
+```bash
 /client
 -/ui
 -/api
