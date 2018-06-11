@@ -1,4 +1,4 @@
-# !Draft! Updated Architecture of CMP
+# !Draft!   Updated Architecture of CMP   !Draft!
 
 ```
 +-----------+         +-----------+
@@ -15,6 +15,7 @@
 Responsible for the creation of a data object for consumption by other modules. It is client agnostic, it does not need the client id for any logic.
 
 #### Flow:
+- fetch the clientId from the script tag.
 - check if cookies are allowed (1st party)
 - check if cookies are allowed (3rd party)
 - check for first party cookie presence & get value if exists
@@ -36,21 +37,22 @@ Responsible for the creation of a data object for consumption by other modules. 
 
 ### Application Folder Structure
 ```bash
-/client
--/ui
--/api
--/cmp
+/client 
+    /loader
+    /ui
+    /api
+    /cmp
 
 /server
--/routes
---/cmp
---/log
---/api
----/cookie
+    /routes
+        /cmp
+        /log
+        /api
+            /cookie
 
-/lib
--/cookies
--/http
+/lib # code which can be shared across client/server
+    /cookies
+    /http
 
 /build
 
