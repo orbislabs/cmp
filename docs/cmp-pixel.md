@@ -1,5 +1,5 @@
 # Pluto Pixel Documentation
-The cmp-pixel application is designed to check if a web user has a global IAB consent cookie set, and dependant on its value fire a corresponsing AppNexus pixel or return back a 43byte transparent GIF with no tracking.
+The **cmp-pixel** application is designed to check if a web user has a global IAB consent cookie set, and dependant on its value fire a corresponsing AppNexus pixel or return back a 43byte transparent GIF with no tracking.
 
 ## Basics
 - The application is running on an auto-scaling cluster in Google Cloud.
@@ -45,9 +45,9 @@ The application is designed with some request altering middleware:
 ```
 Once the request body has been appended with the extra fields we check the following logic:
 
-Is the user in an EU country & have they given consent - if yes -> fire pixel.
-Is the user not in an EU country - if yes -> fire pixel.
-Any other scenario -> return a GIF.
+- Is the user in an EU country & have they given consent - if yes -> fire pixel.
+- Is the user not in an EU country - if yes -> fire pixel.
+- Any other scenario -> return a GIF.
 
 ## Usage
 
