@@ -4,6 +4,9 @@ import iabVendorList from './configs/iabVendorList.js';
 import api from './api.js';
 import renderVueApp from './ui/main.js';
 
+// TESTING....
+import './loader/index';
+
 // here we grab the client id from a data att in the script tag
 let clientId;
 if(document.getElementById('pluto-cmp-js-src')) {

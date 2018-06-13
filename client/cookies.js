@@ -15,6 +15,8 @@ function checkCookiesEnabled() {
   return cookieEnabled;
 }
 
+
+// this now lives in loader.js - and can be removed from here
 function checkCookiesEnabledPromise() {
   return new Promise((resolve, reject) => {
     let cookieEnabled = (navigator.cookieEnabled) ? true : false;
