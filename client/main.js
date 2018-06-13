@@ -3,7 +3,6 @@ import Cmp from './cmp.js';
 import iabVendorList from './configs/iabVendorList.js';
 import api from './api.js';
 import renderVueApp from './ui/main.js';
-//import { isEqual } from 'underscore';
 
 // here we grab the client id from a data att in the script tag
 let clientId;

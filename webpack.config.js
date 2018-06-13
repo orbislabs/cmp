@@ -1,9 +1,12 @@
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
+
+// WEBPACK PLUGINS
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackExcludeAssetsPlugin = require('html-webpack-exclude-assets-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 
 const isProduction = process.env.NODE_ENV === 'production'
@@ -67,7 +70,10 @@ const config = {
       template: './index.html'
     }),
     new HtmlWebpackExcludeAssetsPlugin(),
-    new Dotenv()
+    new Dotenv(),
+    new BundleAnalyzerPlugin({
+      analyzerMode: (isProduction) ? 'disabled' : 'server' 
+    })
   ]
 };
 
