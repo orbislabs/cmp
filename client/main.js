@@ -5,7 +5,7 @@ import api from './api.js';
 import renderVueApp from './ui/main.js';
 
 // TESTING....
-import './loader/index';
+import './refactor.main';
 
 // here we grab the client id from a data att in the script tag
 let clientId;
@@ -16,7 +16,7 @@ if(document.getElementById('pluto-cmp-js-src')) {
 }
 
 //const clientId = document.getElementById('pluto-cmp-js-src').getAttribute('client-id');
-console.log(`CMP => Detected clientID: ${clientId}`);
+//console.log(`CMP => Detected clientID: ${clientId}`);
 
 // this function adds the api to the global window object
 function init() {
@@ -40,12 +40,11 @@ function loadCmp(clientId = 1, iabVendorList, result) {
       if (!cmp) reject('Error loading CMP');
       resolve(window.cmp);
     }
-    console.log('CMP loaded...', cmp.customVendorsAllowed)
   });
 }
 
 // Main CMP flow logic is here.
-init()
+/* init()
   .then(result => cookies.checkCookiesEnabledPromise(result)) // true OR false
   .then(result => cookies.checkIabCookie(result)) // base64 OR false
   .then(result => loadCmp(clientId, iabVendorList, result))
@@ -62,7 +61,7 @@ init()
         .then(result => cmp.readyCmpAPI(result));
     }
   })
-  .catch(err => console.log(err));
+  .catch(err => console.log(err)); */
 
 export function fireGtmPixels (clientId) {
 
