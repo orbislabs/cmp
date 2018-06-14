@@ -16,6 +16,7 @@ export default function initCmp(loaderData) {
   console.log('Loaderdata: ', loaderData);
   return new Promise((resolve, reject) => {
     const cmp = new Cmp(loaderData.iabCookie);
+    console.log('CMP: ', cmp);
     resolve(cmp);
   });
 }

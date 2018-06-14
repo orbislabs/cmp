@@ -67,7 +67,7 @@ const config = {
     new VueLoaderPlugin(),
     new CleanWebpackPlugin('dist', {} ),
     new HtmlWebpackPlugin({
-      template: './index.html'
+      template: './build/template.index.html'
     }),
     new HtmlWebpackExcludeAssetsPlugin(),
     new Dotenv(),
