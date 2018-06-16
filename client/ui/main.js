@@ -7,8 +7,8 @@ import Modal from './components/Modal.vue';
 import Purposes from './components/Purposes.vue';
 import Vendors from './components/Vendors.vue';
 import Breadcrumb from './components/Breadcrumb.vue';
-import Toggle from './components/Toggle.vue'
-import { ElementModalClose } from 'vuikit/lib/modal'
+import Toggle from './components/Toggle.vue';
+import { ElementModalClose } from 'vuikit/lib/modal';
 
 import EventBus from './eventBus';
 
@@ -23,7 +23,7 @@ Vue.component('Vendors', Vendors);
 Vue.component('app-breadcrumb', Breadcrumb);
 Vue.component('app-init', App);
 Vue.component('cmp-toggle', Toggle);
-Vue.component('element-modal-close',ElementModalClose)
+Vue.component('element-modal-close', ElementModalClose);
 
 // creating a root in the DOM for the app to attach to, when called
 const divToAttachApp = document.createElement('div');
@@ -34,12 +34,11 @@ document.body.appendChild(divToAttachApp);
 const vm = new Vue(App).$mount('#cmp-app');
 
 // this function is called to load the UI, it accepts the clientId
-function renderVueApp (clientId) {
+function renderVueApp(clientId) {
   return new Promise((resolve, reject) => {
     if (vm) {
-      // vm.$store.commit('setClientId', parseInt(clientId));
       vm.$store.dispatch('setClientId', parseInt(clientId));
-      vm.$store.commit('changeShowState', true)
+      vm.$store.commit('changeShowState', true);
       EventBus.$on('save-selection', value => {
         console.log(`CMP-UI :: Resolving Promise (save-selection): ${JSON.stringify(value)}`);
         resolve(value);
