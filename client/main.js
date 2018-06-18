@@ -1,8 +1,8 @@
 import * as cookies from './cookies.js';
-import Cmp from './cmp.js';
+// import Cmp from './cmp.js';
 import iabVendorList from './configs/iabVendorList.js';
 import api from './api.js';
-import renderVueApp from './ui/main.js';
+// import renderVueApp from './ui/main.js';
 
 // TESTING....
 import './refactor.main';

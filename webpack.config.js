@@ -18,7 +18,9 @@ const config = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath : isProduction ? PRODUCTION_HOST : '/',
-    filename: '[name].bundle.js'
+    filename: '[name].bundle.js',
+    chunkFilename: '[name].chunk.bundle.js',
+
   },
   resolve : {
     alias : { '@': path.resolve('client')}

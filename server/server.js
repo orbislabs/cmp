@@ -4,7 +4,7 @@ const PORT = process.env.PORT_PRODUCTION;
 
 const express = require('express');
 const app = express();
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
 const cmp = require('./routes/cmp');
 const api = require('./routes/api');
 

@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import Vuikit from 'vuikit';
+import { ElementModalClose } from 'vuikit/lib/modal';
+import EventBus from './eventBus';
 
 // import and make global all components
 import App from './App.vue';
@@ -8,22 +10,17 @@ import Purposes from './components/Purposes.vue';
 import Vendors from './components/Vendors.vue';
 import Breadcrumb from './components/Breadcrumb.vue';
 import Toggle from './components/Toggle.vue';
-import { ElementModalClose } from 'vuikit/lib/modal';
-
-import EventBus from './eventBus';
-
-import '../../cookie/cookieutils.js';
 
 Vue.use(Vuikit);
 
 // registering all components globally
+Vue.component('CmpApp', App);
 Vue.component('Modal', Modal);
 Vue.component('Purposes', Purposes);
 Vue.component('Vendors', Vendors);
-Vue.component('app-breadcrumb', Breadcrumb);
-Vue.component('app-init', App);
-Vue.component('cmp-toggle', Toggle);
-Vue.component('element-modal-close', ElementModalClose);
+Vue.component('AppBreadcrumb', Breadcrumb);
+Vue.component('AppToggle', Toggle);
+Vue.component('ElementModalClose', ElementModalClose);
 
 // creating a root in the DOM for the app to attach to, when called
 const divToAttachApp = document.createElement('div');
@@ -37,14 +34,15 @@ const vm = new Vue(App).$mount('#cmp-app');
 function renderVueApp(clientId) {
   return new Promise((resolve, reject) => {
     if (vm) {
-      vm.$store.dispatch('setClientId', parseInt(clientId));
+      vm.$store.dispatch('setClientId', parseInt(clientId, 10));
       vm.$store.commit('changeShowState', true);
-      EventBus.$on('save-selection', value => {
+      EventBus.$on('save-selection', (value) => {
         console.log(`CMP-UI :: Resolving Promise (save-selection): ${JSON.stringify(value)}`);
         resolve(value);
       });
     } else {
-      console.error(`CMP-UI :: No App Present`);
+      console.error('CMP-UI :: No App Present');
+      reject();
     }
   });
 }

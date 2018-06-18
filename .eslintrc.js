@@ -1,11 +1,21 @@
 module.exports = {
-  extends: [
-    // add more generic rulesets here, such as:
+  'parserOptions': {
+    'allowImportExportEverywhere': true,
+    'parser': 'babel-eslint'
+  },
+  'extends': [
     'eslint:recommended',
-    'plugin:vue/recommended'
+    'plugin:vue/recommended',
+    'airbnb-base'
   ],
-  rules: {
-    // override/add rules settings here, such as:
-    // 'vue/no-unused-vars': 'error'
+  'rules': {
+    'strict': 0,
+    'no-console': 0 // this should be changed for prod...
+  },
+  'env': { 
+    'es6': true,
+    'browser': true,
+    'node': true,
+    'shared-node-browser': true
   }
-}
+};
