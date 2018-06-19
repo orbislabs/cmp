@@ -1,17 +1,17 @@
 import { ConsentString } from 'consent-string';
-import * as cookies from './cookies';
-import renderVueApp from './ui/main';
-import { fireGtmPixels } from './main';
+import getCustomVendorsAllowed from './customVendors';
+import * as cookies from '../utils/cookies';
+import iabVendorList from '../configs/iabVendorList';
 
 export default class Cmp extends ConsentString {
-  constructor(clientId, iabVendorList, result = null) {
+  constructor(result = null) {
     super(result);
     this.setCmpId(52);
     this.setCmpVersion(1);
     this.setConsentLanguage('en');
     this.setConsentScreen(1);
     this.setGlobalVendorList(iabVendorList);
-    this.clientId = clientId;
+    // this.clientId = clientId; TODO: should this be here????
     this.cmpLoaded = false;
     this.customVendorsAllowed = getCustomVendorsAllowed();
   }
@@ -31,7 +31,7 @@ export default class Cmp extends ConsentString {
 
   // TODO: allVendors does not exist right now
   getVendorConsents(vendors = allVendors, callback = () => {}) {
-    let result = {};
+    const result = {};
     vendors.forEach((element) => {
       result[element] = this.isVendorAllowed(element);
     });
@@ -73,11 +73,4 @@ export default class Cmp extends ConsentString {
         });
     });
   }
-}
-
-function getCustomVendorsAllowed() {
-  if (typeof cookies.readCookieSync('custom') === 'string') {
-    return JSON.parse(cookies.readCookieSync('custom'));
-  }
-  return [];
 }

@@ -13,7 +13,7 @@ const isProduction = process.env.NODE_ENV === 'production'
 const PRODUCTION_HOST = 'https://pluto.mgr.consensu.org/'
 const config = {
   entry: {
-    cmp: './client/main.js'
+    cmp: ['babel-polyfill', './client/main.js'],
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

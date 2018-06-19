@@ -1,11 +1,13 @@
 {
-    "presets": [[
-        "@babel/env",
-        {"modules": false}
-    ], "@babel/es2017"],
-    "plugins": [
-      "@babel/plugin-transform-runtime",
-      "syntax-dynamic-import",
-      "transform-async-to-generator"
-    ]
+  "presets": [
+    [ "@babel/env", {
+        "targets": {
+          "browsers": ["last 2 versions", "safari >= 8"]
+        }
+      }]
+  ],
+  "plugins": [
+    "@babel/plugin-transform-runtime",
+    "syntax-dynamic-import",
+  ]
 }
