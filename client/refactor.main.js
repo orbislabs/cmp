@@ -26,11 +26,11 @@ init();
 -- subsequent calls to showConsentTool(), may need to avoid calling import() again?
 */
 
-function uiNotRequired() {
+function UINotRequired() {
   const error = new Error();
   error.message = 'No UI Required';
   error.name = 'UINotRequired';
   return error;
 }
 
-throw new uiNotRequired();
+throw new UINotRequired();
