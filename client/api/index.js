@@ -19,6 +19,6 @@ export default function initApi(cmp) {
     }
   }
   window.__cmp = api;
-  Promise.resolve(true);
-  console.log('API: ', api);
+  console.log('Module-API: ', api);
+  return Promise.resolve(true);
 }

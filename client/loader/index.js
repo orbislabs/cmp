@@ -12,8 +12,9 @@ export default function initLoader() {
     isDataLayer(),
     is1PCSupported(),
     is3PCSupported(),
-    get1PCookieValue('pubeuconsent'), // cookie.get('1P','name');
+    get1PCookieValue('euconsent'), // cookie.get('1P','name');
   ]).then((result) => {
+    // return {clientId, isDataLayer, is1PCSupported, is3PCSupported, iabCookie} = ...result
     return {
       clientId: result[0],
       isDataLayer: result[1],

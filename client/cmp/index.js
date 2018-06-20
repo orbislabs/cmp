@@ -1,11 +1,11 @@
 import Cmp from './Cmp';
 
 export default function initCmp(loaderData) {
-  console.log('LoaderData: ', loaderData);
+  console.log('Module-Loader: ', loaderData);
   return new Promise((resolve, reject) => {
     const cmp = new Cmp(loaderData.iabCookie);
     if (!cmp) reject();
-    console.log('CMP: ', cmp);
+    console.log('Module-CMP: ', cmp);
     resolve(cmp);
   });
 }

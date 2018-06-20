@@ -1,18 +1,17 @@
-// setup express routing
 const express = require('express');
+
 const router = express.Router();
 
 // TODO: decide on the middleware for logging
-
 router.get('/getCookie', (req, res) => {
   res.set({
     'Access-Control-Allow-Origin': req.get('Origin'),
-    'Access-Control-Allow-Credentials': 'true'
+    'Access-Control-Allow-Credentials': 'true',
   });
   res.json({
-    euconsent : (req.cookies.euconsent) ? req.cookies.euconsent : false,
+    euconsent: (req.cookies.euconsent) ? req.cookies.euconsent : false,
     // TODO : grab all cookies here including eupubconsent
-    plutoconsent : (req.cookies.plutoconsent) ? req.cookies.plutoconsent : false
+    plutoconsent: (req.cookies.plutoconsent) ? req.cookies.plutoconsent : false,
   });
   res.end();
 });
@@ -20,7 +19,7 @@ router.get('/getCookie', (req, res) => {
 router.get('/setCookie', (req, res) => {
   res.set({
     'Access-Control-Allow-Origin': req.get('Origin'),
-    'Access-Control-Allow-Credentials': 'true'
+    'Access-Control-Allow-Credentials': 'true',
   });
   res.cookie(req.query.n, req.query.c, { maxAge: 336960000, domain: '.consensu.org' });
   res.end();

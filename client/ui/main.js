@@ -19,7 +19,7 @@ Vue.component('Modal', Modal);
 Vue.component('Purposes', Purposes);
 Vue.component('Vendors', Vendors);
 Vue.component('AppBreadcrumb', Breadcrumb);
-Vue.component('AppToggle', Toggle);
+Vue.component('CmpToggle', Toggle);
 Vue.component('ElementModalClose', ElementModalClose);
 
 // creating a root in the DOM for the app to attach to, when called

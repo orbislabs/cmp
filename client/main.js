@@ -2,35 +2,31 @@ import initLoader from './loader/index';
 import initCmp from './cmp/index';
 import initApi from './api/index';
 import isShowUi from './cmp/isShowUi';
+import tagManager from './cmp/tagManager';
+import { requestHttpCookies } from './utils/cookies';
 
 async function init() {
   const loaderData = await initLoader();
-  initCmp(loaderData)
-    .then(cmp => initApi(cmp))
+  const cmp = await initCmp(loaderData);
+  initApi(cmp)
     .then(() => isShowUi(loaderData.iabCookie))
-    .then((result) => {
-      if (!result) {
+    .then((showUiBool) => {
+      if (showUiBool) {
         return import(/* webpackChunkName: "ui" */ './ui/main.js')
-          .then(appModule => appModule.default(loaderData.clientId));
+          .then(appModule => appModule.default(loaderData.clientId))
+          .then(userConsentObject => cmp.updateCmpAndWriteCookie(userConsentObject))
+          .then(() => requestHttpCookies('euconsent', cmp.getConsentString()))
+          .catch(err => console.error(err));
       }
       return Promise.resolve();
     })
+    .then(result => cmp.readyCmpAPI(result)) // readyCMPAPI
+    .then(() => tagManager(loaderData.clientId)) // tagmanager
     .catch(err => console.error(err));
 }
 init();
 
 /*
-
-        .then(result => cmp.updateCmpAndWriteCookie(result))
-        .then(result => fireGtmPixels(clientId))
-        .then(result => cmp.readyCmpAPI(result))
-        .then(result => cookies.requestHttpCookies( 'euconsent', cmp.getConsentString() ))
-        .catch(err => console.log(err));
-
-
-          } else {
-      fireGtmPixels(clientId)
-        .then(result => cmp.readyCmpAPI(result));
 ----------------------
 -- isShowUi returns a boolean
 -- Cmp class should have an interface for showing the UI
