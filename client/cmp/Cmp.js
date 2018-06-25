@@ -1,27 +1,18 @@
-import {
-  ConsentString
-} from 'consent-string';
-import {
-  fetchAllVendorsArray,
-  fetchAllPurposeArray
-} from './utils';
-import iabVendorList from './configs/iabVendorList.js';
-import * as cookies from './cookies.js';
-import renderVueApp from './ui/main.js';
-import { fireGtmPixels } from './main.js';
+import { ConsentString } from 'consent-string';
+import getCustomVendorsAllowed from './customVendors';
+import * as cookies from '../utils/cookies';
+import iabVendorList from '../configs/iabVendorList';
 
 export default class Cmp extends ConsentString {
-  constructor(clientId, iabVendorList, result = null) {
+  constructor(result = null) {
     super(result);
     this.setCmpId(52);
     this.setCmpVersion(1);
     this.setConsentLanguage('en');
     this.setConsentScreen(1);
     this.setGlobalVendorList(iabVendorList);
-    this.clientId = clientId;
+    // this.clientId = clientId; TODO: should this be here????
     this.cmpLoaded = false;
-    this.fullVendorList = fetchAllVendorsArray(iabVendorList);
-    this.fullPurposeList = fetchAllPurposeArray(iabVendorList);
     this.customVendorsAllowed = getCustomVendorsAllowed();
   }
 
@@ -33,13 +24,14 @@ export default class Cmp extends ConsentString {
   ping(empty = null, callback = () => {}) {
     const result = {
       gdprAppliesGlobally: true,
-      cmpLoaded: this.cmpLoaded
+      cmpLoaded: this.cmpLoaded,
     };
     callback(result, true);
   }
 
+  // TODO: allVendors does not exist right now
   getVendorConsents(vendors = allVendors, callback = () => {}) {
-    let result = {};
+    const result = {};
     vendors.forEach((element) => {
       result[element] = this.isVendorAllowed(element);
     });
@@ -51,48 +43,22 @@ export default class Cmp extends ConsentString {
     callback(result, true);
   }
 
-  showConsentTool (parameter = null, callback = null) {
+  showConsentTool(parameter = null, callback = null) {
     // TODO : refactor for a single entry to showing the consent modal
     renderVueApp(this.clientId)
       .then(result => this.updateCmpAndWriteCookie(result))
       .then(result => this.readyCmpAPI(result))
-      .then(result => fireGtmPixels(this.clientId))
-      .then(result => cookies.requestHttpCookies('euconsent', this.getConsentString()))
+      .then(() => fireGtmPixels(this.clientId))
+      .then(() => cookies.requestHttpCookies('euconsent', this.getConsentString()))
       .catch(err => console.log(err));
   }
 
-  // TODO : this function is not being used, this may not be needed
-  onFullConsent() {
-    return new Promise((resolve, reject) => {
-      console.log('CMP => setting full consent');
-      this.setVendorsAllowed(this.fullVendorList);
-      this.setPurposesAllowed(this.fullPurposeList);
-      cookies.writeCookie(this.getConsentString())
-        .then((result) => {
-          if (result) resolve(true);
-        });
-    });
-  }
-/* 
-  getCustomVendorsAllowed() {
-    if(typeof cookies.readCookie('custom') == 'string') {
-      console.log('here??',cookies.readCookieSync('custom'))
-      console.log(typeof cookies.readCookieSync('custom'))
-      console.log(JSON.parse(cookies.readCookieSync('custom')))
-      this.customVendorsAllowed = [1,2,4]
-      //this.customVendorsAllowed = JSON.parse(cookies.readCookieSync('custom'));
-    } else {
-      this.customVendorsAllowed = [];
-    }
-  } */
-
   setCustomVendorsAllowed(customVendorArray) {
     this.customVendorsAllowed = customVendorArray;
-    //cookies.writeCookie()
+    // cookies.writeCookie()
   }
 
   updateCmpAndWriteCookie(consentObject) {
-
     return new Promise((resolve, reject) => {
       this.setPurposesAllowed(consentObject.purposes);
       this.setVendorsAllowed(consentObject.vendors);
@@ -106,13 +72,5 @@ export default class Cmp extends ConsentString {
           if (result) resolve(true);
         });
     });
-  }
-}
-
-function getCustomVendorsAllowed() {
-  if(typeof cookies.readCookieSync('custom') == 'string') {
-    return JSON.parse(cookies.readCookieSync('custom'));
-  } else {
-    return [];
   }
 }
