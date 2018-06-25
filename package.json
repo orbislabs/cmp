@@ -4,7 +4,7 @@
   "description": "Consent Management Platform",
   "main": "./server/server.js",
   "scripts": {
-    "start": "node server/server.js",
+    "start": "node ./server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "develop": "NODE_ENV=development webpack --mode development --watch",
     "dev-server": "NODE_ENV=development nodemon",
@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/orbislabs/cmp#readme",
   "engines": {
-    "node":"10.5.0"
+    "node": "8.x"
   },
   "dependencies": {
     "@google-cloud/logging-winston": "^0.9.0",
