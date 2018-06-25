@@ -8,7 +8,8 @@
     "develop": "NODE_ENV=development webpack --mode development --watch",
     "dev-server": "NODE_ENV=development nodemon",
     "build": "NODE_ENV=production webpack --mode production",
-    "deploy": "NODE_ENV=production pm2 start ./server/server.js"
+    "deploy": "NODE_ENV=production pm2 start ./server/server.js",
+    "node-sass-install": "sudo npm install  --unsafe-perm node-sass"
   },
   "repository": {
     "type": "git",
