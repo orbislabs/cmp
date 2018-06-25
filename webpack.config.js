@@ -8,6 +8,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
+process.env.NODE_ENV = process.env.NODE_ENV || 'production';
 
 const isProduction = process.env.NODE_ENV === 'production';
 const isStaging = process.env.NODE_ENV === 'staging';
@@ -74,12 +75,12 @@ const config = {
     new VueLoaderPlugin(),
     new CleanWebpackPlugin('dist', {}),
     new HtmlWebpackPlugin({
-      template: './build/template.index.html'
+      template: './build/template.index.html',
     }),
     new HtmlWebpackExcludeAssetsPlugin(),
     new Dotenv(),
     new BundleAnalyzerPlugin({
-      analyzerMode: (isProduction) ? 'disabled' : 'server'
+      analyzerMode: (isProduction) ? 'disabled' : 'server',
     }),
   ],
 };
