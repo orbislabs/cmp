@@ -65,6 +65,8 @@ function readCookieSync(name = 'euconsent') {
 
 // below functions use Promises
 function writeCookie(value) {
+	console.log(COOKIE_DOMAIN)
+	document.cookie = 'testing='+value;
     document.cookie = `${COOKIE_NAME}=${value}${COOKIE_DOMAIN};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
     return Promise.resolve(true);
 }

@@ -8,10 +8,10 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-process.env.NODE_ENV = process.env.NODE_ENV || 'production';
+//process.env.NODE_ENV = process.env.NODE_ENV || 'production';
 
 const isProduction = process.env.NODE_ENV === 'production';
-const isStaging = process.env.NODE_ENV === 'staging';
+//const isStaging = process.env.NODE_ENV === 'staging';
 
 const PRODUCTION_HOST = 'https://pluto.mgr.consensu.org/'; // TODO: where is this?
 
@@ -21,7 +21,7 @@ const config = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: isProduction ? PRODUCTION_HOST : '/',
+    publicPath: isProduction ? '/' : '/',
     filename: '[name].bundle.js',
     chunkFilename: '[name].chunk.bundle.js',
 

@@ -1,3 +1,4 @@
+console.log(process.env.NODE_ENV) // TODO: check out GAE docs for prod/dev split
 process.env.NODE_ENV = process.env.NODE_ENV || 'production';
 require('dotenv').config();
 
@@ -7,11 +8,11 @@ const cmp = require('./routes/cmp');
 const api = require('./routes/api');
 
 if (process.env.NODE_ENV === 'production') {
-  process.env.PORT = process.env.PORT_PRODUCTION || 5000;
+  process.env.PORT = process.env.PORT || 8080;
 } else if (process.env.NODE_ENV === 'staging') {
-  process.env.PORT = process.env.PORT_STAGING || 6000;
+  process.env.PORT = process.env.PORT || 8080;
 } else {
-  process.env.PORT = process.env.PORT_DEVELOPMENT || 5000;
+  process.env.PORT = process.env.PORT || 8080;
 }
 
 const app = express();
@@ -19,8 +20,8 @@ const app = express();
 app.use(cookieParser());
 app.use('/cmp', cmp);
 app.use('/api', api);
-app.use(express.static('../dist'));
-app.use(express.static('../public'));
+app.use(express.static('dist'));
+app.use(express.static('public'));
 
 // fire up the server
 app.listen(process.env.PORT, () => {
