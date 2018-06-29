@@ -1,19 +1,12 @@
-console.log(process.env.NODE_ENV) // TODO: check out GAE docs for prod/dev split
-process.env.NODE_ENV = process.env.NODE_ENV || 'production';
 require('dotenv').config();
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const cmp = require('./routes/cmp');
 const api = require('./routes/api');
 
-if (process.env.NODE_ENV === 'production') {
-  process.env.PORT = process.env.PORT || 8080;
-} else if (process.env.NODE_ENV === 'staging') {
-  process.env.PORT = process.env.PORT || 8080;
-} else {
-  process.env.PORT = process.env.PORT || 8080;
-}
+const PORT = process.env.PORT || 8080;
 
 const app = express();
 
@@ -24,8 +17,8 @@ app.use(express.static('dist'));
 app.use(express.static('public'));
 
 // fire up the server
-app.listen(process.env.PORT, () => {
+app.listen(PORT, () => {
   console.log(`CMP++ :: ExpressServer --> Mode : ${process.env.NODE_ENV}`);
   console.log(`CMP++ :: ExpressServer --> NodeV :  ${process.version}`); // TODO: node v9.8.0 -> needs to be updated
-  console.log(`CMP++ :: ExpressServer --> Port : ${process.env.PORT}`);
+  console.log(`CMP++ :: ExpressServer --> Port : ${PORT}`);
 });
