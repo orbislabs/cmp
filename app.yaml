@@ -1,9 +1,2 @@
 runtime: nodejs
 env: flex
-
-handlers:
-- url: /favicon\.ico
-  static_files: favicon.ico
-
-- url: /
-  static_dir: dist
