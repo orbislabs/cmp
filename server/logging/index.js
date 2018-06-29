@@ -35,7 +35,7 @@ module.exports = (req, res, next) => {
       referer: req.get('Referer'),
       protocol: req.protocol,
     },
-    countryCode: req.get('X-Request-Country'),
+    countryCode: req.get('X-AppEngine-Country'),
     // TODO: gdrpApplies: isUserEu(),
     cookieData: {
       euconsentBool: (req.cookies.euconsent !== undefined),
