@@ -32,8 +32,9 @@ router.get('/', (req, res) => {
   }
 });
 
-router.get('/dev', (req, res) => {
-  res.send('<body><script src="/cmp"></script></body>');
+router.get('/dev/:id*?', (req, res) => {
+  const clientId = req.params.id || 0;
+  res.send(`<body><script src="/cmp" id="pluto-cmp-js-src" client-id="${clientId}"></script></body>`);
 });
 
 module.exports = router;
