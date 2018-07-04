@@ -8,6 +8,7 @@ import { requestHttpCookies } from './utils/cookies';
 async function init() {
   const loaderData = await initLoader();
   const cmp = await initCmp(loaderData);
+  window.cmp = cmp; // TODO: remove this it should not be set globally
   initApi(cmp)
     .then(() => isShowUi(loaderData.iabCookie))
     .then((showUiBool) => {

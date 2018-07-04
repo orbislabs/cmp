@@ -8,7 +8,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-//process.env.NODE_ENV = process.env.NODE_ENV || 'production';
+//process.env.NODE_ENV = process.env.NODE_ENV || '\';
 
 const isProduction = process.env.NODE_ENV === 'production';
 const isStaging = process.env.NODE_ENV === 'staging';
@@ -22,10 +22,9 @@ const config = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: isProduction ? PRODUCTION_HOST : '/',
+    publicPath: 'https://staging.pluto.mgr.consensu.org/', //isProduction ? PRODUCTION_HOST : '/', TODO: fix this is awful
     filename: '[name].bundle.js',
     chunkFilename: '[name].chunk.bundle.js',
-
   },
   resolve: {
     alias: {

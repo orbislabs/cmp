@@ -116,11 +116,11 @@ export const store = new Vuex.Store({
     },
     setClientId({commit}, clientId) {
       return import(`@/configs/client.${clientId}.js`).then((configImport) => {
-        const config = configImport.default
-        commit('setClientId', clientId)
-        commit('setClientConfig', config)
-        commit('syncClientDefaultsToUserObject', config.defaults)
-      })
+        const config = configImport.default;
+        commit('setClientId', clientId);
+        commit('setClientConfig', config);
+        commit('syncClientDefaultsToUserObject', config.defaults);
+      });
     }
   },
 });
