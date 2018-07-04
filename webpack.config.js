@@ -1,5 +1,5 @@
 const path = require('path');
-const Dotenv = require('dotenv-webpack');
+// const Dotenv = require('dotenv-webpack');
 
 // WEBPACK PLUGINS
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -11,9 +11,10 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 //process.env.NODE_ENV = process.env.NODE_ENV || 'production';
 
 const isProduction = process.env.NODE_ENV === 'production';
-//const isStaging = process.env.NODE_ENV === 'staging';
+const isStaging = process.env.NODE_ENV === 'staging';
 
-const PRODUCTION_HOST = 'https://pluto.mgr.consensu.org/'; // TODO: where is this?
+const PRODUCTION_HOST = 'https://staging.pluto.mgr.consensu.org/';
+const STAGING_HOST = 'https://staging.pluto.mgr.consensu.org/'; // TODO: where is this?
 
 const config = {
   entry: {
@@ -21,7 +22,7 @@ const config = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: isProduction ? '/' : '/',
+    publicPath: isProduction ? PRODUCTION_HOST : '/',
     filename: '[name].bundle.js',
     chunkFilename: '[name].chunk.bundle.js',
 
@@ -78,7 +79,7 @@ const config = {
       template: './build/template.index.html',
     }),
     new HtmlWebpackExcludeAssetsPlugin(),
-    new Dotenv(),
+    // new Dotenv(), TODO: maybe this can be remove dotenv-webpack
     new BundleAnalyzerPlugin({
       analyzerMode: (isProduction) ? 'disabled' : 'server',
     }),
