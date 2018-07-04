@@ -2,6 +2,7 @@ import { ConsentString } from 'consent-string';
 import getCustomVendorsAllowed from './customVendors';
 import * as cookies from '../utils/cookies';
 import iabVendorList from '../configs/iabVendorList';
+import renderVueApp from '../ui/main';
 
 export default class Cmp extends ConsentString {
   constructor(result = null) {

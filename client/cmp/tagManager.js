@@ -7,6 +7,8 @@ we should push isUserEU if this is set to false -> all tags may fire.
 { isUserEu : bool , consent: full || partial || none }
 */
 
+
+
 function checkPermissionMismatch(userPermission, clientPermission) {
   let res = clientPermission.filter(function(n) {
     return !this.has(n);
