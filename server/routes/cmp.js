@@ -14,7 +14,7 @@ const logger = require('../logging/index');
 router.use(logger);
 
 router.get('/', (req, res) => {
-	console.log(req.get('X-AppEngine-Country'))
+	console.log('yo', req.get('X-AppEngine-Country'))
   if (req.hostname !== 'localhost' && req.get('X-AppEngine-Country')) {
     if (geo.isUserEu(req.get('X-AppEngine-Country'))) {
       res.sendFile('cmp.bundle.js', {

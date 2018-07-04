@@ -17,7 +17,7 @@ function is1PCSupported() {
 function is3PCSupported() {
   return new Promise((resolve, reject) => {
     const frame = document.createElement('iframe');
-    frame.setAttribute('src', '/cookieCheckStart.html');
+    frame.setAttribute('src', __webpack_public_path__ + 'cookieCheckStart.html');
     frame.setAttribute('style', 'display:none');
     document.body.appendChild(frame);
     
