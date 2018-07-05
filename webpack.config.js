@@ -24,7 +24,7 @@ const config = {
     path: path.resolve(__dirname, 'dist'),
     publicPath: isProduction ? PRODUCTION_HOST : '/', // TODO: fix this is awful
     filename: '[name].bundle.js',
-    chunkFilename: '[name].chunk.bundle.js',
+    // chunkFilename: '[name].chunk.bundle.js',
   },
   resolve: {
     alias: {
