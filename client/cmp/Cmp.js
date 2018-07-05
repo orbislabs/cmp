@@ -43,13 +43,19 @@ export default class Cmp extends ConsentString {
     callback(result, true);
   }
 
-  showConsentTool() {
-    // TODO : refactor for a single entry to showing the consent modal
-    return import(/* webpackChunkName: "ui" */ '../ui/main.js')
-      .then(appModule => appModule.default(this.clientId))
-      .then(userConsentObject => this.updateCmpAndWriteCookie(userConsentObject))
-      .then(() => cookies.requestHttpCookies('euconsent', this.getConsentString()))
-      .catch(err => console.error(err));
+  showConsentTool(showUiBoolean) {
+    console.log('[Info] showConsentTool has been called.');
+    return new Promise((resolve, reject) => {
+      if (showUiBoolean) {
+        return import(/* webpackChunkName: "ui" */ '../ui/main.js')
+          .then(appModule => appModule.default(this.clientId))
+          .then(userConsentObject => this.updateCmpAndWriteCookie(userConsentObject))
+          .then(() => cookies.requestHttpCookies('euconsent', this.getConsentString()))
+          // .then(() => Promise.resolve('UI Closed'))
+          .catch(err => console.error(err));
+      }
+      resolve('false');
+    });
   }
 
   setCustomVendorsAllowed(customVendorArray) {

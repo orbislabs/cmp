@@ -10,12 +10,7 @@ async function init() {
   window.cmp = cmp; // TODO: remove this it should not be set globally
   initApi(cmp)
     .then(() => isShowUi(loaderData.iabCookie))
-    .then((showUiBool) => {
-      if (showUiBool) {
-        cmp.showConsentTool();
-      }
-      return Promise.resolve();
-    })
+    .then(showUiBoolean => cmp.showConsentTool(showUiBoolean))
     .then(result => cmp.readyCmpAPI(result)) // readyCMPAPI
     .then(() => tagManager(loaderData.clientId)) // tagmanager
     .catch(err => console.error(err));
