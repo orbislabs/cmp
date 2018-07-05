@@ -3,7 +3,6 @@ import initCmp from './cmp/index';
 import initApi from './api/index';
 import isShowUi from './cmp/isShowUi';
 import tagManager from './cmp/tagManager';
-import { requestHttpCookies } from './utils/cookies';
 
 async function init() {
   const loaderData = await initLoader();
@@ -13,11 +12,7 @@ async function init() {
     .then(() => isShowUi(loaderData.iabCookie))
     .then((showUiBool) => {
       if (showUiBool) {
-        return import(/* webpackChunkName: "ui" */ './ui/main.js')
-          .then(appModule => appModule.default(loaderData.clientId))
-          .then(userConsentObject => cmp.updateCmpAndWriteCookie(userConsentObject))
-          .then(() => requestHttpCookies('euconsent', cmp.getConsentString()))
-          .catch(err => console.error(err));
+        cmp.showConsentTool();
       }
       return Promise.resolve();
     })

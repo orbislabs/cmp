@@ -2,17 +2,16 @@ import { ConsentString } from 'consent-string';
 import getCustomVendorsAllowed from './customVendors';
 import * as cookies from '../utils/cookies';
 import iabVendorList from '../configs/iabVendorList';
-import renderVueApp from '../ui/main';
 
 export default class Cmp extends ConsentString {
   constructor(result = null) {
-    super(result);
+    super(result.iabCookie);
     this.setCmpId(52);
     this.setCmpVersion(1);
     this.setConsentLanguage('en');
     this.setConsentScreen(1);
     this.setGlobalVendorList(iabVendorList);
-    // this.clientId = clientId; TODO: should this be here????
+    this.clientId = result.clientId;
     this.cmpLoaded = false;
     this.customVendorsAllowed = getCustomVendorsAllowed();
   }
@@ -44,19 +43,17 @@ export default class Cmp extends ConsentString {
     callback(result, true);
   }
 
-  showConsentTool(parameter = null, callback = null) {
+  showConsentTool() {
     // TODO : refactor for a single entry to showing the consent modal
-    renderVueApp(this.clientId)
-      .then(result => this.updateCmpAndWriteCookie(result))
-      .then(result => this.readyCmpAPI(result))
-      .then(() => fireGtmPixels(this.clientId))
+    return import(/* webpackChunkName: "ui" */ '../ui/main.js')
+      .then(appModule => appModule.default(this.clientId))
+      .then(userConsentObject => this.updateCmpAndWriteCookie(userConsentObject))
       .then(() => cookies.requestHttpCookies('euconsent', this.getConsentString()))
-      .catch(err => console.log(err));
+      .catch(err => console.error(err));
   }
 
   setCustomVendorsAllowed(customVendorArray) {
     this.customVendorsAllowed = customVendorArray;
-    // cookies.writeCookie()
   }
 
   updateCmpAndWriteCookie(consentObject) {
