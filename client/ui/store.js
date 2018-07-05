@@ -51,15 +51,12 @@ export const store = new Vuex.Store({
     },
   },
   mutations: {
-    // TODO : right now we are setting the config in main.js using Vue.set()
     setClientId(state, clientId) {
       state.clientId = clientId;
     },
     setClientConfig(state, clientConfig) {
       state.clientConfig = clientConfig;
     },
-    // TODO: this function is mega shitty updateUserConsentObject it needs refactor
-    // here we mutate the userConsentObject to add/remove allowed purposes
     updateUserConsentObject(state, payload) {
       const {
         toggleType,
@@ -70,10 +67,8 @@ export const store = new Vuex.Store({
         console.log('CMP-UI :: Unknown Toggle Type', toggleType);
         return;
       }
-
       const attr = toggleType === 'purposes' ? 'purposes' : toggleId <= 1000 ? 'vendors' : 'customVendors'
       let arrayValue = state.userConsentObject[attr];
-
       if (toggleValue) {
         if (!arrayValue.includes(toggleId)) {
           arrayValue.push(toggleId)
@@ -89,7 +84,6 @@ export const store = new Vuex.Store({
     // this mutation is called right after setting the clientId, so we can use the getter
     // to fetch the correct client config object
     syncClientDefaultsToUserObject(state, payload) {
-      // make sure to copy the array, to avoid changing the original clientConfig
       state.userConsentObject = {
         purposes: [...payload.purposes],
         vendors: [...payload.vendors],
@@ -131,9 +125,10 @@ export const store = new Vuex.Store({
     setClientId({
       commit,
     }, clientId) {
+      console.log('action called', clientId);
       return import(`@/configs/client.${clientId}.js`).then((configImport) => {
         const config = configImport.default;
-        commit('setClientId', clientId);
+        // commit('setClientId', clientId);
         commit('setClientConfig', config);
         commit('syncClientDefaultsToUserObject', config.defaults);
       });
@@ -141,4 +136,4 @@ export const store = new Vuex.Store({
   },
 });
 
-// export default store;
+// export { store }
