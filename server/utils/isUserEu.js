@@ -1,4 +1,5 @@
-// TODO: this can be converted to a middleware function, which can be called once - to add in req.body
+// TODO: this can be converted to a middleware function,
+// which can be called once - to add in req.body
 
 const euCountries = [
   'GB',
@@ -29,7 +30,6 @@ const euCountries = [
   'SI',
   'ES',
   'SE',
-  'JP',
 ];
 
 function isUserEu(countryCode) {
