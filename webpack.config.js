@@ -29,6 +29,7 @@ const config = {
       '@': path.resolve('client'),
     },
   },
+  devtool: 'source-map',
   module: {
     rules: [{
       test: /\.vue$/,
