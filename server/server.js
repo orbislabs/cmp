@@ -21,4 +21,5 @@ app.listen(PORT, () => {
   console.log(`CMP++ :: ExpressServer --> Mode : ${process.env.NODE_ENV}`);
   console.log(`CMP++ :: ExpressServer --> NodeV :  ${process.version}`); // TODO: node v9.8.0 -> needs to be updated
   console.log(`CMP++ :: ExpressServer --> Port : ${PORT}`);
+  console.log(process.env);
 });
