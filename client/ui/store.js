@@ -10,7 +10,7 @@ Vue.use(Vuex);
 
 const debug = process.env.NODE_ENV !== 'production';
 
-export const store = new Vuex.Store({
+export default new Vuex.Store({
   // strict: true, // TODO: this should bet set in dev ONLY!
   plugins: debug ? [createLogger()] : [],
 
@@ -125,18 +125,17 @@ export const store = new Vuex.Store({
     setClientId({
       commit,
     }, clientId) {
-    	// console.log('import',import(`../configs/client.${clientId}.js`))
       console.log('setClientId action called', clientId);
-      console.log('@',`@/configs/client.${clientId}.js`);
+      console.log('@', `@/configs/client.${clientId}.js`);
       return import(
-      	/* webpackMode : "eager" */ 
-      	`../configs/client.${clientId}.js`).then((configImport) => {
-      	  console.log('configImport', configImport)
-      	  console.log('@',`@/configs/client.${clientId}.js`)
-          const config = configImport.default;
-          // commit('setClientId', clientId);
-          commit('setClientConfig', config);
-          commit('syncClientDefaultsToUserObject', config.defaults);
+        /* webpackMode : "eager" */
+        `../configs/client.${clientId}.js`).then((configImport) => {
+        console.log('configImport', configImport);
+        console.log('@', `@/configs/client.${clientId}.js`);
+        const config = configImport.default;
+        // commit('setClientId', clientId);
+        commit('setClientConfig', config);
+        commit('syncClientDefaultsToUserObject', config.defaults);
       }).catch(err => console.error(err));
     },
   },
