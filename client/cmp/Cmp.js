@@ -48,8 +48,8 @@ export default class Cmp extends ConsentString {
     console.log('[INFO][CMP-Module] showConsentTool() has been called.');
     return new Promise((resolve, reject) => {
       return import(
+        /* webpackMode: "eager" */
         /* webpackChunkName: "ui" */
-        /* webpackModee: "eager" */
         '../ui/main.js')
         .then(appModule => appModule.default(this.clientId))
         .then(userConsentObject => this.updateCmpAndWriteCookie(userConsentObject))
