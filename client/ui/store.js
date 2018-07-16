@@ -125,13 +125,19 @@ export const store = new Vuex.Store({
     setClientId({
       commit,
     }, clientId) {
-      console.log('action called', clientId);
-      return import(`@/configs/client.${clientId}.js`).then((configImport) => {
-        const config = configImport.default;
-        // commit('setClientId', clientId);
-        commit('setClientConfig', config);
-        commit('syncClientDefaultsToUserObject', config.defaults);
-      });
+    	// console.log('import',import(`../configs/client.${clientId}.js`))
+      console.log('setClientId action called', clientId);
+      console.log('@',`@/configs/client.${clientId}.js`);
+      return import(
+      	/* webpackMode : "eager" */ 
+      	`../configs/client.${clientId}.js`).then((configImport) => {
+      	  console.log('configImport', configImport)
+      	  console.log('@',`@/configs/client.${clientId}.js`)
+          const config = configImport.default;
+          // commit('setClientId', clientId);
+          commit('setClientConfig', config);
+          commit('syncClientDefaultsToUserObject', config.defaults);
+      }).catch(err => console.error(err));
     },
   },
 });

@@ -72,7 +72,7 @@
     "vue-loader": "^15.2.4",
     "vue-style-loader": "^4.1.0",
     "vue-template-compiler": "^2.5.16",
-    "webpack": "^4.16.0",
+    "webpack": "^4.9.2",
     "webpack-bundle-analyzer": "^2.13.1",
     "webpack-cli": "^3.0.8"
   }

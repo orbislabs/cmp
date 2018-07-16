@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackExcludeAssetsPlugin = require('html-webpack-exclude-assets-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+// const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 // TODO: this needs to be refactored into a dynamic assignment.
@@ -31,6 +31,9 @@ const config = {
     },
   },
   devtool: 'source-map',
+  optimization: {
+  	 minimize: false,
+  },
   module: {
     rules: [{
       test: /\.vue$/,
@@ -77,9 +80,9 @@ const config = {
     new HtmlWebpackPlugin({
       template: './build/template.index.html',
     }),
-    new UglifyJSPlugin({
-      sourceMap: true,
-    }),
+    // new UglifyJSPlugin({
+    //   sourceMap: true,
+    // }),
     new HtmlWebpackExcludeAssetsPlugin(),
     // new Dotenv(), TODO: maybe this can be remove dotenv-webpack
     new BundleAnalyzerPlugin({
