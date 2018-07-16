@@ -19,6 +19,7 @@ export default class Cmp extends ConsentString {
   readyCmpAPI() {
     this.cmpLoaded = true;
     console.log(`CMP => The CMP is loaded: ${this.cmpLoaded}`);
+    Promise.resolve();
   }
 
   ping(empty = null, callback = () => {}) {
@@ -43,18 +44,15 @@ export default class Cmp extends ConsentString {
     callback(result, true);
   }
 
-  showConsentTool(showUiBoolean) {
-    console.log('[Info] showConsentTool has been called.');
+  showConsentTool() {
+    console.log('[INFO][CMP-Module] showConsentTool() has been called.');
     return new Promise((resolve, reject) => {
-      if (showUiBoolean) {
-        return import(/* webpackChunkName: "ui" */ '../ui/main.js')
-          .then(appModule => appModule.default(this.clientId))
-          .then(userConsentObject => this.updateCmpAndWriteCookie(userConsentObject))
-          .then(() => cookies.requestHttpCookies('euconsent', this.getConsentString()))
-          // .then(() => Promise.resolve('UI Closed'))
-          .catch(err => console.error(err));
-      }
-      resolve('false');
+      return import(/* webpackChunkName: "ui" */ '../ui/main.js')
+        .then(appModule => appModule.default(this.clientId))
+        .then(userConsentObject => this.updateCmpAndWriteCookie(userConsentObject))
+        .then(() => cookies.requestHttpCookies('euconsent', this.getConsentString()))
+        .then(result => Promise.resolve(result))
+        .catch(err => console.error(err));
     });
   }
 

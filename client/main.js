@@ -10,18 +10,12 @@ async function init() {
   window.cmp = cmp; // TODO: remove this it should not be set globally
   initApi(cmp)
     .then(() => isShowUi(loaderData.iabCookie))
-    .then(showUiBoolean => cmp.showConsentTool(showUiBoolean))
-    .then(result => cmp.readyCmpAPI(result)) // readyCMPAPI
-    .then(() => tagManager(loaderData.clientId)) // tagmanager
+    .then((bool) => {
+      if (bool) cmp.showConsentTool();
+      Promise.resolve(true);
+    })
+    .then(result => cmp.readyCmpAPI(result))
+    .then(() => tagManager(loaderData.clientId))
     .catch(err => console.error(err));
 }
 init();
-
-/*
-----------------------
--- isShowUi returns a boolean
--- Cmp class should have an interface for showing the UI
--- it can also accept a bool, and exit if false
--- otherwise it can render the UI via first using the import() call.
--- subsequent calls to showConsentTool(), may need to avoid calling import() again?
-*/
