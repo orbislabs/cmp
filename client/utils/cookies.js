@@ -8,9 +8,9 @@ const PATH = '/';
 
 function checkCookiesEnabled() {
   let cookieEnabled = (navigator.cookieEnabled) ? true : false;
-  if (typeof navigator.cookieEnabled == "undefined" && !cookieEnabled) {
-    document.cookie = "testcookie";
-    cookieEnabled = (document.cookie.indexOf("testcookie") != -1) ? true : false;
+  if (typeof navigator.cookieEnabled == 'undefined' && !cookieEnabled) {
+    document.cookie = 'testcookie';
+    cookieEnabled = (document.cookie.indexOf('testcookie') != -1) ? true : false;
   }
   return cookieEnabled;
 }
@@ -20,15 +20,15 @@ function checkCookiesEnabled() {
 function checkCookiesEnabledPromise() {
   return new Promise((resolve, reject) => {
     let cookieEnabled = (navigator.cookieEnabled) ? true : false;
-    if (typeof navigator.cookieEnabled == "undefined" && !cookieEnabled) {
-      document.cookie = "testcookie";
-      cookieEnabled = (document.cookie.indexOf("testcookie") != -1) ? true : false;
+    if (typeof navigator.cookieEnabled == 'undefined' && !cookieEnabled) {
+      document.cookie = 'testcookie';
+      cookieEnabled = (document.cookie.indexOf('testcookie') != -1) ? true : false;
     }
     if (cookieEnabled == true || false) {
       console.log(`CMP => set cookie status : ${cookieEnabled}`);
       resolve(cookieEnabled);
     } else {
-      reject('Error checking if CMP can set cookies');
+      reject(new Error('Error checking if CMP can set cookies'));
     }
   });
 }
@@ -51,7 +51,6 @@ function checkIabCookie(result) {
 
 function writeCookieSync(value) {
   document.cookie = `${COOKIE_NAME}=${value}${COOKIE_DOMAIN};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
-  return;
 }
 
 function readCookieSync(name = 'euconsent') {
@@ -60,20 +59,19 @@ function readCookieSync(name = 'euconsent') {
   if (parts.length === 2) {
     return parts.pop().split(';').shift();
   }
-  return;
+  return undefined;
 }
 
 // below functions use Promises
 function writeCookie(value) {
-	console.log(COOKIE_DOMAIN)
-	document.cookie = 'testing='+value;
-    document.cookie = `${COOKIE_NAME}=${value}${COOKIE_DOMAIN};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
-    return Promise.resolve(true);
+  console.log(COOKIE_DOMAIN);
+  document.cookie = 'testing='+value;
+  document.cookie = `${COOKIE_NAME}=${value}${COOKIE_DOMAIN};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
+  return Promise.resolve(true);
 }
-//TODO : clean up cookies!!!
+// TODO : clean up cookies!!!
 function writeCookieCustom(value) {
-    document.cookie = `custom=${value}${COOKIE_DOMAIN};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
-    return; //Promise.resolve(true);
+  document.cookie = `custom=${value}${COOKIE_DOMAIN};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
 }
 
 function readCookie(name = 'euconsent') {
@@ -86,9 +84,8 @@ function readCookie(name = 'euconsent') {
 }
 
 function requestHttpCookies(cookieName, cookieValue) {
-  console.log('requesting http coooookies from da server')
-  const url = (process.env.NODE_ENV == 'production') ? 'https://pluto.mgr.consensu.org/cmp/cookie' : '/api/getCookie';
-  // const newCookieName = (process.env.NODE_ENV == 'production') ? cookieName : 'httpeuconsent';
+  console.log('[INFO] Requesting HTTP cookie from server.');
+  const url = __webpack_public_path__ + 'api/setCookie';
   return new Promise((resolve, reject) => {
     const headers = new Headers();
     headers.append('Content-Type', 'text/plain');

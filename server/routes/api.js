@@ -10,7 +10,6 @@ router.get('/getCookie', (req, res) => {
   });
   res.json({
     euconsent: (req.cookies.euconsent) ? req.cookies.euconsent : false,
-    // TODO : grab all cookies here including eupubconsent
     plutoconsent: (req.cookies.plutoconsent) ? req.cookies.plutoconsent : false,
   });
   res.end();
