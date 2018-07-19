@@ -49,6 +49,7 @@ export default class Cmp extends ConsentString {
     return new Promise((resolve, reject) => {
       return import(
         /* webpackMode: "lazy",
+        webpackPrefetch: true,
         webpackChunkName: "ui" */
         '../ui/main.js')
         .then(appModule => appModule.default(this.clientId))

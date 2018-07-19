@@ -125,13 +125,11 @@ export default new Vuex.Store({
     setClientId({
       commit,
     }, clientId) {
-      console.log('setClientId action called', clientId);
-      console.log('@', `@/configs/client.${clientId}.js`);
+      console.log('[INFO] setClientId action called', clientId);
       return import(
-        /* webpackMode : "lazy" */
+        /* webpackMode : "eager" */
         `../configs/client.${clientId}.js`).then((configImport) => {
         console.log('configImport', configImport);
-        console.log('@', `@/configs/client.${clientId}.js`);
         const config = configImport.default;
         // commit('setClientId', clientId);
         commit('setClientConfig', config);

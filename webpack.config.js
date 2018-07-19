@@ -24,15 +24,10 @@ const config = {
     publicPath: STAGING_HOST, // isProduction ? PRODUCTION_HOST : '/', // TODO: fix this is awful
     filename: '[name].bundle.js',
     chunkFilename: '[name].chunk.bundle.js',
-    crossOriginLoading: 'use-credentials',
-    jsonpScriptType: 'module',
+    // crossOriginLoading: 'use-credentials',
+    // jsonpScriptType: 'module',
   },
   devtool: 'source-map',
-/*   optimization: {
-    splitChunks: {
-      chunks: 'initial',
-    },
-  }, */
   resolve: {
     alias: {
       '@': path.resolve('client'),
