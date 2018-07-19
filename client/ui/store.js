@@ -117,7 +117,7 @@ export default new Vuex.Store({
       getters,
     }, payload) {
       console.log(`CMP-UI :: partial-consent Event: ${payload}`);
-      const config = getters.getUserConsentObject
+      const config = getters.getUserConsentObject;
       EventBus.$emit('save-selection', config);
       commit('changeShowState', false);
       commit('changeCurrentView', 'Modal');
@@ -128,7 +128,7 @@ export default new Vuex.Store({
       console.log('setClientId action called', clientId);
       console.log('@', `@/configs/client.${clientId}.js`);
       return import(
-        /* webpackMode : "eager" */
+        /* webpackMode : "lazy" */
         `../configs/client.${clientId}.js`).then((configImport) => {
         console.log('configImport', configImport);
         console.log('@', `@/configs/client.${clientId}.js`);

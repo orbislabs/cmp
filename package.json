@@ -5,12 +5,10 @@
   "main": "./server/server.js",
   "scripts": {
     "start": "node ./server/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "develop": "NODE_ENV=development webpack --mode development --watch",
-    "dev-server": "NODE_ENV=development nodemon",
-    "build": "NODE_ENV=production webpack --mode production",
-    "deploy": "NODE_ENV=production pm2 start ./server/server.js",
-    "node-sass-install": "sudo npm install  --unsafe-perm node-sass"
+    "build:dev": "NODE_ENV=development webpack --mode development",
+    "build:prod": "NODE_ENV=production webpack --mode production",
+    "deploy": "NODE_ENV=production pm2 start ./server/server.js"
   },
   "repository": {
     "type": "git",
@@ -72,8 +70,8 @@
     "vue-loader": "^15.2.4",
     "vue-style-loader": "^4.1.0",
     "vue-template-compiler": "^2.5.16",
-    "webpack": "^4.9.2",
+    "webpack": "^4.16.1",
     "webpack-bundle-analyzer": "^2.13.1",
-    "webpack-cli": "^3.0.8"
+    "webpack-cli": "^3.1.0"
   }
 }
