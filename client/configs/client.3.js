@@ -1,7 +1,12 @@
-const clientConfig2 = {
-  clientId: 2,
-  clientName: 'The Independent',
+const clientConfig3 = {
+  clientId: 3,
+  clientName: 'SanyaBoriskin',
   clientLogo: 'https://upload.wikimedia.org/wikipedia/fi/a/ab/The_Independent_logo.svg',
+  clientStyle: {
+    fontColor: '#3D3C3A',
+    fontFamily: 'Replica-Regular, sans-serif',
+    backgroundColor: '#3D3C3A',
+  },
   defaults: {
     purposes: [1, 2, 3, 4, 5],
     vendors: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -50,4 +55,4 @@ const clientConfig2 = {
   },
 };
 
-export default clientConfig2;
+export default clientConfig3;
