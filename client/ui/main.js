@@ -22,6 +22,20 @@ Vue.component('AppBreadcrumb', Breadcrumb);
 Vue.component('CmpToggle', Toggle);
 Vue.component('ElementModalClose', ElementModalClose);
 
+Vue.mixin({
+  methods: {
+    $ready(fn) {
+      if (process.env.NODE_ENV === 'production') {
+        return this.$nextTick(fn);
+      }
+
+      setTimeout(() => {
+        this.$nextTick(fn);
+      });
+    }
+  }
+});
+
 // creating a root in the DOM for the app to attach to, when called
 const divToAttachApp = document.createElement('div');
 divToAttachApp.setAttribute('id', 'cmp-app');

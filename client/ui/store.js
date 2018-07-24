@@ -5,7 +5,6 @@ import EventBus from './eventBus';
 
 import iabVendorList from '../configs/iabVendorList';
 import customVendorList from '../configs/customVendorList';
-import clientConfig3 from '../configs/client.3';
 
 Vue.use(Vuex);
 

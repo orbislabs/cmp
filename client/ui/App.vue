@@ -3,6 +3,7 @@
         <vk-modal :show="isShow" v-if="clientConfig">
             <element-modal-close @click="setFullConsent" large/>
             <app-breadcrumb :current-view="currentView" />
+            <!-- render the currently active component/page here -->
             <component v-bind:is="currentView"/>
         </vk-modal>
     </div>
@@ -16,17 +17,18 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 export default {
   store : store,
   name: 'app',
+  mounted () {
+    this.$ready(() => {
+      if (this.getCurrentClientConfig.clientStyle){
+        let modalBody = this.$el.querySelector('.uk-modal-dialog')
+        modalBody.style.backgroundColor = this.getCurrentClientConfig.clientStyle.backgroundColor
+      }
+    })
+  },
   methods: {
     ...mapActions([
       'setFullConsent'
     ]),
-  },
-  mounted () {
-    console.log(this.$el)
-    console.log(this.$el.querySelector('.uk-modal-dialog'))
-    const modalBody = this.$el.querySelector('.uk-modal-dialog')
-    console.log(modalBody)
-    modalBody.style.backgroundColor = this.getCurrentClientConfig.clientStyle ? this.getCurrentClientConfig.clientStyle.backgroundColor : ''
   },
   computed: {
     ...mapState([
