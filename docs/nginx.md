@@ -111,15 +111,15 @@ server {
 
 	location / {
 	        proxy_pass http://localhost:5000/;
-          	proxy_redirect http://localhost:5000/ https://pluto.mgr.consensu.org;
-		proxy_http_version 1.1;
-		proxy_set_header X-Request-Country $geoip_country_code;
-          	proxy_set_header Upgrade $http_upgrade;
-          	proxy_set_header Connection 'upgrade';
-          	proxy_set_header Host $host;
-		proxy_set_header X-Cookie-Euconsent $cookie_euconsent;
-          	proxy_cache_bypass $http_upgrade;
-		#proxy_cookie_domain localhost .consensu.org;
+          proxy_redirect http://localhost:5000/ https://pluto.mgr.consensu.org;
+		      proxy_http_version 1.1;
+		      proxy_set_header X-Request-Country $geoip_country_code;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection 'upgrade';
+          proxy_set_header Host $host;
+		      proxy_set_header X-Cookie-Euconsent $cookie_euconsent;
+          proxy_cache_bypass $http_upgrade;
+		      #proxy_cookie_domain localhost .consensu.org;
 	}
 
   #####
@@ -128,15 +128,15 @@ server {
 
   location /pixel {
 	        proxy_pass http://localhost:5001/;
-          	proxy_redirect http://localhost:5000/ https://pluto.mgr.consensu.org;
-		proxy_http_version 1.1;
-		proxy_set_header X-Request-Country $geoip_country_code;
-          	proxy_set_header Upgrade $http_upgrade;
-          	proxy_set_header Connection 'upgrade';
-          	proxy_set_header Host $host;
-		proxy_set_header X-Cookie-Euconsent $cookie_euconsent;
-          	proxy_cache_bypass $http_upgrade;
-		#proxy_cookie_domain localhost .consensu.org;
+          proxy_redirect http://localhost:5000/ https://pluto.mgr.consensu.org;
+		      proxy_http_version 1.1;
+		      proxy_set_header X-Request-Country $geoip_country_code;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection 'upgrade';
+          proxy_set_header Host $host;
+		      proxy_set_header X-Cookie-Euconsent $cookie_euconsent;
+          proxy_cache_bypass $http_upgrade;
+		      #proxy_cookie_domain localhost .consensu.org;
 	}
 }
 
@@ -161,4 +161,4 @@ server {
     proxy_cache_bypass $http_upgrade;
 	}
 }
-
+```
