@@ -43,8 +43,8 @@ export default {
   name: 'ToggleButton',
   props: {
     purposeId : {
-        type : Number,
-        required : true
+      type : Number,
+      required : true
     },
     toggleType : {
       type : String,

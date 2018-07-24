@@ -1,4 +1,4 @@
-const clientConfig1 = {
+const clientConfig = {
   clientId: 1,
   clientName: 'MiQ',
   clientLogo: '//wearemiq.com/wp-content/themes/miq/img/branding/miq-think-beyond.png',
@@ -49,4 +49,4 @@ const clientConfig1 = {
   },
 };
 
-export default clientConfig1;
+export default clientConfig;

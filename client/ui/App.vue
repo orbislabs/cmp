@@ -1,10 +1,11 @@
 <template>
     <div class="uk-scope">
-        <vk-modal :show="isShow" v-if="clientConfig" :style="backgroundColor">
+        <vk-modal :show="isShow" v-if="clientConfig">
+          <div>
             <element-modal-close @click="setFullConsent" large/>
-                <app-breadcrumb :current-view="currentView" />
-                <!-- render the currently active component/page here -->
-                <component v-bind:is="currentView"/>
+            <app-breadcrumb :current-view="currentView" />
+            <component v-bind:is="currentView" :style="backgroundColor"/>
+          </div>
         </vk-modal>
     </div>
 </template>
@@ -22,6 +23,12 @@ export default {
       'setFullConsent'
     ]),
   },
+  mounted () {
+    if (this.getCurrentClientConfig.clientStyle){
+      const modalBody = this.$el.querySelector('.uk-modal-dialog')
+      modalBody.style.backgroundColor = this.getCurrentClientConfig.clientStyle.backgroundColor
+    }
+  },
   computed: {
     ...mapState([
       'isShow',
@@ -31,13 +38,6 @@ export default {
     ...mapGetters([
       'getCurrentClientConfig',
     ]),
-    backgroundColor: function () {
-      if (this.getCurrentClientConfig.clientStyle) {
-        return {
-          backgroundColor: this.getCurrentClientConfig.clientStyle.backgroundColor
-        }
-      }
-    }
   },
 }
 </script>

@@ -1,4 +1,4 @@
-const clientConfig2 = {
+const clientConfig = {
   clientId: 2,
   clientName: 'The Independent',
   clientLogo: 'https://upload.wikimedia.org/wikipedia/fi/a/ab/The_Independent_logo.svg',
@@ -50,4 +50,4 @@ const clientConfig2 = {
   },
 };
 
-export default clientConfig2;
+export default clientConfig;
