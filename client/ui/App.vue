@@ -1,11 +1,9 @@
 <template>
     <div class="uk-scope">
         <vk-modal :show="isShow" v-if="clientConfig">
-          <div>
             <element-modal-close @click="setFullConsent" large/>
             <app-breadcrumb :current-view="currentView" />
-            <component v-bind:is="currentView" :style="backgroundColor"/>
-          </div>
+            <component v-bind:is="currentView"/>
         </vk-modal>
     </div>
 </template>
@@ -24,10 +22,11 @@ export default {
     ]),
   },
   mounted () {
-    if (this.getCurrentClientConfig.clientStyle){
-      const modalBody = this.$el.querySelector('.uk-modal-dialog')
-      modalBody.style.backgroundColor = this.getCurrentClientConfig.clientStyle.backgroundColor
-    }
+    console.log(this.$el)
+    console.log(this.$el.querySelector('.uk-modal-dialog'))
+    const modalBody = this.$el.querySelector('.uk-modal-dialog')
+    console.log(modalBody)
+    modalBody.style.backgroundColor = this.getCurrentClientConfig.clientStyle ? this.getCurrentClientConfig.clientStyle.backgroundColor : ''
   },
   computed: {
     ...mapState([

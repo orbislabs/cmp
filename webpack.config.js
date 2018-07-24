@@ -21,7 +21,7 @@ const config = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: 'PRODUCTION_HOST', // isProduction ? PRODUCTION_HOST : '/', // TODO: fix this is awful
+    publicPath: '/', // isProduction ? PRODUCTION_HOST : '/', // TODO: fix this is awful
     filename: '[name].bundle.js',
     chunkFilename: '[name].chunk.bundle.js',
     // crossOriginLoading: 'use-credentials',
