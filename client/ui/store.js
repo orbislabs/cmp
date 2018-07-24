@@ -68,7 +68,7 @@ export default new Vuex.Store({
         console.log('CMP-UI :: Unknown Toggle Type', toggleType);
         return;
       }
-      const attr = toggleType === 'purposes' ? 'purposes' : toggleId <= 1000 ? 'vendors' : 'customVendors'
+      let attr = toggleType === 'purposes' ? 'purposes' : toggleId <= 1000 ? 'vendors' : 'customVendors';
       let arrayValue = state.userConsentObject[attr];
       if (toggleValue) {
         if (!arrayValue.includes(toggleId)) {

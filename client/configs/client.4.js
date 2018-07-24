@@ -1,4 +1,4 @@
-const clientConfig4 = {
+const clientConfig3 = {
   clientId: 3,
   clientName: 'SanyaBoriskin',
   clientLogo: 'https://upload.wikimedia.org/wikipedia/fi/a/ab/The_Independent_logo.svg',
@@ -56,4 +56,4 @@ const clientConfig4 = {
   },
 };
 
-export default clientConfig4;
+export default clientConfig3;

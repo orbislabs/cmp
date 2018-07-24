@@ -196,12 +196,16 @@ export default {
   },
   watch: {
     value (value) {
+      console.log(value)
+      console.log(this.sync)
       if (this.sync) {
         this.toggled = !!value
       }
     }
   },
   data () {
+    console.log(this.value)
+    console.log(!!this.value)
     return {
       toggled: !!this.value
     }
