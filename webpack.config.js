@@ -12,7 +12,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 // TODO: this needs to be refactored into a dynamic assignment.
 const isProduction = process.env.NODE_ENV === 'production';
 const isStaging = process.env.NODE_ENV === 'staging';
-const PRODUCTION_HOST = 'https://staging.pluto.mgr.consensu.org/';
+const PRODUCTION_HOST = 'https://pluto.mgr.consensu.org/';
 const STAGING_HOST = 'https://staging-dot-pluto-cmp.appspot.com/'; // TODO: where is this?
 
 const config = {
@@ -21,7 +21,7 @@ const config = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: STAGING_HOST, // isProduction ? PRODUCTION_HOST : '/', // TODO: fix this is awful
+    publicPath: PRODUCTION_HOST, // isProduction ? PRODUCTION_HOST : '/', // TODO: fix this is awful
     filename: '[name].bundle.js',
     chunkFilename: '[name].chunk.bundle.js',
     // crossOriginLoading: 'use-credentials',
