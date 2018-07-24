@@ -18,7 +18,7 @@ export default new Vuex.Store({
   state: {
     isShow: false,
     currentView: 'Modal',
-    clientId: 3,
+    clientId: null,
     vendorsList: iabVendorList.vendors.concat((customVendorList.vendors || []).map((vendor) => {
       return {
         ...vendor,
@@ -29,8 +29,9 @@ export default new Vuex.Store({
       purposes: [],
       vendors: [],
       customVendors: [],
+      customPurposes: [11, 12, 13]
     },
-    clientConfig: clientConfig3,
+    clientConfig: null,
   },
 
   getters: {
@@ -88,7 +89,8 @@ export default new Vuex.Store({
       state.userConsentObject = {
         purposes: [...payload.purposes],
         vendors: [...payload.vendors],
-        customVendors: [...payload.customVendors]
+        customVendors: [...payload.customVendors],
+        customPurposes: [11, 12, 13]
       };
     },
 

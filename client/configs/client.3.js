@@ -1,9 +1,9 @@
-const clientConfig3 = {
+const clientConfig = {
   clientId: 3,
   clientName: 'SanyaBoriskin',
-  clientLogo: 'https://upload.wikimedia.org/wikipedia/fi/a/ab/The_Independent_logo.svg',
+  clientLogo: '',
   clientStyle: {
-    fontColor: '#3D3C3A',
+    fontColor: '#FFF',
     fontFamily: 'Replica-Regular, sans-serif',
     backgroundColor: '#3D3C3A',
   },
@@ -55,4 +55,4 @@ const clientConfig3 = {
   },
 };
 
-export default clientConfig3;
+export default clientConfig;

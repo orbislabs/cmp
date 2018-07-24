@@ -1,4 +1,4 @@
-const clientConfig0 = {
+const clientConfig = {
   clientId: 0,
   clientName: 'demo',
   clientLogo: '',
@@ -48,4 +48,4 @@ const clientConfig0 = {
   },
 };
 
-export default clientConfig0;
+export default clientConfig;

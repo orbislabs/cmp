@@ -25,7 +25,7 @@
           <vk-table-column title="Allow">
             <cmp-toggle toggleType="purposes" :purposeId="row.id"
                         :disabled="row.disabled"
-                        slot-scope="{ row }" :value="row.id" :labels="{checked: 'on', unchecked: 'off'}">
+                        slot-scope="{ row }" :value="toggleValue(row.id)" :labels="{checked: 'on', unchecked: 'off'}">
             </cmp-toggle>
           </vk-table-column>
         </vk-table>
@@ -67,7 +67,11 @@ export default {
     ...mapActions(['setFullConsent', 'setPartialConsent']),
     ...mapMutations(['changeCurrentView']),
     toggleValue (id) {
-      return this.getUserConsentObject.purposes.includes(id)
+      if (this.getCurrentClientConfig.views.purposeView.purposeType === 'default'){
+        return this.getUserConsentObject.customPurposes.includes(id)
+      } else {
+        return this.getUserConsentObject.purposes.includes(id)
+      }
     }
   }
 }
