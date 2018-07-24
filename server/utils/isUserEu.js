@@ -1,3 +1,6 @@
+// TODO: this can be converted to a middleware function,
+// which can be called once - to add in req.body
+
 const euCountries = [
   'GB',
   'AT',
@@ -27,10 +30,9 @@ const euCountries = [
   'SI',
   'ES',
   'SE',
-  'JP'
 ];
 
-function isUserEu (countryCode) {
+function isUserEu(countryCode) {
   return euCountries.includes(countryCode);
 }
 

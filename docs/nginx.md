@@ -139,4 +139,4 @@ server {
 		#proxy_cookie_domain localhost .consensu.org;
 	}
 }
-```
+
