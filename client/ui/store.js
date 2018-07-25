@@ -28,6 +28,7 @@ export default new Vuex.Store({
       purposes: [],
       vendors: [],
       customVendors: [],
+      customPurposes: [11, 12, 13]
     },
     clientConfig: null,
   },
@@ -87,7 +88,8 @@ export default new Vuex.Store({
       state.userConsentObject = {
         purposes: [...payload.purposes],
         vendors: [...payload.vendors],
-        customVendors: [...payload.customVendors]
+        customVendors: [...payload.customVendors],
+        customPurposes: [11, 12, 13]
       };
     },
 

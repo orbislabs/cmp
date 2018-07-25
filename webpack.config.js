@@ -1,5 +1,4 @@
 const path = require('path');
-// const webpack = require('webpack');
 // const Dotenv = require('dotenv-webpack');
 
 // WEBPACK PLUGINS
@@ -9,7 +8,6 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-// TODO: this needs to be refactored into a dynamic assignment.
 const isProduction = process.env.NODE_ENV === 'production';
 const isStaging = process.env.NODE_ENV === 'staging';
 const PRODUCTION_HOST = 'https://pluto.mgr.consensu.org/';
@@ -21,11 +19,9 @@ const config = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: PRODUCTION_HOST, // isProduction ? PRODUCTION_HOST : '/', // TODO: fix this is awful
+    publicPath: '/', // isProduction ? PRODUCTION_HOST : '/', // TODO: fix this is awful
     filename: '[name].bundle.js',
     chunkFilename: '[name].chunk.bundle.js',
-    // crossOriginLoading: 'use-credentials',
-    // jsonpScriptType: 'module',
   },
   devtool: 'source-map',
   resolve: {
@@ -84,7 +80,6 @@ const config = {
     new BundleAnalyzerPlugin({
       analyzerMode: (isProduction) ? 'disabled' : 'server',
     }),
-    // new webpack.HashedModuleIdsPlugin(),
   ],
 };
 

@@ -41,7 +41,21 @@ const customVendorList = {
       "legIntPurposeIds": [],
       "featureIds": []
     }
-  ]
+  ],
+  "purposes": [{
+    "id": 11,
+    "name": "Functional",
+    "description": "These cookies are required to enable core site functionality.",
+    "disabled": true
+  }, {
+    "id": 12,
+    "name": "Analytics",
+    "description": "These cookies allow us to analyse the site usage so we can measure and improve performance."
+  }, {
+    "id": 13,
+    "name": "Marketing",
+    "description": "These cookies are used by our advertising partners to serve you ads relevant to your interests."
+  }],
 };
 
 export default customVendorList;

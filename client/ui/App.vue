@@ -1,7 +1,7 @@
 <template>
     <div class="uk-scope">
         <vk-modal :show="isShow" v-if="clientConfig">
-        <element-modal-close @click="setFullConsent" large/>
+            <element-modal-close @click="setFullConsent" large/>
             <app-breadcrumb :current-view="currentView" />
             <!-- render the currently active component/page here -->
             <component v-bind:is="currentView"/>
@@ -12,11 +12,19 @@
 <script>
 
 import store from './store.js'
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 
 export default {
   store : store,
   name: 'app',
+  mounted () {
+    this.$ready(() => {
+      if (this.getCurrentClientConfig.clientStyle){
+        let modalBody = this.$el.querySelector('.uk-modal-dialog')
+        modalBody.style.backgroundColor = this.getCurrentClientConfig.clientStyle.backgroundColor
+      }
+    })
+  },
   methods: {
     ...mapActions([
       'setFullConsent'
@@ -26,8 +34,11 @@ export default {
     ...mapState([
       'isShow',
       'currentView',
-      'clientConfig'
-    ])
+      'clientConfig',
+    ]),
+    ...mapGetters([
+      'getCurrentClientConfig',
+    ]),
   },
 }
 </script>
