@@ -35,9 +35,7 @@ export default new Vuex.Store({
 
   getters: {
     getUserConsentObject: state => state.userConsentObject,
-    getCurrentClientConfig: (state) => {
-      return state.clientConfig;
-    },
+    getCurrentClientConfig: state => state.clientConfig,
     getCurrentClientVendorList: (state, getters) => {
       // first we fetch the IAB, and filter the IAB vendors
       if (!getters.getCurrentClientConfig) {
@@ -51,6 +49,7 @@ export default new Vuex.Store({
       return state.vendorsList.filter(vendor => configVendors.includes(vendor.id));
     },
   },
+
   mutations: {
     setClientId(state, clientId) {
       state.clientId = clientId;
@@ -127,18 +126,13 @@ export default new Vuex.Store({
     setClientId({
       commit,
     }, clientId) {
-      console.log('[INFO] setClientId action called', clientId);
       return import(
         /* webpackMode : "eager" */
         `../configs/client.${clientId}.js`).then((configImport) => {
-        console.log('configImport', configImport);
         const config = configImport.default;
-        // commit('setClientId', clientId);
         commit('setClientConfig', config);
         commit('syncClientDefaultsToUserObject', config.defaults);
       }).catch(err => console.error(err));
     },
   },
 });
-
-// export { store }

@@ -5,9 +5,10 @@
   "main": "./server/server.js",
   "scripts": {
     "start": "node ./server/server.js",
-    "develop": "NODE_ENV=development webpack --mode development --watch",
-    "build:dev": "NODE_ENV=development webpack --mode development",
-    "build:prod": "NODE_ENV=production webpack --mode production",
+    "develop": "NODE_ENV=development ASSET_PATH=/ webpack --mode development --watch",
+    "build:dev": "NODE_ENV=development ASSET_PATH=/ webpack --mode development",
+    "build:staging": "NODE_ENV=development ASSET_PATH=https://staging-dot-pluto-cmp.appspot.com/ webpack --mode development",
+    "build:prod": "NODE_ENV=production ASSET_PATH=https://pluto.mgr.consensu.org/ webpack --mode production",
     "deploy": "NODE_ENV=production pm2 start ./server/server.js"
   },
   "repository": {
@@ -36,8 +37,8 @@
     "consent-string": "^1.2.4",
     "cookie-parser": "^1.4.3",
     "dotenv": "^6.0.0",
-    "dotenv-webpack": "^1.5.7",
     "express": "^4.16.3",
+    "js-cookie": "^2.2.0",
     "uikit": "^3.0.0-beta.42",
     "vue": "^2.5.16",
     "vuex": "^3.0.1",

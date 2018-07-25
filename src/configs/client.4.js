@@ -1,14 +1,9 @@
 const clientConfig = {
-  clientId: 3,
-  clientName: 'SanyaBoriskin',
-  clientLogo: '//wearemiq.com/wp-content/themes/miq/img/branding/miq-think-beyond.png',
-  clientStyle: {
-    fontColor: '#FFF',
-    fontFamily: 'Replica-Regular, sans-serif',
-    backgroundColor: '#3D3C3A',
-  },
+  clientId: 4,
+  clientName: 'Custom Purpose Client',
+  clientLogo: 'https://upload.wikimedia.org/wikipedia/fi/a/ab/The_Independent_logo.svg',
   defaults: {
-    purposes: [1, 2, 3, 4, 5],
+    purposes: [1, 2, 3, 4, 5, 11, 12, 13],
     vendors: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     customVendors: [],
   },
@@ -21,6 +16,7 @@ const clientConfig = {
               You can view our privacy policy <a href="https://www.independent.co.uk/service/privacy-policy-a6184181.html">here</a>.`,
     },
     purposeView: {
+      purposeType: 'default',
       title: 'Our Purposes',
       body: `We use cookies and work with various partners to create a tailored experience for our users. 
       Below you can find all the purposes for which we collect data from your device.`,

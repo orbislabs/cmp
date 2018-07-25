@@ -32,8 +32,8 @@ Vue.mixin({
       setTimeout(() => {
         this.$nextTick(fn);
       });
-    }
-  }
+    },
+  },
 });
 
 // creating a root in the DOM for the app to attach to, when called

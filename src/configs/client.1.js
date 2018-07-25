@@ -1,7 +1,7 @@
 const clientConfig = {
   clientId: 1,
   clientName: 'MiQ',
-  clientLogo: '//wearemiq.com/wp-content/themes/miq/img/branding/miq-think-beyond.png',
+  clientLogo: '/assets/logo-miq.png',
   defaults: {
     purposes: [1, 2, 3, 4, 5],
     vendors: [32, 101],
