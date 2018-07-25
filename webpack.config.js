@@ -11,7 +11,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 const config = {
   entry: {
-    cmp: ['babel-polyfill', './client/main.js'],
+    cmp: ['babel-polyfill', './src/main.js'],
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
