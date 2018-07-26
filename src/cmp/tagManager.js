@@ -25,7 +25,6 @@ export default function tagManagerModule() {
     } else {
       console.log('[INFO][Module-TMS] => Consented purposes', purposeArray);
       updateConsentCookie(purposeArray);
-      window.dataLayer = []; // testing must be removed!!!!!!!!!!!!!!!
       window.dataLayer.push({ event: 'updatedConsentSettings' });
       console.log('[INFO][Module-TMS] => Updated dataLayer', window.dataLayer);
       resolve(true);

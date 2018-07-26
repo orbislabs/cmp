@@ -55,6 +55,16 @@ export default class Cmp extends ConsentString {
         '../ui/main')
         .then(appModule => appModule.default(this.clientId))
         .then(userConsentObject => this.updateCmpAndWriteCookie(userConsentObject))
+        /* {
+          if (!userConsentObject.purposes.includes(13)) {
+            userConsentObject.purposes = userConsentObject.purposes.filter(purpose => purpose > 5);
+            console.log('b', userConsentObject)
+            this.updateCmpAndWriteCookie(userConsentObject);
+          } else {
+            console.log('a', userConsentObject)
+            this.updateCmpAndWriteCookie(userConsentObject);
+          }
+        }) */
         .then(() => tagManagerModule())
         .then(() => cookies.requestHttpCookies('euconsent', this.getConsentString()))
         .then(result => Promise.resolve(result))

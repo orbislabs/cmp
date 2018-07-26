@@ -69,11 +69,7 @@ export default {
     ...mapActions(['setFullConsent', 'setPartialConsent']),
     ...mapMutations(['changeCurrentView']),
     toggleValue(id) {
-      if (this.purposeView.purposeType === 'default'){
-        return this.getUserConsentObject.customPurposes.includes(id)
-      } else {
-        return this.getUserConsentObject.purposes.includes(id)
-      }
+      return this.getUserConsentObject.purposes.includes(id);
     }
   }
 }

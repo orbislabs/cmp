@@ -28,7 +28,7 @@ export default new Vuex.Store({
       purposes: [],
       vendors: [],
       customVendors: [],
-      customPurposes: [11, 12, 13]
+      // customPurposes: [],
     },
     clientConfig: null,
   },
@@ -67,14 +67,23 @@ export default new Vuex.Store({
         console.log('CMP-UI :: Unknown Toggle Type', toggleType);
         return;
       }
-      const attr = toggleType === 'purposes' ? 'purposes' : toggleId <= 1000 ? 'vendors' : 'customVendors'
+      const attr = toggleType === 'purposes' ? 'purposes' : toggleId <= 1000 ? 'vendors' : 'customVendors';
       let arrayValue = state.userConsentObject[attr];
+
+      if (attr === 'purposes' && toggleId === 13) {
+        if (toggleValue) {
+          arrayValue.push(1, 2, 3, 4, 5);
+        } else {
+          arrayValue = arrayValue.filter(a => a > 5);
+        }
+      }
+
       if (toggleValue) {
         if (!arrayValue.includes(toggleId)) {
-          arrayValue.push(toggleId)
+          arrayValue.push(toggleId);
         }
       } else {
-        arrayValue = arrayValue.filter(id => id !== toggleId)
+        arrayValue = arrayValue.filter(id => id !== toggleId);
       }
       state.userConsentObject = {
         ...state.userConsentObject,
@@ -88,7 +97,7 @@ export default new Vuex.Store({
         purposes: [...payload.purposes],
         vendors: [...payload.vendors],
         customVendors: [...payload.customVendors],
-        customPurposes: [11, 12, 13]
+        // customPurposes: [...payload.customPurposes],
       };
     },
 
@@ -107,7 +116,7 @@ export default new Vuex.Store({
       getters,
     }, payload) {
       console.log(`CMP-UI :: full-consent Event: ${payload}`);
-      const defaultConfig = getters.getCurrentClientConfig.defaults
+      const defaultConfig = getters.getCurrentClientConfig.defaults;
       EventBus.$emit('save-selection', defaultConfig);
       commit('syncClientDefaultsToUserObject', defaultConfig);
       commit('changeShowState', false);

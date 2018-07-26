@@ -49,10 +49,6 @@ function checkIabCookie(result) {
   });
 }
 
-function writeCookieSync(value) {
-  document.cookie = `${COOKIE_NAME}=${value}${COOKIE_DOMAIN};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
-}
-
 function readCookieSync(name = 'euconsent') {
   const value = '; ' + document.cookie;
   const parts = value.split('; ' + name + '=');
@@ -109,7 +105,6 @@ export {
   writeCookie,
   writeCookieCustom,
   readCookieSync,
-  writeCookieSync,
   checkCookiesEnabled,
   checkCookiesEnabledPromise,
   checkIabCookie,

@@ -52,7 +52,7 @@ function renderVueApp(clientId) {
       vm.$store.dispatch('setClientId', parseInt(clientId, 10));
       vm.$store.commit('changeShowState', true);
       EventBus.$on('save-selection', (value) => {
-        console.log(`CMP-UI :: Resolving Promise (save-selection): ${JSON.stringify(value)}`);
+        console.log('[INFO][CMP-UI] Resolving Promise (save-selection):', value);
         resolve(value);
       });
     } else {

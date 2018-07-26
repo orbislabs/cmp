@@ -5,6 +5,7 @@ const clientConfig = {
   defaults: {
     purposes: [1, 2, 3, 4, 5, 11, 12, 13],
     vendors: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    // customPurposes: [11, 12, 13],
     customVendors: [],
   },
   views: {
