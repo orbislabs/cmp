@@ -49,10 +49,6 @@ function checkIabCookie(result) {
   });
 }
 
-function writeCookieSync(value) {
-  document.cookie = `${COOKIE_NAME}=${value}${COOKIE_DOMAIN};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
-}
-
 function readCookieSync(name = 'euconsent') {
   const value = '; ' + document.cookie;
   const parts = value.split('; ' + name + '=');
@@ -62,16 +58,15 @@ function readCookieSync(name = 'euconsent') {
   return undefined;
 }
 
-// below functions use Promises
 function writeCookie(value) {
-  console.log(COOKIE_DOMAIN);
-  document.cookie = 'testing='+value;
   document.cookie = `${COOKIE_NAME}=${value}${COOKIE_DOMAIN};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
   return Promise.resolve(true);
 }
-// TODO : clean up cookies!!!
+
 function writeCookieCustom(value) {
-  document.cookie = `custom=${value}${COOKIE_DOMAIN};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
+  if (value !== '[]') {
+    document.cookie = `custom=${value}${COOKIE_DOMAIN};path=${PATH};max-age=${COOKIE_MAX_AGE}`;
+  }
 }
 
 function readCookie(name = 'euconsent') {
@@ -110,7 +105,6 @@ export {
   writeCookie,
   writeCookieCustom,
   readCookieSync,
-  writeCookieSync,
   checkCookiesEnabled,
   checkCookiesEnabledPromise,
   checkIabCookie,

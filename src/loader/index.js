@@ -1,5 +1,6 @@
 import getClientId from './utils/getClientId';
 import isDataLayer from './utils/isDataLayer';
+import packageJson from '../../package.json';
 import {
   is1PCSupported,
   is3PCSupported,
@@ -16,6 +17,7 @@ export default function initLoader() {
   ]).then((result) => {
     // return {clientId, isDataLayer, is1PCSupported, is3PCSupported, iabCookie} = ...result
     return {
+      appVersion: packageJson.version, // TODO: fetch this fro
       clientId: result[0],
       isDataLayer: result[1],
       is1PCSupported: result[2],

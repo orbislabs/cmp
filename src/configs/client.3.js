@@ -1,7 +1,7 @@
 const clientConfig = {
   clientId: 3,
-  clientName: 'SanyaBoriskin',
-  clientLogo: '//wearemiq.com/wp-content/themes/miq/img/branding/miq-think-beyond.png',
+  clientName: 'Custom Styling Client',
+  clientLogo: '/assets/logo-habito.svg',
   clientStyle: {
     fontColor: '#FFF',
     fontFamily: 'Replica-Regular, sans-serif',

@@ -1,6 +1,7 @@
 module.exports = {
   'parserOptions': {
     'allowImportExportEverywhere': true,
+    'allowForLoopAfterthoughts': true,
     'parser': 'babel-eslint'
   },
   'extends': [

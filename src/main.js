@@ -1,8 +1,8 @@
-import initLoader from './loader/index';
-import initCmp from './cmp/index';
-import initApi from './api/index';
+import initLoader from './loader';
+import initCmp from './cmp';
+import initApi from './api';
 import isShowUi from './cmp/isShowUi';
-import tagManager from './cmp/tagManager';
+import tagManagerModule from './cmp/tagManager';
 
 async function init() {
   const loaderData = await initLoader();
@@ -15,7 +15,7 @@ async function init() {
       Promise.resolve(true);
     })
     .then(result => cmp.readyCmpAPI(result))
-    .then(() => tagManager(loaderData.clientId))
+    .then(() => tagManagerModule())
     .catch(err => console.error(err));
 }
 init();

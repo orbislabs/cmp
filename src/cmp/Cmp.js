@@ -2,6 +2,7 @@ import { ConsentString } from 'consent-string';
 import getCustomVendorsAllowed from './customVendors';
 import * as cookies from '../utils/cookies';
 import iabVendorList from '../configs/iabVendorList';
+import tagManagerModule from './tagManager';
 
 export default class Cmp extends ConsentString {
   constructor(result = null) {
@@ -18,7 +19,7 @@ export default class Cmp extends ConsentString {
 
   readyCmpAPI() {
     this.cmpLoaded = true;
-    console.log(`CMP => The CMP is loaded: ${this.cmpLoaded}`);
+    console.log(`[INFO][Module-CMP]: CMP loaded status is => ${this.cmpLoaded}`);
     Promise.resolve();
   }
 
@@ -51,9 +52,20 @@ export default class Cmp extends ConsentString {
         /* webpackMode: "lazy",
         webpackPrefetch: true,
         webpackChunkName: "ui" */
-        '../ui/main.js')
+        '../ui/main')
         .then(appModule => appModule.default(this.clientId))
         .then(userConsentObject => this.updateCmpAndWriteCookie(userConsentObject))
+        /* {
+          if (!userConsentObject.purposes.includes(13)) {
+            userConsentObject.purposes = userConsentObject.purposes.filter(purpose => purpose > 5);
+            console.log('b', userConsentObject)
+            this.updateCmpAndWriteCookie(userConsentObject);
+          } else {
+            console.log('a', userConsentObject)
+            this.updateCmpAndWriteCookie(userConsentObject);
+          }
+        }) */
+        .then(() => tagManagerModule())
         .then(() => cookies.requestHttpCookies('euconsent', this.getConsentString()))
         .then(result => Promise.resolve(result))
         .catch(err => console.error(err));
@@ -69,6 +81,7 @@ export default class Cmp extends ConsentString {
       this.setPurposesAllowed(consentObject.purposes);
       this.setVendorsAllowed(consentObject.vendors);
       this.setCustomVendorsAllowed(consentObject.customVendors);
+      console.log('[INFO][Module-CMP]: Received consent object', consentObject);
       console.log(`CMP => Set CustomVendors:${JSON.stringify(this.customVendorsAllowed)}`);
       console.log(`CMP => Set Purposes: ${JSON.stringify(this.getPurposesAllowed())}`);
       console.log(`CMP => Set Vendors: ${JSON.stringify(this.getVendorsAllowed())}`);
