@@ -1,20 +1,20 @@
 <template>
     <div>
         <img :src="getCurrentClientConfig.clientLogo">
-        <h1 :style="headerStyles">{{ getCurrentClientConfig.views.homeView.title }}</h1>
-        <p :style="bodyStyles" v-html="getCurrentClientConfig.views.homeView.body"></p>
-        <p :style="bodyStyles" class="uk-text-right">
-            <vk-button v-on:click="changeCurrentView('Purposes')">
+        <h1 class="client-styles">{{ getCurrentClientConfig.views.homeView.title }}</h1>
+        <p class="client-styles" v-html="getCurrentClientConfig.views.homeView.body"></p>
+        <p class="uk-text-right client-styles">
+            <vk-button class="client-styles" v-on:click="changeCurrentView('Purposes')">
               More Information
             </vk-button>
-            <vk-button v-on:click="fullConsent" type="secondary">
+            <vk-button class="client-styles" v-on:click="fullConsent" type="secondary">
               I Agree
             </vk-button>
         </p>
     </div>
 </template>
-<script>
 
+<script>
 import { mapGetters, mapMutations, mapActions } from 'vuex';
 
 export default {
@@ -26,22 +26,6 @@ export default {
     ...mapGetters([
       'getCurrentClientConfig',
     ]),
-    headerStyles: function () {
-      if (this.getCurrentClientConfig.clientStyle) {
-        return {
-          color: this.getCurrentClientConfig.clientStyle.fontColor,
-          fontFamily: this.getCurrentClientConfig.clientStyle.fontFamily
-        }
-      }
-    },
-    bodyStyles: function () {
-      if (this.getCurrentClientConfig.clientStyle) {
-        return {
-          backgroundColor: this.getCurrentClientConfig.clientStyle.backgroundColor,
-          fontFamily: this.getCurrentClientConfig.clientStyle.fontFamily
-        }
-      }
-    }
   },
   methods: {
     fullConsent() {

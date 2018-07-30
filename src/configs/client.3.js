@@ -1,26 +1,23 @@
 const clientConfig = {
   clientId: 3,
-  clientName: 'Custom Styling Client',
+  clientName: 'Habito',
   clientLogo: '/assets/logo-habito.svg',
-  clientStyle: {
-    fontColor: '#FFF',
-    fontFamily: 'Replica-Regular, sans-serif',
-    backgroundColor: '#3D3C3A',
-  },
+  clientStyle: true,
   defaults: {
-    purposes: [1, 2, 3, 4, 5],
+    purposes: [1, 2, 3, 4, 5, 11, 12, 13],
     vendors: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     customVendors: [],
   },
   views: {
     homeView: {
-      title: 'Dear Reader,',
-      body: `In order to run a successful online newspaper, The Independent and third parties are storing and accessing information on your device with cookies and other technologies. 
-              Several third parties are also processing personal data to show you personalised content and ads. 
-              This can also be on websites that are not just ours. Under new <a href="https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/">EU Regulation</a>, your consent is needed for both setting cookies and processing your personal data.
-              You can view our privacy policy <a href="https://www.independent.co.uk/service/privacy-policy-a6184181.html">here</a>.`,
+      title: 'We value your privacy.',
+      body: `You have control over your personal data. 
+            We use technology to create a personalised experience for our users, for analytics and for advertising. 
+            Please click <b>"I agree"</b> to provide consent to us and third parties mentioned in our <a href="https://www.habito.com/privacy">Privacy & Cookie Policy</a> to process your data for these purposes. 
+            You can change your settings at any time.`,
     },
     purposeView: {
+      purposeType: 'default',
       title: 'Our Purposes',
       body: `We use cookies and work with various partners to create a tailored experience for our users. 
       Below you can find all the purposes for which we collect data from your device.`,

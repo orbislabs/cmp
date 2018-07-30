@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h1>{{ purposeView.title }}</h1>
+    <h1 class="client-styles">{{ purposeView.title }}</h1>
 
-    <p>{{ purposeView.body }}</p>
+    <p class="client-styles">{{ purposeView.body }}</p>
 
     <vk-table v-if="!purposeType || purposeType === 'iab'" :data="purposeView.purposeText" narrowed>
         <vk-table-column title="Purpose" cell="purpose"></vk-table-column>
@@ -17,8 +17,8 @@
               :data="vendorList.purposes" narrowed>
       <vk-table-column title="Purpose">
         <div slot-scope="{ row }">
-          <h4 class="purpose-header">{{ row.name }}</h4>
-          <span>{{ row.description }}</span>
+          <h4 class="purpose-header client-styles">{{ row.name }}</h4>
+          <span class="client-styles">{{ row.description }}</span>
         </div>
       </vk-table-column>
       <vk-table-column title="Allow">
@@ -29,13 +29,13 @@
       </vk-table-column>
     </vk-table>
 
-    <p>{{ purposeView.vendorsText }}
+    <p class="client-styles">{{ purposeView.vendorsText }}
       <a @click="changeCurrentView('Vendors')" href="#">PARTNERS</a>
     </p>
 
-    <p class="uk-text-right">
-        <vk-button @click="setPartialConsent">Accept Selected</vk-button>
-        <vk-button @click="setFullConsent" type="secondary">Accept All</vk-button>
+    <p class="uk-text-right client-styles">
+        <vk-button @click="setPartialConsent" class="client-styles">Accept Selected</vk-button>
+        <vk-button @click="setFullConsent" type="secondary" class="client-styles">Accept All</vk-button>
     </p>
 
   </div>

@@ -19,9 +19,9 @@ export default {
   name: 'app',
   mounted () {
     this.$ready(() => {
-      if (this.getCurrentClientConfig.clientStyle){
-        let modalBody = this.$el.querySelector('.uk-modal-dialog')
-        modalBody.style.backgroundColor = this.getCurrentClientConfig.clientStyle.backgroundColor
+      if (this.getCurrentClientConfig.clientStyle) {
+        console.log('[INFO][Module-UI] Custom Styles loading: ', this.getCurrentClientConfig.clientStyle);
+        require('./styles/clients/client.' + this.getCurrentClientConfig.clientId + '.css');
       }
     })
   },
