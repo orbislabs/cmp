@@ -1,12 +1,12 @@
 <template>
     <div>
 
-    <h1>{{ getCurrentClientConfig.views.vendorView.title }}</h1>
+    <h1 class="client-styles">{{ getCurrentClientConfig.views.vendorView.title }}</h1>
 
-    <p>{{ getCurrentClientConfig.views.vendorView.body }}</p>
+    <p class="client-styles">{{ getCurrentClientConfig.views.vendorView.body }}</p>
 
-    <vk-table v-bind:data="paginatedData" narrowed>
-        <vk-table-column title="Vendor Name" cell="name"></vk-table-column>
+    <vk-table v-bind:data="paginatedData" class="client-styles" narrowed>
+        <vk-table-column title="Vendor Name" cell="name" class="client-styles"></vk-table-column>
         <vk-table-column title="Policy Link">
           <a slot-scope="{ row }" :href="row.policyUrl" target="_blank">Link</a>
         </vk-table-column>
@@ -21,9 +21,9 @@
         <vk-pagination-page-next></vk-pagination-page-next>
     </vk-pagination>
 
-    <p class="uk-text-right">
-        <vk-button v-on:click="setPartialConsent">Accept Selected</vk-button>
-        <vk-button v-on:click="setFullConsent" type="secondary">Accept All</vk-button>
+    <p class="uk-text-right client-styles">
+        <vk-button v-on:click="setPartialConsent" class="client-styles">Accept Selected</vk-button>
+        <vk-button v-on:click="setFullConsent" type="secondary" class="client-styles">Accept All</vk-button>
     </p>
 
   </div>
@@ -57,9 +57,9 @@ export default {
     prevPage() {
       this.pageNumber--
     },
-    toggleValue (id) {
-      const { vendors, customVendors } = this.getUserConsentObject
-      return customVendors.includes(id) || vendors.includes(id)
+    toggleValue(id) {
+      const { vendors, customVendors } = this.getUserConsentObject;
+      return customVendors.includes(id) || vendors.includes(id);
     }
   },
   computed: {
