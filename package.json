@@ -9,7 +9,8 @@
     "build:dev": "NODE_ENV=development ASSET_PATH=/ webpack --mode development",
     "build:staging": "NODE_ENV=development ASSET_PATH=https://staging-dot-pluto-cmp.appspot.com/ webpack --mode development",
     "build:prod": "NODE_ENV=production ASSET_PATH=https://pluto.mgr.consensu.org/ webpack --mode production",
-    "deploy": "NODE_ENV=production pm2 start ./server/server.js"
+    "deploy": "NODE_ENV=production pm2 start ./server/server.js",
+    "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "repository": {
     "type": "git",
@@ -49,6 +50,7 @@
     "@babel/core": "^7.0.0-beta.51",
     "@babel/plugin-transform-runtime": "^7.0.0-beta.51",
     "@babel/preset-env": "^7.0.0-beta.51",
+    "@storybook/vue": "^4.0.0-alpha.14",
     "babel-eslint": "^8.2.3",
     "babel-loader": "^8.0.0-beta.2",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
