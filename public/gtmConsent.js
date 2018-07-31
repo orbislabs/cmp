@@ -1,5 +1,14 @@
+function getCookie(sKey) {
+  if (!sKey) {
+    return null;
+  }
+  return decodeURIComponent(document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || null;
+}
+
 if (typeof window.dataLayer === 'undefined') {
   console.log('[INFO][Module-TMS] dataLayer is undefined.');
+} else if (getCookie('isFunctionalAllowed') || getCookie('isAnalyticsAllowed') || getCookie('isMarketingAllowed')) {
+  console.log('[INFO][Module-TMS] Consent settings already set.');
 } else {
   document.cookie = 'isFunctionalAllowed=true';
   document.cookie = 'isAnalyticsAllowed=true';
