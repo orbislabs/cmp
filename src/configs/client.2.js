@@ -1,7 +1,7 @@
 const clientConfig = {
   clientId: 2,
   clientName: 'The Independent',
-  clientLogo: _webpack_public_path__ + '/assets/logo-independent.svg',
+  clientLogo: __webpack_public_path__ + '/assets/logo-independent.svg',
   defaults: {
     purposes: [1, 2, 3, 4, 5],
     vendors: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],

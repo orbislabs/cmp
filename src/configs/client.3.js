@@ -1,7 +1,7 @@
 const clientConfig = {
   clientId: 3,
   clientName: 'Habito',
-  clientLogo: _webpack_public_path__ + '/assets/logo-habito.svg',
+  clientLogo: __webpack_public_path__ + '/assets/logo-habito.svg',
   clientStyle: true,
   defaults: {
     purposes: [1, 2, 3, 4, 5, 11, 12, 13],
