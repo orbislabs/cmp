@@ -5,17 +5,24 @@ import isShowUi from './cmp/isShowUi';
 import tagManagerModule from './cmp/tagManager';
 
 async function init() {
+
+  // prevent this script from running without window object
+  // e.g: SSR
+  if(typeof window === 'undefined') return;
+
+
+  // in async, use try catch instead
+  // or catch on execution
+
   const loaderData = await initLoader();
   const cmp = await initCmp(loaderData);
-  window.cmp = cmp; // TODO: remove this it should not be set globally
-  initApi(cmp)
-    .then(() => isShowUi(loaderData.iabCookie))
-    .then((bool) => {
-      if (bool) cmp.showConsentTool();
-      Promise.resolve(true);
-    })
-    .then(result => cmp.readyCmpAPI(result))
-    .then(() => tagManagerModule())
-    .catch(err => console.error(err));
+
+  await initApi(cmp);
+  if(isShowUi(loaderData.iabCookie)) 
+    await cmp.showConsentTool();
+  cmp.readyCmpAPI();
+  tagManagerModule(cmp.getPurposesAllowed());
+
 }
-init();
+
+init().catch(e => console.log(e));

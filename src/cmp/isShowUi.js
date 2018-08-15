@@ -1,5 +1,10 @@
 export default function (cookie) {
-  const isCookiePresent = (typeof cookie === 'string');
-  console.log('[INFO][Module-isShowUi]: ', !isCookiePresent);
-  return Promise.resolve(!isCookiePresent);
+  // make it sync
+  // wont make a difference to be async
+  return !(typeof cookie === 'string')
+  
+  // const isCookiePresent = (typeof cookie === 'string');
+  // console.log('[INFO][Module-isShowUi]: ', !isCookiePresent);
+
+  // !isCookiePresent;
 }

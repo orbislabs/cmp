@@ -7,12 +7,16 @@ import tagManagerModule from './tagManager';
 export default class Cmp extends ConsentString {
   constructor(result = null) {
     super(result.iabCookie);
+    this.clientId = result.clientId;
+  }
+
+  // will be usefull when all data are retrieved async
+  async _initialize(){
     this.setCmpId(52);
     this.setCmpVersion(1);
     this.setConsentLanguage('en');
     this.setConsentScreen(1);
     this.setGlobalVendorList(iabVendorList);
-    this.clientId = result.clientId;
     this.cmpLoaded = false;
     this.customVendorsAllowed = getCustomVendorsAllowed();
   }
@@ -20,7 +24,8 @@ export default class Cmp extends ConsentString {
   readyCmpAPI() {
     this.cmpLoaded = true;
     console.log(`[INFO][Module-CMP]: CMP loaded status is => ${this.cmpLoaded}`);
-    Promise.resolve();
+    // doesn't even return anything
+    // Promise.resolve();
   }
 
   ping(empty = null, callback = () => {}) {
@@ -45,21 +50,19 @@ export default class Cmp extends ConsentString {
     callback(result, true);
   }
 
-  showConsentTool() {
+  async showConsentTool() {
     console.log('[INFO][CMP-Module] showConsentTool() has been called.');
-    return new Promise((resolve, reject) => {
-      return import(
-        /* webpackMode: "lazy",
-        webpackPrefetch: true,
-        webpackChunkName: "ui" */
-        '../ui/main')
-        .then(appModule => appModule.default(this.clientId))
-        .then(userConsentObject => this.updateCmpAndWriteCookie(userConsentObject))
-        .then(() => tagManagerModule())
-        .then(() => cookies.requestHttpCookies('euconsent', this.getConsentString()))
-        .then(result => Promise.resolve(result))
-        .catch(err => console.error(err));
-    });
+    return import(
+      /* webpackMode: "lazy",
+      webpackPrefetch: true,
+      webpackChunkName: "ui" */
+      '../ui/main')
+      .then(appModule => appModule.default(this.clientId))
+      .then(userConsentObject => this.updateCmpAndWriteCookie(userConsentObject))
+      .then(() => tagManagerModule(this.getPurposesAllowed()))
+      .then(() => cookies.requestHttpCookies('euconsent', this.getConsentString()))
+      .then(result => result)
+      .catch(err => console.error(err));
   }
 
   setCustomVendorsAllowed(customVendorArray) {
