@@ -18,9 +18,11 @@ async function init() {
   const cmp = await initCmp(loaderData);
 
   await initApi(cmp);
-  if(isShowUi(loaderData.iabCookie)) 
-    await cmp.showConsentTool();
-  cmp.readyCmpAPI();
+  const result = isShowUi(loaderData.iabCookie) ? await cmp.showConsentTool() : true;
+
+  // why do we need window.__cpm ?
+  cmp.readyCmpAPI(result);
+
   tagManagerModule(cmp.getPurposesAllowed());
 
 }
