@@ -13,9 +13,8 @@ function updateConsentCookies(purposeArray) {
   }
 }
 
-export default function tagManagerModule() {
+export default function tagManagerModule(purposeArray) {
   return new Promise((resolve, reject) => {
-    const purposeArray = cmp.getPurposesAllowed();
     if (purposeArray === undefined || purposeArray.length == 0) {
       console.log('[INFO][Module-TMS] => No user consented purposes');
       resolve(false);

@@ -1,7 +1,5 @@
 // renameBug..
-export default function isDataLayer() {
-  return new Promise((resolve, reject) => {
-    const result = (typeof dataLayer !== 'undefined') ? true : false;
-    resolve(result);
-  });
+// use async if this will be promise in the future 
+export default async function isDataLayer() {
+  return typeof dataLayer !== 'undefined'
 }

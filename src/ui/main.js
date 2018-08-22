@@ -46,20 +46,16 @@ const vm = new Vue(App).$mount('#cmp-app');
 
 // this function is called to load the UI, it accepts the clientId
 function renderVueApp(clientId) {
-  return new Promise((resolve, reject) => {
-    if (vm) {
-      vm.$store.commit('setClientId', parseInt(clientId, 10));
-      vm.$store.dispatch('setClientId', parseInt(clientId, 10));
-      vm.$store.commit('changeShowState', true);
-      EventBus.$on('save-selection', (value) => {
-        console.log('[INFO][CMP-UI] Resolving Promise (save-selection):', value);
-        resolve(value);
-      });
-    } else {
-      console.error('CMP-UI :: No App Present');
-      reject();
-    }
-  });
+  if(!vm) return Promise.reject(new Error('CMP-UI :: No App Present'));
+
+  vm.$store.commit('setClientId', parseInt(clientId, 10));
+  vm.$store.dispatch('setClientId', parseInt(clientId, 10));
+  vm.$store.commit('changeShowState', true);
+
+  return new Promise((resolve, reject) => EventBus.$on('save-selection', (value) => {
+    console.log('[INFO][CMP-UI] Resolving Promise (save-selection):', value);
+    resolve(value);
+  }));
 }
 
 export default renderVueApp;

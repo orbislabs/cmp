@@ -1,11 +1,12 @@
 import Cmp from './Cmp';
 
-export default function initCmp(loaderData) {
+export default async function initCmp(loaderData) {
+
   console.log('[INFO][Module-Loader]: ', loaderData);
-  return new Promise((resolve, reject) => {
-    const cmp = new Cmp(loaderData);
-    if (!cmp) reject();
-    console.log('[INFO][Module-CMP]: ', cmp);
-    resolve(cmp);
-  });
+  const cmp = new Cmp(loaderData);
+  if (!cmp) throw 'cmp is NULL';
+ 
+  console.log('[INFO][Module-CMP]: ', cmp);
+  await cmp._initialize();
+  return cmp;
 }
