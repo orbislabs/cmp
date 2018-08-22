@@ -17,11 +17,9 @@ function is1PCSupported() {
 function is3PCSupported() {
   return new Promise((resolve, reject) => {
     const frame = document.createElement('iframe');
-    console.log('this is an update', __webpack_public_path__)
     frame.setAttribute('src', __webpack_public_path__ + 'cookieCheckStart.html');
     frame.setAttribute('style', 'display:none');
     document.body.appendChild(frame);
-    
     const receiveMessage = function (evt) {
       if (evt.data === 'MM:3PCunsupported') {
         resolve(false);
@@ -45,5 +43,5 @@ function get1PCookieValue(name = 'euconsent') {
 export {
   is1PCSupported,
   is3PCSupported,
-  get1PCookieValue
+  get1PCookieValue,
 };
