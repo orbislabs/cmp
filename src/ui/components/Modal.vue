@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img :src="getCurrentClientConfig.clientLogo">
+        <img class="logo-image" :src="getCurrentClientConfig.clientLogo">
         <h1 class="client-styles">{{ getCurrentClientConfig.views.homeView.title }}</h1>
         <p class="client-styles" v-html="getCurrentClientConfig.views.homeView.body"></p>
         <p class="uk-text-right client-styles">
@@ -45,4 +45,10 @@ export default {
 </script>
 
 <style scoped>
+.logo-image {
+  max-height: 150px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 </style>

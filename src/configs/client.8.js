@@ -1,19 +1,20 @@
 const clientConfig = {
-  clientId: 1,
-  clientName: 'MiQ',
-  clientLogo: __webpack_public_path__ + '/assets/logo-miq.png',
+  clientId: 8,
+  clientName: 'Dewynters - The Bodyguard',
+  clientLogo: __webpack_public_path__ + 'assets/logo-dewynters.png',
   clientStyle: false,
   defaults: {
     purposes: [1, 2, 3, 4, 5, 11, 12, 13],
-    vendors: [32, 101],
-    customVendors: [1001, 1002, 1003, 1004],
+    vendors: [101],
+    customVendors: [1001, 1003],
   },
   views: {
     homeView: {
-      title: 'We are MiQ!',
-      body: `MiQ and our partners use technology such as cookies on our site for analytics and advertising purposes. 
-      By clicking '<b>I Agree</b>' you consent to use of this technology across the web by us and the third-parties mentioned in our <a href="http://wearemiq.com/privacy-policy/">Privacy Policy</a>. 
-      You can change your mind and revisit your consent choices at anytime by returning to this site.`,
+      title: 'We value your privacy.',
+      body: `We and our partners use cookies on our site for analytics and advertising purposes. 
+            By selecting <b>"I agree"</b> you are consenting to use of this technology across the web by us and our ad partners.  
+            More information can be found in our <a href="https://www.dewynters.com/privacy/">privacy policy</a>.
+            If you change your mind, you can change your preferences at anytime when returning to this site.`,
     },
     purposeView: {
       purposeType: 'default',
@@ -46,7 +47,7 @@ const clientConfig = {
     vendorView: {
       title: 'Our Partners',
       body: `Below is a list of our technology partners, please explore each partners policy and remove any
-            which do not conform to your privacy standards.`,
+          which do not conform to your privacy standards.`,
     },
   },
 };
